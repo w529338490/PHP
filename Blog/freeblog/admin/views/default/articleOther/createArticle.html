@@ -1,0 +1,81 @@
+<{include file="public/header.html"}>
+			<p id="page-intro">Free Blog</p>
+			<div>
+				<span>文章总数(<{$articleData.allTotal}>)&nbsp; | &nbsp;有效文章数(<{$articleData.vaildTotal}>)&nbsp; | &nbsp;<a href='<{$app}>/articleManage/viewRecycle'>回收站</a>(<{$articleData.invaildTotal}>)&nbsp; | &nbsp;<a href="<{$app}>/articleManage/clearRecycle" onclick="return confirm('您确定清空回收站？')">清空回收站</a></span><br/><br/>
+			</div>
+			<br/><br/>
+			<div class="clear"></div> <!-- End .clear -->	
+			
+			<div class="content-box"><!-- Start Content Box -->
+				<div class="content-box-header">
+					<h3>发表文章</h3>
+					<ul class="content-box-tabs">
+						<li><a href="#tab1" class="default-tab">发表文章</a></li> <!-- href must be unique and match the id of target div -->	
+					</ul>
+					<div class="clear"></div>
+				</div> <!-- End .content-box-header -->
+				
+				<div class="content-box-content " >
+					<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->
+						<form action='<{$url}>/addArticle' method='post'>
+							<table>
+								<thead>
+									<tr>
+										<td>
+											<input type='text' name='article_title' style='height:30px;width:400px;font-size:25px;color:#A9A9A9;' value='在此键入标题' id='articleTitle' onclick="titles()"/>
+										</td>
+										<script>
+											function titles(){
+												var hidTitle=document.getElementById('articleTitle');
+												hidTitle.value="";
+											}
+										</script>
+										<td>
+											<b>选择文章类别:</b>
+											<select name='article_category' >
+												<option value='未分类'>选择分组</option>
+												<{section name='category' loop=$allCategory}>
+													<option value='<{$allCategory[category].category_name}>'><{$allCategory[category].category_name}></option>
+												<{/section}>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<b>可见性:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											<input type='radio' name='article_authority' value='1'/>仅自己&nbsp;&nbsp;&nbsp;&nbsp;
+											<input type='radio' name='article_authority' value='3' checked='checked'/>全部可见&nbsp;&nbsp;&nbsp;&nbsp;
+										</td>
+										<td>
+											<b>是/否可以评论:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											<input type='radio' name='article_review' value='1' checked='checked' />是&nbsp;&nbsp;&nbsp;&nbsp;
+											<input type='radio' name='article_review' value='0' />否&nbsp;&nbsp;&nbsp;&nbsp;
+										</td>
+									</tr>
+								</thead>
+								<tfoot>
+									<tr>
+										<td colspan='2'>
+										<input type='submit' value='发表文章' name='subArticle'  class='button' style="height:27px;width:80px"/>&nbsp;&nbsp;&nbsp;&nbsp;
+										<input type='reset' value='重置所有'  class='button' style="height:27px;width:80px"/>&nbsp;&nbsp;&nbsp;&nbsp;
+										<a href='<{$app}>/articleManage/manageArticle' class='button'>返回文章列表</a>
+										</td>
+									</tr>
+								</tfoot>
+								<tbody>
+									<tr>
+										<td colspan='2'>
+											<!-- 调用编辑器-->
+											<textarea cols='20' rows='30' name='article_content'></textarea>
+												<{$ckeditor}>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</form>
+					</div>	
+				</div> <!-- End .content-box-content -->
+			</div> <!-- End .content-box -->		
+			<div class="clear"></div>	
+<!--页面底部-->
+<{include file="public/foot.html"}>

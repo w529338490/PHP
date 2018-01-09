@@ -1,0 +1,69 @@
+<{include file="public/header.html"}>
+			<p id="page-intro">Free Blog</p>
+			<br/><br/>
+			<div class="clear"></div> <!-- End .clear -->	
+			
+			<div class="content-box"><!-- Start Content Box -->
+				<div class="content-box-header">
+					<h3>分类详情</h3>
+					<ul class="content-box-tabs">
+						<li><a href="#tab1" class="default-tab">分类详情</a></li> <!-- href must be unique and match the id of target div -->	
+					</ul>
+					<div class="clear"></div>
+				</div> <!-- End .content-box-header -->
+				
+				<div class="content-box-content " >
+						<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->
+							<table>
+								<thead>
+									<tr>
+										<th width='100'>项目</th>
+										<th width='400'>详情</th>
+										<th>操作</th>
+									</tr>
+								</thead>
+								<tfoot>
+								</tfoot>
+								<tbody>
+									<!--各级别间的关系-->
+									<tr>
+										<td><b>分类关系：</b></td>
+										<td><{$detaCategory.path}></td>
+										<td>
+											<a href='<{$url}>/modCategoryName/cid/<{$detaCategory.cid}>' class='button'>更改类名</a>
+										</td>
+									</tr>
+								<tr>
+										<td><b>类别简介：</b></td>
+										<td><{$detaCategory.category_content}></td>
+										<td>
+											<a href='<{$url}>/modCategoryContent/cid/<{$detaCategory.cid}>' class='button'>修改简介</a>
+										</td>
+									</tr>								
+									<tr>
+										<td><b>包含文章数：</b></td>
+										<td><{$detaCategory.category_total}></td>						
+										<td>
+											<{if $detaCategory.subAction eq 'N'}>
+												<!--Cid/<{$detaCategory.cid}>/-->
+												<a href='<{$app}>/categoryManage/createArticle/Cname/<{$detaCategory.category_name}>' class='button'>发表文章</a>
+											<{else}>
+												<font color='red'>不能在父类模块下发表文章</font>
+											<{/if}>
+										</td>
+									</tr>
+									<tr>
+										<td><b>创建时间：</b></td>
+										<td colspan='3'><{$detaCategory.category_time|date_format:"%y年-%m月-%d日 %H:%M:%S"}></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					<div class="clear"></div>
+				</div> <!-- End #tab1 -->				
+			</div> <!-- End .content-box-content -->
+		</div> <!-- End .content-box -->		
+<div class="clear"></div>
+		
+<!--页面底部-->
+<{include file="public/foot.html"}>

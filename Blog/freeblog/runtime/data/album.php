@@ -1,0 +1,1 @@
+<?php {"pri":"id","0":"pid","1":"album_path","2":"album_title","3":"album_description"}yes

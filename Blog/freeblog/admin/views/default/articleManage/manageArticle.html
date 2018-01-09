@@ -1,0 +1,112 @@
+<{include file="public/header.html"}>
+			<script>
+				function alls(){
+					var cks=document.getElementsByName('check_article[]');
+					for(i=0;i<cks.length;i++){
+						cks[i].checked=true;
+					}
+				}	
+				function fans(){
+					var cks=document.getElementsByName('check_article[]');
+					for(i=0;i<cks.length;i++){
+						if(cks[i].checked==true){
+							cks[i].checked=false;
+						}else{
+							cks[i].checked=true;
+						}
+					}
+				}
+			</script>
+			<p id="page-intro">Free Blog</p>
+			<div>
+				<span>文章总数(<{$condition.totalArticle}>)&nbsp; | &nbsp;有效文章数(<{$condition.vaildArticle}>)&nbsp; | &nbsp;<a href='<{$app}>/articleManage/viewRecycle'>回收站</a>(<{$condition.invalidArticle}>)&nbsp; | &nbsp;<a href="<{$app}>/articleManage/clearRecycle" onclick="return confirm('您确定清空回收站？')">清空回收站</a></span><br/><br/>
+				<form action="<{$app}>/articleManage/searchAtricle" method="post">
+					<!--查询发文章时间-->
+					<select name='selectMonth'>
+						<option value='0'>显示所有时间</option>
+						<{section name=allMonth loop=$issueMonth}>
+							<option><{$issueMonth[allMonth]}></option>
+						<{/section}>
+					</select>
+					<!--查询分组-->
+					<select name="selectGroup">
+						<option value='0'>查看所有分类目录</option>
+						<{section name=aCategory loop=$allCategory}>
+							<option value='<{$allCategory[aCategory].category_name}>'><{$allCategory[aCategory].category_name}></option>
+						<{/section}>
+					<select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="submit" class="button" value="筛选" style="height:25px;width:50px">
+				</form>
+				
+			</div>
+			<br/><br/>
+			<div class="clear"></div> <!-- End .clear -->	
+			
+			<div class="content-box"><!-- Start Content Box -->
+				<div class="content-box-header">
+					<h3>文章列表</h3>
+					<ul class="content-box-tabs">
+						<li><a href="#tab1" class="default-tab">文章列表</a></li> <!-- href must be unique and match the id of target div -->	
+					</ul>
+					<div class="clear"></div>
+				</div> <!-- End .content-box-header -->
+				
+				<div class="content-box-content " >
+					<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->
+						<table>
+							<thead>
+								<tr>
+									<th>选择</th>
+									<th>标题</th>
+									<th>作者</th>
+									<th>所属类别</th>
+									<!--<th>可见性</th>
+									<th>是/否可评论</th>-->
+									<th>发布时间</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tfoot>
+							<form action='<{$url}>/delArticle' method="post">
+								<tr>
+									<td colspan='6'>
+										<div class="bulk-actions align-left">
+											<a href="javascript:void(0)" class="button" onclick="alls()" style="height:15px;width:40px;text-align:center">全选</a>&nbsp
+											<a href="javascript:void(0)" class="button" onclick="fans()" style="height:15px;width:40px;text-align:center">反选</a>&nbsp
+											<input type="submit" value="删除选中" name="sub" class="button" style="height:25px;width:68px">
+										</div>
+										<div class="pagination"><!--用户分页-->
+											<{$fpage}>
+										</div> <!-- End .pagination -->
+									</td>
+								</tr>
+							</tfoot>
+							<tbody>
+									<{section name=allArticle loop=$viewResult}>
+										<tr>
+											<td><input type='checkbox' name='check_article[]' value='<{$viewResult[allArticle].aid}>'/></td>
+											<td><{$viewResult[allArticle].article_title}></td>
+											<td><{$viewResult[allArticle].article_author}></td>
+											<td><{$viewResult[allArticle].article_category}></td>
+											<td><{$viewResult[allArticle].article_time|date_format:"%y年-%m月-%d日 %H:%M:%S"}></td>										
+											<td>
+												<a href="<{$app}>/articleOther/viewArticle/aid/<{$viewResult[allArticle].aid}><{$page}>" title="编辑文章"><img src="<{$res}>/images/icons/pencil.png" alt="编辑文章" /></a>
+												<a href="<{$url}>/moveRecycle/aid/<{$viewResult[allArticle].aid}><{$page}>" title="移至回收站"><img src="<{$res}>/images/icons/recycle.png" alt="移至回收站" onclick="return confirm('您确定要将<{$viewResult[allArticle].article_title}>移至回收站？')"/></a> 
+												<a href="<{$url}>/delArticle/aid/<{$viewResult[allArticle].aid}><{$page}>/flag/delete_manager/cName/<{$viewResult[allArticle].article_category}>" title="删除"><img src="<{$res}>/images/icons/cross.png" alt="删除" onclick="return confirm('您确定要将<{$viewResult[allArticle].article_title}>删除？')" /></a> 
+											</td>	
+										</tr>
+									<{sectionelse}>
+										<tr>
+											<td colspan='6' align='center'>您还没有发表文章!</td>
+										</tr>
+									<{/section}>
+									<input type='hidden' name='flag' value='delete_manager' />
+								</form>
+							</tbody>
+						</table>
+					</div>	
+				</div> <!-- End .content-box-content -->
+			</div> <!-- End .content-box -->		
+			<div class="clear"></div>	
+<!--页面底部-->
+<{include file="public/foot.html"}>

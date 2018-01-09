@@ -1,0 +1,1 @@
+<?php {"0":"uid","pri":"aid","1":"article_title","2":"article_content","3":"article_author","4":"article_authority","5":"article_review","6":"article_action","7":"article_time","8":"article_month","9":"article_category","10":"pic"}yes

@@ -1,0 +1,1 @@
+<?php {"pri":"fid","0":"foreground_title","1":"foreground_logo","2":"foreground_email","3":"foreground_subtitle","4":"saveuploaddata","5":"operatenotes","6":"offpassword","7":"webstate"}yes

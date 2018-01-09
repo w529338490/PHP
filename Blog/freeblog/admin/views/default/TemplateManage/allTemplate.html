@@ -1,0 +1,102 @@
+<{include file="public/header.html"}>
+			<p id="page-intro">Free Blog</p>
+			<script>
+				function show(id){
+					document.getElementById(id).style.display="block";
+				}
+				function noshow(id){
+					document.getElementById(id).style.display="none";
+				}
+			</script>
+			<div>
+				<span>模板总数(<{$templateAll}>)&nbsp; | &nbsp;自定义模板数(<{$templateNum}>)</span>
+			</div>
+			<br/><br/>
+			<div class="clear"></div> <!-- End .clear -->	
+			
+			<div class="content-box"><!-- Start Content Box -->
+				<div class="content-box-header">
+					<h3>模板管理</h3>
+					<ul class="content-box-tabs">
+						<li><a href="#tab1" class="default-tab">模板管理</a></li> <!-- href must be unique and match the id of target div -->	
+					</ul>
+					<div class="clear"></div>
+				</div> <!-- End .content-box-header -->
+				
+				<div class="content-box-content " >
+					<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->
+						<table>
+							<thead>
+							</thead>
+							<tfoot>
+								<tr>
+									<td colspan='2'>
+										<form action='<{$url}>/uploadsTemplate' method='post' enctype="multipart/form-data">
+										<!--<form action='<{$url}>/uploadsTemplate' method='post'>-->
+											<input type='file' name='temUpload'/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											<input type='submit' value='上传模板' class='button'/>
+										</form>
+									</td>
+								</tr>
+								<tr>
+									<td colspan='2'>
+										<hr />
+									</td>
+								</tr>
+								<tr>
+									<td>默认模板1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='javascript:void(0)' onclick='changeTem("default")'>启用</a>&nbsp;&nbsp;</div></td>
+									<td rowspan='2'>
+										<b>模板简介:</b><br /><br />
+										该模板让您的blog有绚丽的风格。
+									</td>
+								</tr>
+								<tr>
+									<td><img src='<{$root}>/home/views/default/resource/them.png' /></td>
+								</tr>
+								<!--分配自定义模板-->
+								<{section name='l' loop=$template}>
+									<tr>
+										<td colspan='2'>
+											<hr />
+										</td>
+									</tr>
+									<div style='display:none;position:absolute;right:200px;top:500px;' id='<{$template[l].name}>'>
+										<img src="<{$template[l].images}>"/>
+									</div>
+									<tr>
+										<td><{$template[l].name}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='javascript:void(0)' onclick='changeTem("<{$template[l].name}>")'>启用</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href='<{$url}>/templateNam/tempName/<{$template[l].name}>' onclick='return confirm("您确定要删除 <{$template[l].name}> ?")'>删除</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onmouseover="show('<{$template[l].name}>')" onmouseout="noshow('<{$template[l].name}>')">预览</a></div></td>
+										
+										<td rowspan='2'>
+											<b>模板简介:</b><br /><br />
+											<{$template[l].note}>
+										</td>
+									</td>
+									
+									</tr>
+									<tr>
+										<td><img src="<{$template[l].image}>"/></td>
+									</tr>
+								<{/section}>
+							</tfoot>
+							<tbody>
+								<script>
+									function changeTem(TemName){
+										Ajax().post('<{$url}>/changeTems',"temName="+TemName,function(data){
+											alert(data);
+										})
+									}
+								</script>
+							</tbody>
+						</table>
+						<script>
+							/*function viewMenu(){
+								var menu=document.getElementsById('Menus1');
+								menu.style.display='block';
+							}*/
+						</script>
+					</div>	
+				</div> <!-- End .content-box-content -->
+			</div> <!-- End .content-box -->		
+			<div class="clear"></div>	
+<!--页面底部-->
+<{include file="public/foot.html"}>

@@ -1,0 +1,1 @@
+<?php {"0":"subaction","pri":"cid","1":"pid","2":"path","3":"category_name","4":"category_content","5":"category_total","6":"category_time"}yes

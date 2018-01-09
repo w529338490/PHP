@@ -1,0 +1,230 @@
+
+<{include file="public/header.html"}>
+
+	
+			<p id="page-intro">Free Blog</p>
+			<!--如果想要这个右边头部导航菜单打开注释即可
+			<{include file="public/right_header_menu.html"}>
+			-->	
+			<div class="clear"></div> <!-- End .clear -->	
+			
+			<div class="content-box"><!-- Start Content Box -->
+				<div class="content-box-header">
+					
+					<h3>修改链接</h3>
+					
+					<ul class="content-box-tabs">
+						<li><a href="#tab1" class="default-tab">修改链接</a></li> <!-- href must be unique and match the id of target div -->
+						
+					</ul>
+					
+					<div class="clear"></div>
+					
+				</div> <!-- End .content-box-header -->
+				
+				<div class="content-box-content">	
+					<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->			
+				<div class="notification attention png_bg">
+				<a href="#" class="close"><img src="<{$res}>/images/icons/cross_grey_small.png" title="关闭友情提醒" alt="关闭" /></a>
+				<div>
+					友情链接logo图片，您可以在原图片上修改尺寸或直接更换图片
+				</div>
+				</div>
+					<form action="<{$url}>/exe_update" method="post" id="frm" enctype="multipart/form-data">
+						<{section name="ls" loop=$link}>
+						<table>	
+							<tbody>
+							
+								<tr>
+									<td >&nbsp</td>
+									<td >&nbsp</td>
+									<td >&nbsp</td>
+									<td >&nbsp</td>
+									<td>网站名字<font color="red">*</font></td>
+									<td><input type="text" name="link_name" value="<{$link[ls].link_name}>"></td>
+									<td >&nbsp</td>
+								</tr>
+								<tr>
+									<td >&nbsp</td>
+									<td >&nbsp</td>
+									<td >&nbsp</td>
+									<td >&nbsp</td>
+									<td>链接地址<font color="red">*</font></td>
+									<td><input type="text" name="link_url" value="<{$link[ls].link_url}>"></td>
+									<td >&nbsp</td>
+								</tr>
+								
+								<tr>
+									<td >&nbsp</td>
+									<td >&nbsp</td>
+									<td >&nbsp</td>
+									<td >&nbsp</td>
+									<td>链接描述<font color="red">*</font></td>
+									<td width="300"><textarea name="link_description" ><{$link[ls].link_description}></textarea></td>
+									<td width="400"></td>
+								</tr>
+								<tr>
+									<td >&nbsp</td>
+									<td >&nbsp</td>
+									<td >&nbsp</td>
+									<td >&nbsp</td>
+									<td>链接远程logo图片<font color="red">*</font></td>
+									<td>
+									<img src="<{$root}>/public/uploads/logo/<{$link[ls].link_image}>" title="<{$link[ls].link_description}>" id="img" style="border:2px solid gray;"/>&nbsp;&nbsp;&nbsp;<a href="#" onclick="changes()" id="subs">换图</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="resize()" id="opensize">自定义尺寸</a>
+									<div id="cg" style="display:none"><input type="text" name="link_image"></div>
+									<div id="size" style="display:none;margin-top:6px;">
+										宽：<input type="text" name="width" size="3">
+										高：<input type="text" name="height" size="3">
+									</div>
+									</td>
+									<td >&nbsp</td>
+								</tr>
+								<tr>
+									<td >&nbsp</td>
+									<td >&nbsp</td>
+									<td >&nbsp</td>
+									<td >&nbsp</td>
+									<td>链接打开方式<font color="red">*</font></td>
+									<td>
+									<{if $link[ls].link_target=="_blank"}>
+									<input type="radio" name="link_target" value="_blank" checked>在新窗口打开
+									<input type="radio" name="link_target" value="_top" >在当前窗口打开
+									<{else}>
+									<input type="radio" name="link_target" value="_blank" >在新窗口打开
+									<input type="radio" name="link_target" value="_top" checked>在当前窗口打开
+									<{/if}>
+									</td>
+									<td >&nbsp</td>
+								</tr>
+								<tr>
+									<td >&nbsp</td>
+									<td >&nbsp</td>
+									<td >&nbsp</td>
+									<td >&nbsp</td>
+									<td>链接显示状态<font color="red">*</font></td>
+									<td>
+									<{if $link[ls].disable}>
+									<input type="radio" name="disable" value="1" checked>显示
+									<input type="radio" name="disable" value="0">不显示
+									<{else}>
+									<input type="radio" name="disable" value="1" >显示
+									<input type="radio" name="disable" value="0" checked>不显示
+									<{/if}>
+									</td>
+									<td >&nbsp</td>
+								</tr>
+								<tr>
+									<td >&nbsp</td>
+									<td >&nbsp</td>
+									<td >&nbsp</td>
+									<td >&nbsp</td>
+									<td>联系人<font color="red">*</font></td>
+									<td><input type="text" name="link_body" value="<{$link[ls].link_body}>"></td>
+									<td >&nbsp</td>
+								</tr>
+								<tr>
+									<td >&nbsp</td>
+									<td >&nbsp</td>
+									<td >&nbsp</td>
+									<td >&nbsp</td>
+									<td>站长email<font color="red">*</font></td>
+									<td><input type="text" name="link_body_email" value="<{$link[ls].link_body_email}>"></td>
+									<td >&nbsp</td>
+								</tr>
+								<tr >
+									<td >&nbsp</td>
+									<td >&nbsp</td>
+									<td >&nbsp</td>
+									<td >&nbsp</td>
+									<td >&nbsp</td>
+									<td>
+										<div class="bulk-actions align-left" >
+											<input class="button" type="button" id="subs" onclick="ation()" value="确定">
+											<input type="hidden" name="id" value="<{$id}>">
+											&nbsp&nbsp&nbsp
+											<input class="button" type="reset" value="重置"/>
+										</div>
+										<div class="clear"></div>
+									</td>
+									<td>&nbsp</td>
+								</tr>
+							</tbody>
+							
+						</table>
+						<{/section}>
+						</form>
+					</div> <!-- End #tab1 -->
+					  <script>
+					  var frm=document.getElementById('frm');
+					  var up=document.getElementById('up');
+					  var cg=document.getElementById('cg');
+					  var img=document.getElementById('img');
+					  var subs=document.getElementById('subs');
+					  var div=document.getElementById('size');
+					  var opensize=document.getElementById('opensize');
+						function show(){
+							if(up.style.display=="none"){
+								up.style.display="block";
+								
+							}else{
+								up.style.display="none";
+								
+							}
+						}
+						function ation(){
+							frm.submit();
+						}
+						function changes(){
+							if(cg.style.display=="none"){
+								img.style.display="none";
+								subs.innerHTML="请输入远程logo路径";
+								cg.style.display="block";
+							opensize.style.display="none";
+
+							}else{
+								opensize.style.display="inline";
+								img.style.display="inline";
+								subs.innerHTML="换图";
+								cg.style.display="none";
+								
+							}
+						}
+						function resize(){
+							
+							if(div.style.display=="none"){
+								subs.style.display="none";
+								div.style.display="block";
+							}else{
+								subs.style.display="inline";
+								div.style.display="none";
+							}
+							
+						}
+					  </script>
+				</div> <!-- End .content-box-content -->
+			</div> <!-- End .content-box -->
+			
+			
+			<!--
+				<{include file="public/content_box.html"}>
+			-->
+			
+			<div class="clear"></div>
+			
+			<!-- 自定义消息提示框，需要就打开
+			<{include file="public/notic_box.html"}>
+			 -->
+			
+			<!--页面底部-->
+			<{include file="public/foot.html"}>
+
+
+
+
+
+
+
+
+
+
+

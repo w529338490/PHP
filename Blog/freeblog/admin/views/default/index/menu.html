@@ -1,0 +1,100 @@
+<{include file="public/menu_header.html"}>
+<div id="sidebar">
+		<div id="sidebar-wrapper"> <!-- Sidebar with logo and menu -->
+			
+			<h1 id="sidebar-title"><a href="#">管理员</a></h1>
+		  
+			<!-- Logo (221px wide) -->
+			<a href="#"><img id="logo" src="<{$res}>/images/logo.png" alt="Simpla Admin logo" /></a>
+		  
+<!-- 		
+			<div id="profile-links">
+				您好, <a href="#" title="Edit your profile">John Doe</a>, 你有 <a href="#">3 信息</a><br />
+				<br />
+				<a href="#" title="View the Site">View the Site</a> | <a href="<{$app}>/user/logout" title="Sign Out">退出</a>
+			</div>   -->      
+			
+			<ul id="main-nav">  <!-- Accordion Menu -->		
+				<{if $group.group_muser==1}>
+				<li>
+					<a href="<{$app}>/user/index" class="nav-top-item" target="main"> <!-- Add the class "no-submenu" to menu items with no sub menu -->
+						用户管理
+					</a>
+					<ul >
+						<li><a href="<{$app}>/user/index" target="main">用户列表</a></li>
+						<li><a href="<{$app}>/user/add" target="main">添加用户</a></li><!-- Add class "current" to sub menu items also -->
+						<li><a href="<{$app}>/group/index" target="main">管理用户组</a></li>
+						<li><a href="<{$app}>/group/add" target="main">添加用户组</a></li>					
+					</ul>
+				</li>
+				<{/if}>
+				<{if $group.group_marticle==1}>
+				<li> 
+					<a href="#" class="nav-top-item "> <!-- Add the class "current" to current menu item -->
+					文章管理
+					</a>
+					<ul >
+						<li><a href="<{$app}>/articleOther/createArticle" target='main'>发表文章</a></li>
+						<li><a href="<{$app}>/articleManage/manageArticle" target='main'>管理文章</a></li> <!-- 添加 class="current" 就会有一个箭头的小图像 -->
+						<li><a href="<{$app}>/categoryOther/createCategory" target='main'>添加分类</a></li>
+						<li><a href="<{$app}>/categoryManage/manageCategory" target='main'>管理分类</a></li>
+						<li><a href="<{$app}>/ReviewManage/viewReview" target='main'>管理评论</a></li>
+					</ul>
+				</li>
+				<{/if}>
+				<{if $group.group_mimage==1}>
+				<li>
+					<a href="#" class="nav-top-item">
+						图片管理
+					</a>
+					<ul >
+						<li><a href="<{$app}>/image/add" target='main'>添加图片</a></li>
+						<li><a href="<{$app}>/image/edit" target='main'>管理图片</a></li>
+						<li><a href="<{$app}>/album/index" target='main'>管理相册</a></li>
+						<li><a href="<{$app}>/album/add" target='main'>添加相册</a></li>
+					</ul>
+				</li>	
+				<{/if}>
+				<{if $group.group_mweb==1}>
+				<li>
+					<a href="#" class="nav-top-item">
+						网站管理
+					</a>
+					<ul >
+						<li><a href="<{$app}>/WebManage/foreGroundManage" target='main'>网站管理</a></li>
+						<li><a href="<{$app}>/dataManage/viewDB" target='main'>数据管理</a></li>
+						<{if $operateNotes eq '1'}>
+							<li><a href="<{$app}>/dataManage/ViewDbOper" target='main'>操作记录</a></li>
+						<{/if}>
+						<li><a href="<{$app}>/templateManage/allTemplate" target='main'>模板管理</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="#" class="nav-top-item">
+						小工具
+					</a>
+					<ul >
+						<li><a href="<{$app}>/tool/index" target='main'>自定义侧边栏</a></li>
+						
+					</ul>
+				</li> 
+				
+				<li>
+					<a href="#" class="nav-top-item">
+						友情链接
+					</a>
+					<ul >
+						<li><a href="<{$app}>/flink/add" target='main'>添加链接</a></li>
+						<li><a href="<{$app}>/flink/edit" target='main'>管理链接</a></li>
+					</ul>
+				</li> 
+				<{/if}>
+				
+			</ul> <!-- End #main-nav -->
+			
+			<!--放置信息的地方-->
+			<div id="messages" style="display: none"> <!-- Messages are shown when a link with these attributes are clicked: href="#messages" rel="modal"  -->
+			</div> <!-- End #messages -->
+			
+		</div></div> <!-- End #左边菜单 -->
+		<{include file="public/foot.html"}>

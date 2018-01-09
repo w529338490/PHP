@@ -1,0 +1,142 @@
+<{include file="public/header.html"}>
+			<p id="page-intro">Free Blog</p>
+			<div>
+					<span><a href="#">全部链接</a> (<{$link_num}>)&nbsp; | &nbsp;<a href="#">显示状态</a> (<{$dis_num}>)&nbsp; </span><br/><br/>	
+			</div>
+			<br/><br/>
+			<div class="clear"></div> <!-- End .clear -->	
+			<div class="content-box"><!-- Start Content Box -->
+				<div class="content-box-header">
+					<h3>友情链接列表</h3>	
+					<ul class="content-box-tabs">
+						<li><a href="#tab1" class="default-tab">友情链接列表</a></li> <!-- href must be unique and match the id of target div -->
+					</ul>
+					<div class="clear"></div>	
+				</div> <!-- End .content-box-header -->
+				<div class="content-box-content " >	
+					<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->	
+						<table>	
+							<thead>
+								<tr>
+								   <th>选择</th>
+								   <th>排序</th>
+								   <th>网站url</th>
+								   <th>链接描述</th>
+								   <th>联系人</th>
+								   <th>联系人邮箱</th>
+								   <th>显示状态</th>
+								   <th>编辑</th>
+								</tr>	
+							</thead>
+							<tfoot>
+								<tr>
+									<td colspan="6">
+										<div class="bulk-actions align-left">
+			<form action="<{$url}>/del" method="post">	
+			<a href="#" onclick="alls()" class="button">全选</a>&nbsp;
+			<a href="#" onclick="fans()" class="button">反选</a>&nbsp;
+	<input type="submit" value="删除?" name="sub" class="button" style="height:25px;width:58px" onclick="return confirm('确定要删除您选中的用户吗？')">&nbsp;<a href="#" name="aj"  class="button" onclick="show()">保存排序</a><div style="display:none;border:3px solid #e7e7e7;margin-left:10px;padding:3px;" id="show2" onclick="show3(this)"></div>
+	<script>
+		function alls(){
+			var cks=document.getElementsByName('num[]');
+			for(i=0;i<cks.length;i++){
+				cks[i].checked=true;
+			}
+		}	
+		function fans(){
+			var cks=document.getElementsByName('num[]');
+			for(i=0;i<cks.length;i++){
+				if(cks[i].checked==true){
+					cks[i].checked=false;
+				}else{
+					cks[i].checked=true;
+				}
+			}
+		}
+		function unalls(){
+			var cks=document.getElementsByName('num[]');
+			for(i=0;i<cks.length;i++){
+				cks[i].checked=false;
+			}
+		}
+	</script>
+							
+										</div>
+										<div class="pagination">
+											<{$fpage}>
+										</div> <!-- End .pagination -->
+										<div class="clear"></div>
+									</td>
+								</tr>
+							</tfoot>	 
+							<tbody>
+							<{section name="ls" loop=$link}>
+								<tr>
+									<td ><input type="checkbox" name="num[]" value="<{$link[ls].id}>"/></td>
+									<td><input type="text" name="oder[]" value="<{$link[ls].oder}>" style="width:20px;height:13px;" id="px"></td>
+									<td ><{$link[ls].link_name}></td>
+									<td><a href="<{$link[ls].link_url}>" title="<{$link[ls].link_description}>" target="_ablank"><{$link[ls].link_url}></a></td>
+									<td><{$link[ls].link_body}></td>
+									<td><{$link[ls].link_body_email}></td>
+									<{if $link[ls].disable}>
+									<td>显示</td>
+									<{else}>
+									<td>不显示</td>
+									<{/if}>
+									<td>
+										<!-- 小图标 -->
+										 <a href="<{$url}>/update/id/<{$link[ls].id}>/" title="修改"><img src="<{$res}>/images/icons/hammer_screwdriver.png" alt="修改" /></a>
+										 <a href="<{$url}>/del/id/<{$link[ls].id}>" title="删除"><img src="<{$res}>/images/icons/cross.png" alt="删除" onclick="return confirm('确定要删除<{$link[ls].link_name}>链接吗？')" ></a> 
+									</td>
+								</tr>
+							<{/section}>
+							</tbody>	
+						</table>
+						</form>	
+					</div> 
+					<script>
+					function show(){
+						var oder=document.getElementsByName('oder[]');
+						var num=document.getElementsByName('num[]');
+						var arr='';
+						var idarr='';
+						var show2=document.getElementById('show2');
+						for(var i=0;i<oder.length;i++){
+							 arr+=oder[i].value+',';
+							 idarr+=num[i].value+',';
+						}
+						var newarr=arr+'|'+idarr;
+						var urls='<{$url}>/order/str/'+newarr+'';
+							Ajax().get(urls,function(date){
+								if(date==1){
+									if(show2.style.display=="none"){
+										show2.style.display="inline";
+										show2.innerHTML="<b>保存成功</b>";
+									}else{
+										show2.style.display="none";
+									}
+								}else{
+									if(show2.style.display=="none"){
+										show2.style.display="inline";
+										show2.innerHTML="<b>您还没有改变排序</b>";
+									}else{
+										show2.style.display="none";
+									}	
+								}
+							})
+						}
+						function show3(obj){
+							obj.style.display="none";
+						}
+					</script>		
+				</div> <!-- End .content-box-content -->
+			</div> <!-- End .content-box -->		
+			<div class="clear"></div>
+			<!--页面底部-->
+			<{include file="public/foot.html"}>
+
+
+
+
+
+

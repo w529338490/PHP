@@ -1,0 +1,135 @@
+<{include file="public/header.html"}>
+			<p id="page-intro">Free Blog</p>
+			<div>
+					<form action="<{$url}>/edit" method="post">
+					<span><a href="<{$url}>/edit">全部图片</a> (<{$total}>)&nbsp; | &nbsp;<a href="<{$app}>/album/index">相册总数</a> (<{$album_total}>)&nbsp; |  &nbsp; <a href="<{$url}>/add">继续添加图片</a></span><br/><br/>
+					<span>
+					<{$select2}>
+					&nbsp;&nbsp;<input type="submit" class="button" value="提交" style="height:25px;width:50px" >
+					</span>&nbsp;&nbsp;&nbsp;&nbsp;
+					<span>
+					<input type="text"  name="search_username">
+					&nbsp;&nbsp;<input type="submit" class="button" value="搜索" style="height:25px;width:50px">
+					</span>
+				</form>
+			</div>
+			<br/><br/>
+			<div class="clear"></div> <!-- End .clear -->	
+			<div class="content-box"><!-- Start Content Box -->
+				<div class="content-box-header">
+					<h3>图片列表</h3>
+					<ul class="content-box-tabs">
+						<li><a href="#tab1" class="default-tab">图片列表</a></li> <!-- href must be unique and match the id of target div -->
+					</ul>
+					<div class="clear"></div>	
+				</div> <!-- End .content-box-header -->
+				<div class="content-box-content " >	
+					<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->	
+						<table>	
+							<thead>
+								<tr>
+								   <th>选择</th>
+								   <th>图片预览</th>
+								   <th>上传者</th>
+								   <th>所属相册</th>
+								   <th>状态</th>
+								   <th>操作</th>	 
+								</tr>	
+							</thead>
+							<tfoot>
+								<tr>
+									<td colspan="6">
+										<div class="bulk-actions align-left">
+			<form action="<{$url}>/del" method="post" name="one">	
+			<span onclick="alls()" class="button" >全选</span>&nbsp
+			<span onclick="fans()" class="button" >反选</span>&nbsp
+	<input type="submit" value="删除?" name="sub" class="button" style="height:25px;width:58px" onclick="return confirm('确定要删除您选中的用户吗？')">
+	<script>
+		function alls(){
+			var cks=document.getElementsByName('num[]');
+			for(i=0;i<cks.length;i++){
+				cks[i].checked=true;
+			}
+		}	
+		function fans(){
+			var cks=document.getElementsByName('num[]');
+			for(i=0;i<cks.length;i++){
+				if(cks[i].checked==true){
+					cks[i].checked=false;
+				}else{
+					cks[i].checked=true;
+				}
+			}
+		}
+		function unalls(){
+			var cks=document.getElementsByName('num[]');
+			for(i=0;i<cks.length;i++){
+				cks[i].checked=false;
+			}
+		}
+	</script>
+							
+										</div>
+										<div class="pagination">
+											<{$fpage}>
+										</div> <!-- End .pagination -->
+										<div class="clear"></div>
+									</td>
+								</tr>
+							</tfoot>	 
+							<tbody>
+							<{section name="il" loop=$image}>
+								<tr>
+									<td><input type="checkbox" name="num[]" value="<{$image[il].id}>"/></td>
+									<td>
+									<div style="width:80px;height60px;float:left">
+									<a href="<{$url}>/mod/id/<{$image[il].id}>"><img src="<{$root}>/public/uploads/th_<{$image[il].name}>" style="float:left" alt="<{$image[il].title}>" title="<{$image[il].title}>"></a>
+									</div>
+										<div style="float:left;margin-left:25px;">
+											<a href="<{$url}>/mod/id/<{$image[il].id}>" style="font-size:15px;"><{$image[il].title}></a><br/><br/>
+											<b><{$image[il].mime}></b>
+										</div>
+									</td>
+									<td><{$image[il].up_author}></td>	
+									<td><{$image[il].album_title}></td>
+									<{if $image[il].postid!=0}>
+									<{section name="fa" loop=$fadd}>
+									<{if $image[il].id==$fadd[fa].id}>
+										<td><a href="<{$app}>/articleOther/viewArticle/aid/<{$fadd[0].aid}>"><{$fadd[fa].article_title}></a>&nbsp;&nbsp;&nbsp;--->&nbsp;<a href="<{$url}>/del_fadd/id/<{$image[il].id}>">移除</a>
+										</td>
+									<{/if}>
+									<{/section}>
+									<{else}>
+										<td><a href="<{$url}>/fadd/id/<{$image[il].id}>">附加</td>
+									<{/if}>
+									<td>
+										<!-- 小图标 -->
+										 <a href="<{$url}>/mod/id/<{$image[il].id}>" title="修改"><img src="<{$res}>/images/icons/hammer_screwdriver.png" alt="修改" /></a>
+										 <a href="<{$url}>/del/id/<{$image[il].id}>" title="删除"><img src="<{$res}>/images/icons/cross.png" alt="删除" onclick="return confirm('确定要删除吗？')" ></a> 					 
+									</td>
+								</tr>
+								
+							<{sectionelse}>
+									<tr>
+										<td>暂无数据</td>
+									</tr>
+							<{/section}>
+							</tbody>	
+							</form>
+						</table>
+						<script>
+							function show(){
+								var box=document.getElementById('showbox');
+								box.style.display="block";
+							}
+						</script>	
+					</div> 	
+				</div> <!-- End .content-box-content -->
+			</div> <!-- End .content-box -->		
+			<div class="clear"></div>
+			
+			<!--页面底部-->
+			<{include file="public/foot.html"}>
+
+
+

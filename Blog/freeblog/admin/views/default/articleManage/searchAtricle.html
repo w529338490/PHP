@@ -1,0 +1,75 @@
+<{include file="public/header.html"}>
+			<p id="page-intro">Free Blog</p>
+			<br/><br/>
+			<div class="clear"></div> <!-- End .clear -->	
+			
+			<div class="content-box"><!-- Start Content Box -->
+				<div class="content-box-header">
+					<h3>查询列表</h3>
+					<ul class="content-box-tabs">
+						<li><a href="#tab1" class="default-tab">查询列表</a></li> <!-- href must be unique and match the id of target div -->	
+					</ul>
+					<div class="clear"></div>
+				</div> <!-- End .content-box-header -->
+				
+				<div class="content-box-content " >
+						<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->
+							<table>
+								<thead>
+									<tr>
+										<th>选择</th>
+										<th>标题</th>
+										<th>作者</th>
+										<th>所属类别</th>
+										<th>发布时间</th>
+										<th>操作</th>
+									</tr>
+								</thead>
+								<tfoot>
+									<tr>
+										<td colspan='6'>
+											<div class="bulk-actions align-left">
+												<button class="button" onclick="alls()" style="height:25px;width:50px">全选</button>&nbsp
+												<button class="button" onclick="fans()" style="height:25px;width:50px">反选</button>&nbsp
+												
+												<input type="submit" value="删除选中" name="sub" class="button" style="height:25px;width:68px">
+												<button class="button" style="height:25px;width:68px" onclick='location.href="<{$url}>/manageArticle"'>文章列表</button>
+											</div>
+											<div class="pagination"><!--用户分页-->
+												<{$fpage}>
+											</div> <!-- End .pagination -->
+										</td>
+									</tr>
+								</tfoot>
+								<tbody>
+									<form action='' method='post'>
+										<{section name=Article loop=$resultSearch}>
+											<tr>
+												<td><input type='checkbox' name='check_article' /></td>
+												<td><{$resultSearch[Article].article_title}></td>
+												<td><{$resultSearch[Article].article_author}></td>
+												<td><{$resultSearch[Article].article_category}></td>
+												<td><{$resultSearch[Article].article_time|date_format:"%y/%m/%d/%H:%M:%S"}></td>									
+												<td>
+													<a href="<{$url}>/viewArticle/aid/<{$manageArticle[contact].aid}>" title="查看详细信息"><img src="<{$res}>/images/icons/pencil.png" alt="查看详细信息" /></a>
+													<a href="<{$url}>/delArticle/aid/<{$manageArticle[contact].aid}>" title="删除"><img src="<{$res}>/images/icons/cross.png" alt="删除" /></a>
+													<a href="<{$url}>/editArticle/aid/<{$manageArticle[contact].aid}>" title="管理"><img src="<{$res}>/images/icons/hammer_screwdriver.png" alt="管理" /></a>
+												</td>	
+											</tr>
+										<{sectionelse}>
+											<tr>
+												<td colspan='6'>Sorry,没有搜到相关文章!</td>
+											</tr>
+										<{/section}>
+									</form>
+								</tbody>
+							</table>
+						</div>
+					<div class="clear"></div>
+				</div> <!-- End #tab1 -->				
+			</div> <!-- End .content-box-content -->
+		</div> <!-- End .content-box -->		
+<div class="clear"></div>
+		
+<!--页面底部-->
+<{include file="public/foot.html"}>

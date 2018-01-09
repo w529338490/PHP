@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title><{$title.foreground_title}></title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="<{$title.foreground_subtitle}>" />
+<link href="<{$res}>/css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="header_panel">
+  <div id="header_section">
+    <div id="title_section"><{$title.foreground_title}></div>
+    <div id="tagline">Give you more free Space</div>
+  </div>
+</div>
+<!-- end of haeder -->
+<div id="menu_panel">
+  <div id="menu_section">
+    <ul>
+      <li><a href="<{$url}>" class="current">首页</a></li>
+		<{$menu}>
+	</ul>
+  </div>
+</div>
+<!-- end of menu -->
+<div id="content">
+  <div id="content_column_one">
+    <div class="column_one_section">
+     <{$left_0}>
+    </div>
+
+    <div class="column_one_section"><!--文章归档-->
+      <{$left_1}>
+    </div>
+
+    <div class="column_one_section">
+      <{$left_2}>
+    </div>
+
+	 <div class="column_one_section">
+      <{$left_3}>
+    </div>
+
+	 <div class="column_one_section">
+      <{$left_4}>
+    </div>
+
+	<div class="column_one_section">
+      <{$left_5}>
+    </div>
+
+	<div class="column_one_section">
+      <{$left_6}>
+    </div>
+	
+
+	
+  </div>
+  <!-- end of column one -->
+  <div id="content_column_two" >
+    <{section name="al" loop=$article}>
+	<div class="column_two_section">
+      <h1><a href="<{$url}>/content/aid/<{$article[al].aid}>"><{$article[al].article_title}></a></h1>
+      <div class="post_info"> 作者 <a href="#"><{$article[al].article_author}></a>&nbsp; 发表于<{$article[al].article_time}> </div>
+     <!-- <img src="<{$res}>/images/image_01.jpg" alt="" /> -->
+      <{$article[al].article_content}>
+      <div class="post_comment"> <a href="#"><span class="comment">评论数：<{$article[al].review_num}></span></a> </div>
+    </div>
+	<{/section}>
+	<div ><{$fpage}></div>
+  </div>
+  <!-- end of column two -->
+  <div id="content_column_three">
+    <!-- end of ads section -->
+    <div class="column_three_section">
+      <{$right_0}>
+    </div>
+	 <div class="column_three_section">
+     <{$right_1}>
+    </div>
+	<div class="column_three_section">
+     <{$right_2}>
+    </div>
+	<div class="column_three_section">
+     <{$right_3}>
+    </div>
+	<div class="column_three_section">
+     <{$right_4}>
+    </div>
+	<div class="column_three_section">
+     <{$right_5}>
+    </div>
+	<div class="column_three_section">
+     <{$right_6}>
+    </div>
+    <div class="cleaner_with_divider">&nbsp;</div>
+    <div class="column_three_section">
+      <h1>About This Blog</h1>
+      <p>we will give you more free space</p>
+    </div>
+  </div>
+  <!-- end of column three -->
+  <div class="cleaner">&nbsp;</div>
+</div>
+<!-- end of content -->
+<div id="bottom_panel">
+  <div class="bottom_panel_section"> <a href="#">Home</a> | <a href="#">关于我们</a> | <a href="#">联系我们</a> | email:<{$title.foreground_email}><br />
+    <br />
+    Copyright &copy; 2024 <a href="#"><strong>freeblog TEAM</strong></a> | Author  <a href="#">卫聪 | 闫海静</a></div>
+  <div class="bottom_panel_section">
+    <h1>FreeBlog</h1>
+    <p>欢迎大家使用，版权归&nbsp;&nbsp;<b><a href="#">freeblog team</a></b>&nbsp;&nbsp;所有 </p>
+  </div>
+  <div class="cleaner">&nbsp;</div>
+</div>
+<!-- end of bottom panel -->
+</body>
+</html>

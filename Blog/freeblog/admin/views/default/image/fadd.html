@@ -1,0 +1,66 @@
+<{include file="public/header.html"}>
+			<p id="page-intro">Free Blog</p>
+			<br/><br/>
+			<div class="clear"></div> <!-- End .clear -->	
+			<div class="content-box"><!-- Start Content Box -->
+				<div class="content-box-header">
+					<h3>图片附加</h3>
+					<ul class="content-box-tabs">
+						<li><a href="#tab1" class="default-tab">图片附加</a></li> <!-- href must be unique and match the id of target div -->
+					</ul>
+					<div class="clear"></div>	
+				</div> <!-- End .content-box-header -->
+				<div class="content-box-content " >	
+					<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->	<form action="<{$url}>/exe_fadd" method="post">
+						<div style="margin:auto;text-align:center;">	
+							文章栏目
+								<select name="cname" onchange="val(1)">
+									<option value="0">按栏目查看</option>
+									<option value="none">查看全部</option>
+										<{$cname}>
+									</select>
+								日期
+								<select name="time" onchange="val(2)">
+									<option value="0">按日期查看</option>
+									<option value="none2">全部查看</option>
+										<{$time}>
+									</select>
+								
+								
+							<div id="date" style="width:310px;height:400px;margin:20px auto;overflow:auto;border:5px solid #878787"></div>
+							放置:<input type="radio" name="pos" value="left_up">文章顶部
+									
+									<input type="radio" name="pos" value="right_down">文章底部<br/><br/>
+									等比例缩放：
+									宽&nbsp;&nbsp;<input type="text" name="width" size="2">
+									高&nbsp;&nbsp;<input type="text" name="height" size="2"><br/><br/>
+									<input type="hidden" name="id" value="<{$id}>">
+									<input type="submit" name="sub" value="提交" class="button">&nbsp;&nbsp;<input type="reset" name="sub" value="重置" class="button">
+						</div>
+						</form>
+					</div> 			
+				</div> <!-- End .content-box-content -->
+			</div> <!-- End .content-box -->		
+			<div class="clear"></div>
+			<script>
+									var cname=document.getElementsByName('cname');
+									var time=document.getElementsByName('time');
+									var div=document.getElementById('date');
+										function val(num){
+											var sval=cname[0].value;			
+											var ti=time[0].value;
+											if(num==1){
+												var ul="<{$url}>/ajax/cname/"+sval+"/time/"+ti+"";
+													Ajax().post(ul,sval,function(date){
+														div.innerHTML=date;
+													})
+											}else if(num==2){
+													var ul="<{$url}>/ajax/cname/"+sval+"/time/"+ti+"";
+													Ajax().post(ul,ti,function(date){
+														div.innerHTML=date;
+													})
+												}
+										}
+			</script>
+			<!--页面底部-->
+			<{include file="public/foot.html"}>

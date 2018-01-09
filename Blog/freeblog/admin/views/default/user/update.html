@@ -1,0 +1,86 @@
+<{include file="public/header.html"}>
+	
+			<p id="page-intro">Free Blog</p>
+			<br/><br/>
+			<div class="clear"></div> <!-- End .clear -->	
+			
+			<div class="content-box"><!-- Start Content Box -->
+				<div class="content-box-header">
+					<h3>添加用户</h3>
+					
+					<ul class="content-box-tabs">
+						<li><a href="#tab1" class="default-tab">添加用户</a></li> <!-- href must be unique and match the id of target div -->
+					</ul>
+					<div class="clear"></div>	
+				</div> <!-- End .content-box-header -->
+				<div class="content-box-content " >	
+					<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->	
+						<form action="<{$url}>/exe_update/page/<{$page}>" method="post" name="f">
+						<table>	
+							<tr>
+								<td><b>所属用户组</b></td>
+								<td>
+									<select name="gid">
+										<option value=''>选择用户组</option>
+										<{section name="gls" loop=$grp}>
+											<{if $grp[gls].gid==$fgid}>
+											<option value="<{$grp[gls].gid}>" selected><{$grp[gls].group_name}></option>
+											<{else}>
+											<option value="<{$grp[gls].gid}>" ><{$grp[gls].group_name}></option>
+											<{/if}>
+										<{/section}>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td><b>用户名</b></td><td><input type="text" name="user_username" onfocus="ckform()" value="<{$date[0].user_username}>"></td>
+							</tr>
+							<tr>
+								<td><b>密码</b></td><td><input type="password" name="user_password"></td>
+							</tr>
+							<tr>
+								<td><b>重复密码</b></td><td><input type="password" name="user_repassword"></td>
+							</tr>
+							<tr>
+								<td><b>邮箱</b></td><td><input type="text" name="user_email" value="<{$date[0].user_email}>"></td>
+							</tr>
+							<tr>
+								<td><b>性别</b></td>
+								<td>
+								<{if $date[0].user_sex==1}>
+									<input type="radio" name="user_sex" value="1" checked/>男
+									<input type="radio" name="user_sex" value="2" />女
+									<input type="radio" name="user_sex" value="3" />保密
+								<{elseif $date[0].user_sex==0}>
+									<input type="radio" name="user_sex" value="1"/>男
+									<input type="radio" name="user_sex" value="2" checked/>女
+									<input type="radio" name="user_sex" value="3" />保密
+								<{elseif $date[0].user_sex==2}>
+									<input type="radio" name="user_sex" value="1"/>男
+									<input type="radio" name="user_sex" value="2"/>女
+									<input type="radio" name="user_sex" value="3" checked/>保密
+								<{/if}>
+								</td>
+							</tr>
+							<tr>
+								<td>&nbsp;<input type="hidden" name="uid" value="<{$date[0].uid}>"></td><td><input type="submit" class="button" value="提交">&nbsp;&nbsp;&nbsp;&nbsp;
+								<input type="reset" value="重置" class="button"></td>
+							</tr>
+						</table>
+						</form>	
+						<script>
+							
+						
+						</script>
+					</div> <!-- E			
+				</div> <!-- End .content-box-content -->
+			</div> <!-- End .content-box -->		
+			<div class="clear"></div>
+			<!--页面底部-->
+			<{include file="public/foot.html"}>
+
+
+
+
+
+

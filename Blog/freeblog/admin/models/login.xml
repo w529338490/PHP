@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<input name="user_username" type="notnull" action="islogin" msg="用户名不能为空" />
+	<input name="user_username" type="unique" action="islogin" msg="用户名已经存在"/>
+	<input name="user_password" type="notnull" action="islogin" msg="密码不能为空" />
+	<input name="user_repassword" type="confirm" value="user_password" action="islogin" msg="两次密码不一致" />
+</form>

@@ -1,0 +1,1 @@
+<?php {"pri":"id","0":"link_name","1":"link_description","2":"link_url","3":"link_image","4":"link_target","5":"link_body","6":"link_body_email","7":"link_time","8":"disable","9":"oder"}yes

@@ -1,0 +1,54 @@
+<{include file="public/header.html"}>
+			<p id="page-intro">Free Blog</p>
+			<br/><br/>
+			<div class="clear"></div> <!-- End .clear -->	
+			
+			<div class="content-box"><!-- Start Content Box -->
+				<div class="content-box-header">
+					<h3>分类列表</h3>
+					<ul class="content-box-tabs">
+						<li><a href="#tab1" class="default-tab">分类列表</a></li> <!-- href must be unique and match the id of target div -->	
+					</ul>
+					<div class="clear"></div>
+				</div> <!-- End .content-box-header -->
+				
+				<div class="content-box-content " >
+						<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->
+							<table>
+								<thead>
+									<tr>
+										<th>分类</th>
+										<th>查看</th>
+									</tr>
+								</thead>
+								<tfoot>
+								</tfoot>
+								<tbody>
+									<{section name='cates' loop=$allCates}>
+										<tr>
+											<td><a href='<{$url}>/detaCategory/CateId/<{$allCates[cates].cid}>'><{$allCates[cates].category_name}></a></td>
+											<td>
+												<a href='<{$url}>/detaCategory/CateId/<{$allCates[cates].cid}>'><image src='<{$res}>/images/icons/detaCates.png'/></a>
+												&nbsp;&nbsp;
+												<!--判断是否存在自类,如果存在输出可以不删除，如果不存在输出不可以删除-->
+												<{if $allCates[cates].flag eq 'NO'}>
+													<image src='<{$res}>/images/icons/unrecycle.png' />
+												<{else}>
+													<a href='<{$url}>/delCategory/Cid/<{$allCates[cates].cid}>'><image src='<{$res}>/images/icons/recycle.png' onclick='return confirm("您确实要删除<{split_catTag string=$allCates[cates].category_name }>类？")'/></a>
+												<{/if}>
+											</td>
+										</tr>
+									<{sectionelse}>
+										<tr><td colspan='2'>还没有类别!</td></tr>
+									<{/section}>
+								</tbody>
+							</table>
+						</div>
+					<div class="clear"></div>
+				</div> <!-- End #tab1 -->				
+			</div> <!-- End .content-box-content -->
+		</div> <!-- End .content-box -->		
+<div class="clear"></div>
+		
+<!--页面底部-->
+<{include file="public/foot.html"}>

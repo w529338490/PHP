@@ -1,0 +1,1 @@
+<?php {"0":"aid","1":"rid","pri":"rrid","2":"rtime","3":"rrname","4":"rremail","5":"rrwebsite","6":"rrcontent"}yes

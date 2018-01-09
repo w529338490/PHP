@@ -1,0 +1,83 @@
+<{include file="public/header.html"}>
+			<p id="page-intro">Free Blog</p>
+			<br/><br/>
+			<div class="clear"></div> <!-- End .clear -->
+			<div class="content-box"><!-- Start Content Box -->
+				<div class="content-box-header">
+					<h3>操作记录</h3>
+					<ul class="content-box-tabs">
+						<li><a href="#tab1" class="default-tab">操作记录</a></li> <!-- href must be unique and match the id of target div -->	
+					</ul>
+					<div class="clear"></div>
+				</div> <!-- End .content-box-header -->
+				
+				<div class="content-box-content " >
+					<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->
+						<table id='operNotes'>
+							<thead>
+								<tr>
+									<td colspan='5'>
+										<button class='button' onclick='sendDatas()'>删除全部记录</button>&nbsp;&nbsp;&nbsp;
+										<a href='<{$url}>/saveOper'><button class='button'>记录保存</button></a>
+									</td>
+								</tr>
+								<tr>
+								<th>操作人</th>
+								<th>操作模块</th>
+								<th>操作详情</th>
+								<th>操作时间</th>
+								</tr>
+							</thead>
+							<tfoot>
+								<{section name='lo' loop=$resultDbOper}>
+								<tr>
+									<td><{$resultDbOper[lo].oname}></td>
+									<td><{$resultDbOper[lo].opertype}></td>
+									<td><{$resultDbOper[lo].operdeta}></td>
+									<td><{$resultDbOper[lo].opertime|date_format:"%y年-%m月-%d日 %H:%M:%S"}></td>
+								</tr>
+								<{sectionelse}>
+								<tr>
+									<td>没有相关记录!</td>
+								</tr>
+								<{/section}>
+								<tr>
+									<td colspan='4' style='text-align:right'>
+									<div class="pagination"><!--用户分页-->
+										<{$fpage}>
+									</div> <!-- End .pagination -->
+									</td>
+								</tr>
+							</tfoot>
+							<tbody>
+								<tr style='display:none' id='hidTb'>
+									<td colspan='4'>没有相关记录!</td>
+								</tr>
+									<script>
+										function sendDatas(){
+												//$.get("<{$url}>/delDbOper","delData="+delData,function(data)
+													//var notes=document.getElementById('notes');
+													//notes.innerHTML="<tr><td>没有相关记录</td></tr>";
+													//alert(data);
+											Ajax().post("<{$url}>/delDbOper","isSure=1",function(data){
+												if(data == '1'){
+													var operNotes=document.getElementById('operNotes').tFoot;
+													operNotes.style.display='none';
+													var operTb=document.getElementById('hidTb');
+													
+													operTb.style.display='block';
+													alert('删除成功');
+												}else{
+													alert('删除失败,请稍候再试');
+												}
+											});
+										}
+									</script>
+							</tbody>
+						</table>
+					</div>	
+				</div> <!-- End .content-box-content -->
+			</div> <!-- End .content-box -->		
+			<div class="clear"></div>	
+<!--页面底部-->
+<{include file="public/foot.html"}>

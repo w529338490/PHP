@@ -1,0 +1,125 @@
+<{include file="public/header.html"}>
+	
+			<p id="page-intro">Free Blog</p>
+			<div>
+					<span><a href="<{$url}>/index">全部用户</a> (<{$user_total}>)&nbsp; | &nbsp;<a href="<{$url}>/online">当前在线</a> (<{$online}>)&nbsp; | &nbsp;<a href="#">活跃用户</a> (0)&nbsp; | &nbsp;<a href="#">不稳定用户</a> (0)&nbsp; | &nbsp;<a href="#">屏蔽的用户</a> (1) &nbsp;   </span><br/><br/>
+					<span>
+					<form action="<{$url}>/index" method="post">
+					<select name="gid">
+						<option value="0">分组查看</option>
+						<{section name="gls" loop=$grp}>
+							<option value="<{$grp[gls].gid}>" ><{$grp[gls].group_name}></option>
+						<{/section}>
+					<select>&nbsp;&nbsp;<input type="submit" class="button" value="提交" style="height:25px;width:50px" >
+					</span>&nbsp;&nbsp;&nbsp;&nbsp;
+					<span>
+					<input type="text"  name="search_username">
+					&nbsp;&nbsp;<input type="submit" class="button" value="搜索" style="height:25px;width:50px">
+					</form>
+					</span>
+				
+			</div>
+			<br/><br/>
+			<div class="clear"></div> <!-- End .clear -->	
+			
+			<div class="content-box"><!-- Start Content Box -->
+				<div class="content-box-header">
+					<h3>用户列表</h3>
+					
+					<ul class="content-box-tabs">
+						<li><a href="#tab1" class="default-tab">用户列表</a></li> <!-- href must be unique and match the id of target div -->
+					</ul>
+					<div class="clear"></div>	
+				</div> <!-- End .content-box-header -->
+				<div class="content-box-content " >	
+					<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->	
+						<table>	
+							<thead>
+								<tr>
+								   <th>选择</th>
+								   <th>用户名</th>
+								   <th>邮箱</th>
+								   <th>创建时间</th>
+								   <th>所属用户组</th>
+								   <th>状态</th>
+								   <th>权限</th>
+								</tr>	
+							</thead>
+							<tfoot>
+								<tr>
+									<td colspan="6">
+										<div class="bulk-actions align-left">
+			<form action="<{$url}>/del" method="post">	
+<button class="button" onclick="alls()" style="height:25px;width:58px">全选</button>&nbsp
+<button class="button" onclick="fans()" style="height:25px;width:58px">反选</button>&nbsp
+<input type="submit" value="删除?" name="sub" class="button" style="height:25px;width:58px" onclick="return confirm('确定要删除您选中的用户吗？')">
+	<script>
+		function alls(){
+			var cks=document.getElementsByName('num[]');
+			for(i=0;i<cks.length;i++){
+				cks[i].checked=true;
+			}
+		}	
+		function fans(){
+			var cks=document.getElementsByName('num[]');
+			for(i=0;i<cks.length;i++){
+				if(cks[i].checked==true){
+					cks[i].checked=false;
+				}else{
+					cks[i].checked=true;
+				}
+			}
+		}
+		function unalls(){
+			var cks=document.getElementsByName('num[]');
+			for(i=0;i<cks.length;i++){
+				cks[i].checked=false;
+			}
+		}
+	</script>
+							
+										</div>
+										<div class="pagination">
+											<{$fpage}>
+										</div> <!-- End .pagination -->
+										<div class="clear"></div>
+									</td>
+								</tr>
+							</tfoot>	 
+							<tbody>
+							<{section name="uls" loop=$user_list}>
+								<tr>
+									<td><input type="checkbox" name="num[]" value="<{$user_list[uls].uid}>"/></td>
+									<td><{$user_list[uls].user_username}></td>
+									<td><{$user_list[uls].user_email}></a></td>
+									<td><{$user_list[uls].user_mktime|date_format:"%y年-%m月-%d日 %H:%M:%S"}></td>
+									<td><{$user_list[uls].group_name}></td>
+									<{if $user_list[uls].user_onlinestatus}>
+									<td>在线</td>
+									<{else}>
+									<td>离线</td>
+									<{/if}>
+									<td>
+										<!-- 小图标 -->
+										 <a href="#" title="Edit"><img src="<{$res}>/images/icons/pencil.png" alt="编辑" /></a>
+										 <a href="#" title="Delete"><img src="<{$res}>/images/icons/cross.png" alt="删除" onclick="return confirm('确定要删除<{$user_list[uls].user_username}>用户吗？')" ></a> 
+										 <a href="#" title="Edit Meta"><img src="<{$res}>/images/icons/hammer_screwdriver.png" alt="管理" /></a>
+									</td>
+								</tr>
+							<{/section}>
+							</tbody>	
+						</table>
+						</form>	
+					</div> <!-- E			
+				</div> <!-- End .content-box-content -->
+			</div> <!-- End .content-box -->		
+			<div class="clear"></div>
+		
+			<!--页面底部-->
+			<{include file="public/foot.html"}>
+
+
+
+
+
+
