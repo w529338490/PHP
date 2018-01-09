@@ -1,0 +1,49 @@
+#post_box{
+	margin-bottom:10px;
+	padding:10px 5px 5px 5px;
+	border:1px solid #ccc;
+}
+#post_box h2{
+	border:1px solid #ccc;
+	padding:5px;
+	background:#F2F2F2;
+	font-size:14px;
+	margin-bottom:5px;
+}
+#content{
+	margin-top:5px;
+}
+textarea{
+	display:block;
+	width:100%;
+	height:400px;
+}
+#post_title{
+	background: url("../images/px.png") repeat-x scroll 0 0 #FFFFFF;
+	border-color: #848484 #E0E0E0 #E0E0E0 #848484;
+	border-style: solid;
+	border-width: 1px;
+	height: 20px;
+	width: 220px;		
+}
+#post_btn{
+	background: url("../images/pn.png") repeat-x scroll 0 -48px transparent;
+	border: 0 none;
+	color: white !important;
+	cursor: pointer;
+	font-weight: bold;
+	height: 25px;
+	margin-right: 3px;
+	margin-top: 5px;
+	overflow: hidden;
+	padding: 0;
+	vertical-align: middle;
+	width: 80px;		
+}
+#board_list{
+	height:22px;
+	line-height:22px;
+}
+#mess{
+	color:red;
+}

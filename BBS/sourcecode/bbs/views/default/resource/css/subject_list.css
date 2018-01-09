@@ -1,0 +1,186 @@
+/*导航列表*/
+#nav_chain_box{
+	width:130px;
+	border:1px solid #BDD7E3;
+
+	background:#F5F9FB;
+	float:left;
+	overflow:hidden;
+}
+#nav_chain_box h2{
+	padding:5px 0px 5px 10px;
+	font-size:16px;
+}
+#nav_chain_box dt{
+	padding:8px 0px 5px 10px;
+	border-top:1px solid #BDD7E3;
+	border-bottom:1px solid #BDD7E3;
+	cursor:pointer;
+}
+#nav_chain_box dd{
+	background:white;
+	padding-left:10px;
+	line-height:22px;
+}
+/*帖子列表*/
+#subj_list{
+	width:815px;
+	float:right;
+}
+#subj_title{
+	padding:9px;
+	border:1px solid #ccc;
+}
+#subj_title strong{
+	margin-right:10px;
+}
+#subj_title b{
+	color:#F26C4F;
+}
+.post_page{
+	height:30px;
+	padding:8px 0px;
+}
+.post_page img{
+	float:left;
+}
+.post_page > div{
+	float:right;
+	margin-top:8px;
+}
+.post_page > div > b{
+	font-size:14px;
+}
+.post_page > div a{
+	padding:2px 5px;
+	border:1px solid #C2D5E3;
+}
+.post_page > div a:hover{
+	border-color:#336699;
+	text-decoration:none;
+}
+#list_box{
+	border:1px solid #CDCDCD;
+	border-bottom:none;
+}
+#list_box table{
+	border-collapse:collapse;
+}
+#list_box table tbody tr td{
+	padding:5px 0px;
+}
+#list_box table thead tr td{
+	background:#F2F2F2;
+	border-bottom:1px solid #CDCDCD;
+	padding:10px 0px;
+}
+#list_box table td.filter{
+	padding-left:10px;
+	width:30px;
+	overflow:hidden;
+}
+#list_box table td.title{
+	width:493px;
+	overflow:hidden;
+}
+#list_box table td.author{
+	width:106px;
+	overflow:hidden;
+}
+#list_box table td.comm_num{
+	width:60px;
+	overflow:hidden;
+}
+#list_box table td.last_comm small{
+	font-size:12px;
+}
+#list_box table tbody td{
+	border-bottom:1px solid #ccc;
+}
+#list_box .hide_menu{
+	width:90px;
+	border:1px solid #ccc;
+	background:white;
+	position:absolute;
+	display:none;
+}
+#list_box .hide_menu ul{
+	list-style:none;
+}
+#list_box .hide_menu ul li{
+	line-height:25px;
+}
+#list_box .hide_menu ul li a{
+	display:block;
+}
+#list_box .hide_menu ul li a:hover{
+	background:#F0F4F7;
+	cursor:pointer;
+}
+.subj_type_order{
+	margin-left:100px;
+}
+/*快速发帖*/
+#fast_post{
+	margin-bottom:10px;border:1px solid #ccc;
+}
+#fast_post p{
+	padding:5px 10px;
+}
+#fast_post h4{
+	background:#F2F2F2;
+	border-bottom:1px solid #ccc;
+	padding:5px 10px;
+	margin-bottom:15px;	
+	font-size:12px;
+}
+#fast_post #title_input{
+	margin-left:10px;
+	height:20px;
+	width:220px;
+    background: url("../images/px.png") repeat-x scroll 0 0 #FFFFFF;
+    border-color: #848484 #E0E0E0 #E0E0E0 #848484;
+    border-style: solid;
+    border-width: 1px;	
+}
+#post_zone{
+	padding:5px 10px;
+}
+#fast_btn{
+	vertical-align: middle;
+	overflow: hidden;
+	margin-right: 3px;
+	padding: 0;
+	height: 25px;
+	border: 0;
+	background: url("../images/pn.png") repeat-x 0 -48px;
+	cursor: pointer;
+	width: 80px;
+	color: white !important;
+	font-weight: bold;
+	margin-top:5px;
+}
+textarea{
+	display:block;
+	height:300px;
+}
+#counter{
+	border:1px solid #ccc;
+	border-top:none;
+	padding:5px;
+	text-align:right;
+}
+#look{
+	position:relative;
+	top:5px;
+}
+#mess{
+	margin-left:10px;
+	color:red;
+}
+.show_menu_icon{
+    background: url("../images/arrwd.gif") no-repeat scroll 100% 50% transparent;
+    cursor: pointer;
+    padding:0px 16px 2px 0px;
+    white-space: nowrap;	
+}

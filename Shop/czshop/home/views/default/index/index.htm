@@ -1,0 +1,959 @@
+<{include file="./public/header.htm"}>
+<link rel="stylesheet" type="text/css" href="<{$res}>/css/index.css" />
+<script src='<{$public}>/js/ajax3.0.js'></script>
+<script src='<{$public}>/js/jquery-1.4.4.min.js'></script>
+<script type="text/javascript">
+	$("#index").addClass("curron");
+	$(function(){
+				k=2;
+				$("#fpb a:first").addClass("hover");
+				mytime = setInterval(move,3000);
+				function move(){
+					var q=k;
+					if(k>5) {
+						k=1;
+						$("#fptimg img").animate({top:"+=1040"},1000);
+					}
+					$("#fpb a").each(function(){
+						if(parseInt($(this).attr('value'))==k){
+							$("#fpb a").removeClass("hover");
+							$(this).addClass("hover");
+							if(q>5) return;
+							$("#fptimg img").animate({top:'-=260'},1000);
+						}
+					})
+					k++;
+				}
+				$("#fptimg img").hover(function(){
+							clearInterval(mytime);
+					},function(){
+						mytime = setInterval(move,3000)
+											
+					})
+				$("#fpb a").hover(function(){
+				
+							$("#fpb a").removeClass("hover");
+							$(this).addClass("hover");
+							clearInterval(mytime);
+							wei = (k-parseInt($(this).attr('value'))-1)*260;
+							$("#fptimg img").stop(true,true).animate({top:'+='+wei});
+							k=parseInt($(this).attr('value'))+1;
+					},function(){
+						mytime = setInterval(move,3000)
+											
+					})
+				
+				
+			})
+</script>
+<{nocache}>
+	<div class="blank10"></div>
+	<!-- 第一行（顶部通栏广告）-->
+		<div class="cen toplongad" id="toplongad">
+				<a target="_blank" href=""><img src="<{$res}>/images/tonglan-zs1214.jpg" src2=""></a>
+			<p class="blank10"></p>
+		</div>
+	<!-- 第一行（标签广告，网站公告，图片广告）-->
+	<div class="cen">
+		<!-- 图片广告 -->
+			<div class="fl ltopad mgr10" id="topad0"><a target="_blank" href=""><img src="<{$res}>/images/zuo1-1219-1.jpg"></a></div>
+		<!-- 标签广告 -->
+	<div id='fptimg' class="fl relative n_focus"><a  id="fpc0" href="" target="_blank">
+	<img style="position:absolute;top:0px;"  alt="运动鞋促销3.3折起" title="运动鞋促销3.3折起" src="<{$res}>/images/lunbo-1-1219.jpg"></a>
+	<a id="fpc1"  href="" target="_blank">
+	<img style="position:absolute;top:260px;"  alt="冬靴限时抢298元起" title="冬靴限时抢298元起" src="<{$res}>/images/lunbo2-1219-1.jpg" ></a>
+	<a id="fpc2"  href="" target="_blank">
+	<img style="position:absolute;top:520px;"  alt="买篮球鞋送运动袜 " title="买篮球鞋送运动袜 " src="<{$res}>/images/lunbo-3-1219.jpg"></a>
+	<a id="fpc3"  href="" target="_blank">
+	<img style="position:absolute;top:780px;"  alt="圣诞特惠男女鞋 " title="圣诞特惠男女鞋 " src="<{$res}>/images/lunbo-4-1219.jpg"></a>
+	<a id="fpc4" href="" target="_blank">
+	<img style="position:absolute;top:1040px;"  alt="卡骆弛年末新登场" title="卡骆弛年末新登场" src="<{$res}>/images/lunbo5-1219.jpg"></a>
+	<p class="nfP_tit f_white" id="fpb">
+	<a class="" value='1' id="fpt0" href="" target="_blank">运动鞋促销3.3折起</a>
+	<a class="" value='2' id="fpt1" href="" target="_blank">冬靴限时抢298元起</a>
+	<a class="" value='3' id="fpt2" href="" target="_blank">买篮球鞋送运动袜 </a>
+	<a class="" value='4' id="fpt3" href="" target="_blank">圣诞特惠男女鞋 </a>
+	<a class="" value='5' id="fpt4" href="" target="_blank" style="width: 112px; border: medium none;">卡骆弛年末新登场</a>
+	</p>
+	<div style="display: none;" class="n_fload"></div>
+	</div>
+		<div class="fl w220px mgl10">
+			<!-- 广告图 -->
+	<div class="new_ad1"><a target="_blank" href=""><img alt="康尔健野5.5折封顶" src="<{$res}>/images/you-1-1219-1.jpg"></a></div>
+			<div class="blank07"></div>
+			<!-- 网站公告 -->
+	<div class="annou">
+	<p><span class="annou_t fl"></span></p><ul>
+	<{section loop=$notic name="gonggao"}>
+		<li><a target="_blank" href="<{$app}>/list/id/<{$notic[gonggao].tid}>/sid/<{$notic[gonggao].sid}>">&nbsp <{$notic[gonggao].ncont}></a></li>
+	<{/section}>
+	</ul>
+	</div>
+		</div>
+	</div>
+	<div class="blank07"></div>
+	<!-- 第二行（热门品牌，图片广告） -->
+	<div class="cen relative">
+			<div class="fl n_brand">
+				<p><span class="n_brand_t fl"></span></p>
+				<div class="n_brandc" style="background:#f4f4f4">
+					<ul id="hotbrand">
+							<{section loop=$data name="pinpai"}>
+							<li><a href="<{$app}>/list/index/pid/<{$data[pinpai].pid}>/typeid/<{$data[pinpai].id}>/tname/<{$data[pinpai].tname}>" target="_blank"><img title="<{$data[pinpai].tname}>" src="<{$public}>/uploads/<{$data[pinpai].tpic}>" style="width: 74px; height: 51px;"> </a></li>
+							<{/section}>
+					</ul>
+				</div>
+			</div>
+	<div class="fl n_brand_ad mgl10"><a target="_blank" href="">
+	<img alt="全场童装童鞋满200减40" src="<{$res}>/images/you-2-1219-1.jpg"></a></div>
+	</div>
+	<div class="blank07"></div>
+	<!-- 第三行（商品分类，图片广告） -->
+	<div class="cen relative">
+		<div class="fl n_class">
+			<p><span class="n_class_t fl"></span></p>
+			<div class="n_classc">
+						<div class="n_classu">
+							<a href="<{$app}>/list/index/pid/1" class="fl cat_logo1" target="_blank"></a>
+								<div class="n_classlist fl">
+									<ul>
+										<{section loop=$cat1 name="pp"}>
+										<a href="<{$app}>/list/index/pid/1/styleid/<{$cat1[pp].id}>/sname/<{$cat1[pp].sname}>" target="_blank"><{$cat1[pp].sname}></a> |
+										<{/section}>
+										
+												
+									</ul>
+								</div>
+						</div>
+						<div class="n_classu">
+							<a href="<{$app}>/list/index/pid/3" class="fl cat_logo2" target="_blank"></a>
+								<div class="n_classlist fl">
+									<ul>
+										<{section loop=$cat2 name="pp"}>
+										<a href="<{$app}>/list/index/pid/3/styleid/<{$cat2[pp].id}>/sname/<{$cat2[pp].sname}>" target="_blank"><{$cat1[pp].sname}></a> |
+										<{/section}>
+												
+									</ul>
+								</div>
+						</div>
+						<div class="n_classu">
+							<a href="<{$app}>/list/index/pid/2" class="fl cat_logo3" target="_blank"></a>
+								<div class="n_classlist fl">
+									<ul>
+										<{section loop=$cat3 name="pp"}>
+										<a href="<{$app}>/list/index/pid/2/styleid/<{$cat3[pp].id}>/sname/<{$cat3[pp].sname}>" target="_blank"><{$cat1[pp].sname}></a> |
+										<{/section}>
+												
+									</ul>
+								</div>
+						</div>
+						<div class="n_classu">
+							<a href="<{$app}>/list/index/pid/5" class="fl cat_logo4" target="_blank"></a>
+								<div class="n_classlist fl">
+									<ul>
+										<{section loop=$cat4 name="pp"}>
+										<a href="<{$app}>/list/index/pid/5/styleid/<{$cat4[pp].id}>/sname/<{$cat4[pp].sname}>" target="_blank"><{$cat1[pp].sname}></a> |
+										<{/section}>
+												
+									</ul>
+								</div>
+						</div>
+						<div style="border: medium none;" class="n_classu">
+							<a href="<{$app}>/list/index/pid/4" class="fl cat_logo5" target="_blank"></a>
+								<div class="n_classlist fl">
+									<ul>
+										<{section loop=$cat5 name="pp"}>
+										<a href="<{$app}>/list/index/pid/4/styleid/<{$cat5[pp].id}>/sname/<{$cat5[pp].sname}>" target="_blank"><{$cat1[pp].sname}></a> |
+										<{/section}>
+												
+									</ul>
+								</div>
+						</div>
+						<div style="border: medium none;" class="n_classu">
+							<a href="<{$app}>/list/index/pid/6" class="fl cat_logo6" target="_blank"></a>
+								<div class="n_classlist fl">
+									<ul>
+										<{section loop=$cat6 name="pp"}>
+										<a href="<{$app}>/list/index/pid/6/styleid/<{$cat6[pp].id}>/sname/<{$cat6[pp].sname}>" target="_blank"><{$cat1[pp].sname}></a> |
+										<{/section}>
+												
+									</ul>
+								</div>
+						</div>
+			</div>
+		</div>
+	<div class="fl n_brand_ad mgl10"><a target="_blank" href=""><img alt="户外探索 自由畅行 年末冲刺￥448" src="<{$res}>/images/you-3-1219-1.jpg"></a></div>
+	</div>
+	<div class="blank20"></div>
+	<!-- 第五行（运动馆） -->
+	<div class="cen">
+		<div class="unit_top" style="border-bottom:3px solid #207c9f">
+			<a class="fl sport_t" href=""></a>
+			<span style="width: 80px;" class="channelmore"><a class="icon4 fr" href=""></a><a href="" class="fr" target="_blank">运动馆</a></span>
+			<span class="top_classl">
+						<em><a href="" target="_blank">篮球鞋</a></em>
+						|
+						<em><a href="" target="_blank">跑步鞋</a></em>
+						|
+						<em><a href="" target="_blank">板鞋/复克鞋</a></em>
+						|
+						<em><a href="" target="_blank">羽绒服</a></em>
+						|
+						<em><a href="" target="_blank">棉服</a></em>
+						|
+						<em><a href="" target="_blank">棉马夹/羽绒马夹</a></em>
+						|
+						<em><a href="" target="_blank">夹克</a></em>
+						|
+						<em><a href="" target="_blank">卫衣/套头衫</a></em>
+						|
+						<em><a href="" target="_blank">运动包</a></em>
+						
+				&nbsp;&nbsp;&nbsp;
+			</span>
+		</div>
+		<div class="cen adunit">
+				<div class="adinfo3"><a target="_blank" href="">
+				<img title="冲破束缚 享受奔跑  NIKE耐克 新款跑步鞋" alt="冲破束缚 享受奔跑  NIKE耐克 新款跑步鞋" src="<{$res}>/images/s-001-1219.jpg" style="display: inline;" height="260" width="198"></a></div>
+
+				<div class="adinfo4">
+					<a target="_blank" href=""><img alt="经典无冬眠 冬季新款复克板鞋" title="经典无冬眠 冬季新款复克板鞋" src="<{$res}>/images/s-002-1219.jpg"  style="margin-bottom: 1px; display: inline;" height="129" width="395"></a>
+					<a target="_blank" href=""><img alt="NIKE 篮球鞋送袜子" title="NIKE 篮球鞋送袜子" src="<{$res}>/images/s-003-1219.jpg"  style="margin-right: 1px; display: inline;" height="129" width="197"></a>
+					 <a target="_blank" href=""><img alt="adidas全能训练鞋" title="adidas全能训练鞋" src="<{$res}>/images/s-004-1219.jpg" style="display: inline;float:left" height="129" width="197"></a></div>
+				<div class="adinfo3">
+					<a target="_blank" href=""><img alt="puma 中性怀旧休闲鞋" title="puma 中性怀旧休闲鞋" src="<{$res}>/images/s-005-1219.jpg"  style="margin-bottom: 1px; display: inline;" height="129" width="197"></a>
+					<a target="_blank" href=""><img alt="匡威 2012新款帆布鞋" title="匡威 2012新款帆布鞋" src="<{$res}>/images/s-006-1219.jpg"  style="display: inline;" height="129" width="197"></a>
+				</div>
+				<div class="adinfo5"><a target="_blank" href="">
+				<img title="保暖百搭添彩冬季卫衣新品上市" alt="保暖百搭添彩冬季卫衣新品上市" src="<{$res}>/images/s-007-1219.jpg" style="display: inline;" height="259" width="197"></a></div>
+
+		</div>
+		<div class="unit_bom clear">
+			<div class="move_left fl">
+				
+			</div>
+			<div class="move_mid move_list fl" id="sport-list">
+				<ul>
+			<li>
+				<span>
+					<a href="" target="_blank">
+						<img style="display: inline;" title="NIKE耐克 2011男子跑步鞋443825-401" alt="NIKE耐克 2011男子跑步鞋443825-401" src="<{$res}>/images/21005579_01_s.jpg">
+						
+					</a>
+				</span>
+				<span class="move_pt"><a target="_blank" href="">NIKE耐克 2011男子跑步鞋443825-401</a></span>
+				<span class="price"><s>市场价<del>￥869</del></s>&nbsp;&nbsp;<span class="Red">优购价<b>￥485</b></span></span>
+			</li>
+			<li>
+				<span>
+					<a href="" target="_blank">
+						<img style="display: inline;" title="NIKE耐克 2011女子复克鞋443687-502" alt="NIKE耐克 2011女子复克鞋443687-502" src="<{$res}>/images/21005460_01_s.jpg">
+						
+					</a>
+				</span>
+				<span class="move_pt"><a target="_blank" href="">NIKE耐克 2011女子复克鞋443687-502</a></span>
+				<span class="price"><s>市场价<del>￥469</del></s>&nbsp;&nbsp;<span class="Red">优购价<b>￥225</b></span></span>
+			</li>
+			<li>
+				<span>
+					<a href="" target="_blank">
+						<img style="display: inline;" title="adidas阿迪达斯2011新款男子训练鞋G40598" alt="adidas阿迪达斯2011新款男子训练鞋G40598" src="<{$res}>/images/21003310_01_s.jpg">
+						
+					</a>
+				</span>
+				<span class="move_pt"><a target="_blank" href="">adidas阿迪达斯2011新款男子训练鞋G40598</a></span>
+				<span class="price"><s>市场价<del>￥680</del></s>&nbsp;&nbsp;<span class="Red">优购价<b>￥449</b></span></span>
+			</li>
+			<li>
+				<span>
+					<a href="" target="_blank">
+						<img style="display: inline;" title="CONVERSE/匡威 10男子卫衣S410M214648" alt="CONVERSE/匡威 10男子卫衣S410M214648" src="<{$res}>/images/21005314_01_s.jpg">
+						
+					</a>
+				</span>
+				<span class="move_pt"><a target="_blank" href="">CONVERSE/匡威 10男子卫衣S410M214648</a></span>
+				<span class="price"><s>市场价<del>￥358</del></s>&nbsp;&nbsp;<span class="Red">优购价<b>￥219</b></span></span>
+			</li>
+			<li>
+				<span>
+					<a href="" target="_blank">
+						<img style="display: inline;" title="PUMA彪马 11新款女子羽绒服55940602" alt="PUMA彪马 11新款女子羽绒服55940602" src="<{$res}>/images/21002649_01_s.jpg" >
+						
+					</a>
+				</span>
+				<span class="move_pt"><a target="_blank" href="">PUMA彪马 11新款女子羽绒服55940602</a></span>
+				<span class="price"><s>市场价<del>￥999</del></s>&nbsp;&nbsp;<span class="Red">优购价<b>￥599</b></span></span>
+			</li>
+					</ul>
+			</div>
+			<div class="move_right fl">
+				
+			</div>
+			<div class="clear"></div>
+			<ul class="move_brand center">	
+						<a target="_blank" href=""><img title="耐克" alt="耐克" src="<{$res}>/images/brandlogo11.jpg" style="display: inline;"></a>
+						<a target="_blank" href=""><img title="耐克360" alt="耐克360" src="<{$res}>/images/brandlogo12.jpg"  style="display: inline;"></a>
+						<a target="_blank" href=""><img title="阿迪达斯" alt="阿迪达斯" src="<{$res}>/images/brandlogo10.jpg"  style="display: inline;"></a>
+						<a target="_blank" href=""><img title="阿迪三叶草" alt="阿迪三叶草" src="<{$res}>/images/adidas3.jpg"  style="display: inline;"></a>
+						<a target="_blank" href=""><img title="阿迪休闲" alt="阿迪休闲" src="<{$res}>/images/adidasstyle.jpg"  style="display: inline;"></a>
+						<a target="_blank" href=""><img title="彪马" alt="彪马" src="<{$res}>/images/brandlogo9.jpg" style="display: inline;"></a>
+						<a target="_blank" href=""><img title="匡威" alt="匡威" src="<{$res}>/images/converse.jpg"  style="display: inline;"></a>
+						<a target="_blank" href=""><img title="卡帕" alt="卡帕" src="<{$res}>/images/kappa.jpg"  style="display: inline;"></a>
+						<a target="_blank" href=""><img title="DC" alt="DC" src="<{$res}>/images/dc.jpg" style="display: inline;"></a>
+						<a target="_blank" href=""><img title="新百伦" alt="新百伦" src="<{$res}>/images/NEWBALANCE.jpg" style="display: inline;"></a>
+						<a href="">更多品牌&gt;&gt;</a>
+			</ul>
+		</div>
+	</div>
+	<div class="blank40"></div>
+	<!-- 第六行（女鞋馆） -->
+	<div class="cen">
+		<div class="unit_top" style="border-bottom:3px solid #f2606e">
+			<a class="fl women_t" href=""></a>
+			<span style="width: 80px;" class="channelmore"><a class="icon2 fr" href=""></a>
+			<a href="" class="fr" target="_blank">女鞋馆</a></span>
+			<span class="top_classl">
+						<em><a href="" target="_blank">人气新款</a></em>
+						|
+						<em><a href="http://www.yougou.com/s/m/search.sc?kword=%25E9%259B%25AA%25E5%259C%25B0%25E9%259D%25B4" target="_blank">雪地靴</a></em>
+						|
+						<em><a href="http://www.yougou.com/search/7p%7E%7E%7EM0%7E%7E%7E%7E%7E2%7EWOMEN_SHOES%7E" target="_blank">短靴</a></em>
+						|
+						<em><a href="http://www.yougou.com/search/7p%7E%7E%7EPY%7E%7E%7E%7E%7E2%7EWOMEN_SHOES%7E" target="_blank">中靴</a></em>
+						|
+						<em><a href="http://www.yougou.com/search/7p%7E%7E%7EMJ%7E%7E%7E%7E%7E2%7EWOMEN_SHOES%7E" target="_blank">长靴</a></em>
+						|
+						<em><a href="http://www.yougou.com/search/7p%7E1%7E%7EIi%7E%7E%7E%7E%7E6%7EWOMEN_SHOES%7E" target="_blank">超长靴</a></em>
+						|
+						<em><a href="http://www.yougou.com/search/7p%7E1%7E%7Elh%7E%7E%7E%7E%7E6%7EWOMEN_SHOES%7E" target="_blank">满帮鞋</a></em>
+						|
+						<em><a href="http://www.yougou.com/search/7p%7E1%7E%7EAA%7E%7E%7E%7E%7E6%7EWOMEN_SHOES%7E" target="_blank">浅口鞋</a></em>
+						|
+						<em><a href="http://www.yougou.com/search/7p%7E1%7Emd%7E%7E%7E%7E%7E%7E%7EWOMEN_SHOES%7E" target="_blank">单鞋</a></em>
+						
+				&nbsp;&nbsp;&nbsp;
+			</span>
+		</div>
+		<div class="cen adunit" id="women_adp">
+				<div class="adinfo3">
+					<a target="_blank" href="">
+						<img title="他她 都市女郎の时尚之履" alt="他她 都市女郎の时尚之履" src="<{$res}>/images/w1-1219.jpg" style="display: inline;" height="260" width="198">
+					</a>
+				</div>
+
+				<div class="adinfo4">
+					<a target="_blank" href=""><img alt="蜜丝罗妮 随心&amp;随型 2.5折起" title="蜜丝罗妮 随心&amp;随型 2.5折起" src="<{$res}>/images/w2-1219.jpg"  style="margin-bottom: 1px; display: inline;" height="129" width="395"></a>
+					<a target="_blank" href=""><img alt="天美意萌绒御寒女靴 ￥698" title="天美意萌绒御寒女靴 ￥698" src="<{$res}>/images/w3-1219-1.jpg"  style="margin-right: 1px; display: inline;" height="129" width="197"></a>
+					<a target="_blank" href=""><img alt="bata舒适粗跟女靴 ￥699" title="bata舒适粗跟女靴 ￥699" src="<{$res}>/images/w4-1219-1.jpg"  style="display: inline;float:left" height="129" width="197"></a>
+				</div>
+				<div class="adinfo3">
+					<a target="_blank" href=""><img alt="百丽温暖百搭 品质女靴 ￥868" title="百丽温暖百搭 品质女靴 ￥868" src="<{$res}>/images/w5-1219-1.jpg"  style="margin-bottom: 1px; display: inline;" height="129" width="197"></a>
+					<a target="_blank" href=""><img alt="真美诗时尚新品女靴 ￥998" title="真美诗时尚新品女靴 ￥998" src="<{$res}>/images/w6-1219-1.jpg" style="display: inline;" height="129" width="197"></a>
+				</div>
+				<div class="adinfo5"><a target="_blank" href=""><img title="优雅&amp;舒适 性感长靴￥495起" alt="优雅&amp;舒适 性感长靴￥495起" src="<{$res}>/images/w7-1219-1.jpg" style="display: inline;" height="259" width="197"></a></div>
+
+		</div>
+		<div class="unit_bom clear">
+			<div class="move_left fl">
+				<a href="javascript:;" class="move_l_btn fl" id="women-left"></a>
+			</div>
+			<div class="move_mid move_list fl" id="women-list">
+				<ul>
+			<li>
+				<span>
+					<a href="" target="_blank">
+						<img style="display: inline;" title="TATA/他她2011冬季棕色抓纹牛皮女皮靴(绒里)FZM66R" alt="TATA/他她2011冬季棕色抓纹牛皮女皮靴(绒里)FZM66R" src="<{$res}>/images/47833424_01_s.jpg" >
+						
+					</a>
+				</span>
+				<span class="move_pt"><a target="_blank" href="">TATA/他她2011冬季棕色抓纹牛皮女皮靴(绒里)FZM66R</a></span>
+				<span class="price"><s>市场价<del>￥1198</del></s>&nbsp;&nbsp;<span class="Red">优购价<b>￥599</b></span></span>
+			</li>
+			<li>
+				<span>
+					<a href="" target="_blank">
+						<img style="display: inline;" title="TATA/他她2011冬季棕色抓纹牛皮女皮靴(绒里)FZM66R" alt="TATA/他她2011冬季棕色抓纹牛皮女皮靴(绒里)FZM66R" src="<{$res}>/images/47833424_01_s.jpg" >
+						
+					</a>
+				</span>
+				<span class="move_pt"><a target="_blank" href="">TATA/他她2011冬季棕色抓纹牛皮女皮靴(绒里)FZM66R</a></span>
+				<span class="price"><s>市场价<del>￥1198</del></s>&nbsp;&nbsp;<span class="Red">优购价<b>￥599</b></span></span>
+			</li>
+			<li>
+				<span>
+					<a href="" target="_blank">
+						<img style="display: inline;" title="TATA/他她2011冬季棕色抓纹牛皮女皮靴(绒里)FZM66R" alt="TATA/他她2011冬季棕色抓纹牛皮女皮靴(绒里)FZM66R" src="<{$res}>/images/47833424_01_s.jpg" >
+						
+					</a>
+				</span>
+				<span class="move_pt"><a target="_blank" href="">TATA/他她2011冬季棕色抓纹牛皮女皮靴(绒里)FZM66R</a></span>
+				<span class="price"><s>市场价<del>￥1198</del></s>&nbsp;&nbsp;<span class="Red">优购价<b>￥599</b></span></span>
+			</li>
+			<li>
+				<span>
+					<a href="" target="_blank">
+						<img style="display: inline;" title="TATA/他她2011冬季棕色抓纹牛皮女皮靴(绒里)FZM66R" alt="TATA/他她2011冬季棕色抓纹牛皮女皮靴(绒里)FZM66R" src="<{$res}>/images/47833424_01_s.jpg" >
+						
+					</a>
+				</span>
+				<span class="move_pt"><a target="_blank" href="">TATA/他她2011冬季棕色抓纹牛皮女皮靴(绒里)FZM66R</a></span>
+				<span class="price"><s>市场价<del>￥1198</del></s>&nbsp;&nbsp;<span class="Red">优购价<b>￥599</b></span></span>
+			</li>
+			<li>
+				<span>
+					<a href="" target="_blank">
+						<img style="display: inline;" title="TATA/他她2011冬季棕色抓纹牛皮女皮靴(绒里)FZM66R" alt="TATA/他她2011冬季棕色抓纹牛皮女皮靴(绒里)FZM66R" src="<{$res}>/images/47833424_01_s.jpg" >
+						
+					</a>
+				</span>
+				<span class="move_pt"><a target="_blank" href="">TATA/他她2011冬季棕色抓纹牛皮女皮靴(绒里)FZM66R</a></span>
+				<span class="price"><s>市场价<del>￥1198</del></s>&nbsp;&nbsp;<span class="Red">优购价<b>￥599</b></span></span>
+			</li>
+			
+				</ul>
+			</div>
+			<div class="move_right fl">
+				<a href="javascript:;" class="move_r_btn fl" id="women-right"></a>
+			</div>
+			<div class="clear"></div>
+			<ul class="move_brand center">	
+						<a target="_blank" href=""><img title="百丽" alt="百丽" src="<{$res}>/images/brandlogo1.jpg"  style="display: inline;"></a>
+						<a target="_blank" href=""><img title="他她" alt="他她" src="<{$res}>/images/brandlogo2.jpg"  style="display: inline;"></a>
+						<a target="_blank" href=""><img title="天美意" alt="天美意" src="<{$res}>/images/brandlogo3.jpg"  style="display: inline;"></a>
+						<a target="_blank" href=""><img title="茵奈儿" alt="茵奈儿" src="<{$res}>/images/brandlogo4.jpg"  style="display: inline;"></a>
+						<a target="_blank" href=""><img title="百思图" alt="百思图" src="<{$res}>/images/brandlogo5.jpg"  style="display: inline;"></a>
+						<a target="_blank" href=""><img title="思加图" alt="思加图" src="<{$res}>/images/brandlogo6.jpg"  style="display: inline;"></a>
+						<a target="_blank" href=""><img title="拔佳" alt="拔佳" src="<{$res}>/images/bata.jpg"  style="display: inline;"></a>
+						<a target="_blank" href=""><img title="蜜丝罗妮" alt="蜜丝罗妮" src="<{$res}>/images/misiluoni2.jpg"  style="display: inline;"></a>
+						<a target="_blank" href=""><img title="真美诗" alt="真美诗" src="<{$res}>/images/joypeace.jpg"  style="display: inline;"></a>
+						<a target="_blank" href=""><img title="ELLE" alt="ELLE" src="<{$res}>/images/elle.jpg"  style="display: inline;"></a>
+						<a href="">更多品牌&gt;&gt;</a>
+			</ul>
+		</div>
+	</div>
+	<div class="blank40"></div>
+	<!-- 第七行（男鞋馆） -->
+	<div class="cen">
+		<div class="unit_top" style="border-bottom:3px solid #757f66">
+			<a class="fl men_t" href=""></a>
+			<span style="width: 80px;" class="channelmore"><a class="icon3 fr" href=""></a><a href="" class="fr" target="_blank">男鞋馆</a></span>
+			<span class="top_classl">
+						<em><a href="" target="_blank">2011男鞋</a></em>
+						|
+						<em><a href="" target="_blank">商务正装鞋</a></em>
+						|
+						<em><a href="" target="_blank">商务休闲鞋</a></em>
+						|
+						<em><a href="" target="_blank">时尚休闲鞋</a></em>
+						|
+						<em><a href="" target="_blank">系带鞋</a></em>
+						|
+						<em><a href="" target="_blank">松紧带</a></em>
+						|
+						<em><a href="" target="_blank">套脚</a></em>
+						|
+						<em><a href="" target="_blank">满帮鞋</a></em>
+						|
+						<em><a href="" target="_blank">低靴</a></em>
+						
+				&nbsp;&nbsp;&nbsp;
+			</span>
+		</div>
+		<div class="cen adunit">
+				<div class="adinfo3"><a target="_blank" href=""><img title="百丽Winter至[in]冬款男鞋" alt="百丽Winter至[in]冬款男鞋" src="<{$res}>/images/men-1-1216.jpg" style="display: inline;" height="260" width="198"></a></div>
+
+				<div class="adinfo4">
+					<a target="_blank" href=""><img alt="	熟男款 从经济到经典—满帮鞋大集合 " title="熟男款 从经济到经典—满帮鞋大集合 " src="<{$res}>/images/men-2-1216-2.jpg"  style="margin-bottom: 1px; display: inline;" height="129" width="395"></a>
+					<a target="_blank" href=""><img alt="森达 商务必备 值得信赖" title="森达 商务必备 值得信赖" src="<{$res}>/images/men-3-1216.jpg"  style="margin-right: 1px; display: inline;" height="129" width="197"></a>
+					<a target="_blank" href=""><img alt="伐拓 超越，每个人的追求" title="伐拓 超越，每个人的追求" src="<{$res}>/images/men-4-1216.jpg"  style="display: inline;float:left" height="129" width="197"></a>
+				</div>
+				<div class="adinfo3">
+					<a target="_blank" href=""><img alt="	他她 日韩风尚款—进口牛皮制作 " title="	他她 日韩风尚款—进口牛皮制作 " src="<{$res}>/images/men-5-1216-2.jpg"  style="margin-bottom: 1px; display: inline;" height="129" width="197"></a>
+					<a target="_blank" href=""><img alt="天美意 简单，穿出个性" title="天美意 简单，穿出个性" src="<{$res}>/images/men-6-1216.jpg"  style="display: inline;" height="129" width="197"></a>
+				</div>
+				<div class="adinfo5"><a target="">
+				<img title="法雷诺男鞋 圣诞有礼" alt="法雷诺男鞋 圣诞有礼" src="<{$res}>/images/men-7-1216-3.jpg" style="display: inline;" height="259" width="197"></a></div>
+
+		</div>
+		<div class="unit_bom clear">
+			<div class="move_left fl">
+				<a href="javascript:;" class="move_l_btn fl" id="men-left"></a>
+			</div>
+			<div class="move_mid move_list fl" id="men-list">
+				<ul>
+			<li>
+				<span>
+					<a href="" target="_blank">
+						<img style="display: inline;" title="BELLE/百丽2011冬季黑色牛皮男低靴FB03-R" alt="BELLE/百丽2011冬季黑色牛皮男低靴FB03-R" src="<{$res}>/images/66706290_01_s.jpg">
+						
+					</a>
+				</span>
+				<span class="move_pt"><a target="_blank" href="">BELLE/百丽2011冬季黑色牛皮男低靴FB03-R</a></span>
+				<span class="price"><s>市场价<del>￥938</del></s>&nbsp;&nbsp;<span class="Red">优购价<b>￥598</b></span></span>
+			</li>
+			<li>
+				<span>
+					<a href="" target="_blank">
+						<img style="display: inline;" title="BELLE/百丽2011冬季黑色牛皮男低靴FB03-R" alt="BELLE/百丽2011冬季黑色牛皮男低靴FB03-R" src="<{$res}>/images/66706290_01_s.jpg">
+						
+					</a>
+				</span>
+				<span class="move_pt"><a target="_blank" href="">BELLE/百丽2011冬季黑色牛皮男低靴FB03-R</a></span>
+				<span class="price"><s>市场价<del>￥938</del></s>&nbsp;&nbsp;<span class="Red">优购价<b>￥598</b></span></span>
+			</li>
+			<li>
+				<span>
+					<a href="" target="_blank">
+						<img style="display: inline;" title="BELLE/百丽2011冬季黑色牛皮男低靴FB03-R" alt="BELLE/百丽2011冬季黑色牛皮男低靴FB03-R" src="<{$res}>/images/66706290_01_s.jpg">
+						
+					</a>
+				</span>
+				<span class="move_pt"><a target="_blank" href="">BELLE/百丽2011冬季黑色牛皮男低靴FB03-R</a></span>
+				<span class="price"><s>市场价<del>￥938</del></s>&nbsp;&nbsp;<span class="Red">优购价<b>￥598</b></span></span>
+			</li>
+			<li>
+				<span>
+					<a href="" target="_blank">
+						<img style="display: inline;" title="BELLE/百丽2011冬季黑色牛皮男低靴FB03-R" alt="BELLE/百丽2011冬季黑色牛皮男低靴FB03-R" src="<{$res}>/images/66706290_01_s.jpg">
+						
+					</a>
+				</span>
+				<span class="move_pt"><a target="_blank" href="">BELLE/百丽2011冬季黑色牛皮男低靴FB03-R</a></span>
+				<span class="price"><s>市场价<del>￥938</del></s>&nbsp;&nbsp;<span class="Red">优购价<b>￥598</b></span></span>
+			</li>
+			<li>
+				<span>
+					<a href="" target="_blank">
+						<img style="display: inline;" title="BELLE/百丽2011冬季黑色牛皮男低靴FB03-R" alt="BELLE/百丽2011冬季黑色牛皮男低靴FB03-R" src="<{$res}>/images/66706290_01_s.jpg">
+						
+					</a>
+				</span>
+				<span class="move_pt"><a target="_blank" href="">BELLE/百丽2011冬季黑色牛皮男低靴FB03-R</a></span>
+				<span class="price"><s>市场价<del>￥938</del></s>&nbsp;&nbsp;<span class="Red">优购价<b>￥598</b></span></span>
+			</li>
+				</ul>
+			</div>
+			<div class="move_right fl">
+				<a href="javascript:;" class="move_r_btn fl" id="men-right"></a>
+			</div>
+			<div class="clear"></div>
+			<ul class="move_brand center">	
+						<a target="_blank" href=""><img title="百丽" alt="百丽" src="<{$res}>/images/brandlogo1.jpg"  style="display: inline;"></a>
+						<a target="_blank" href=""><img title="他她" alt="他她" src="<{$res}>/images/brandlogo2.jpg"  style="display: inline;"></a>
+						<a target="_blank" href=""><img title="法雷诺" alt="法雷诺" src="<{$res}>/images/brandlogo8.jpg"  style="display: inline;"></a>
+						<a target="_blank" href=""><img title="天美意" alt="天美意" src="<{$res}>/images/brandlogo3.jpg"  style="display: inline;"></a>
+						<a target="_blank" href=""><img title="森达" alt="森达" src="<{$res}>/images/brandlogo7.jpg" style="display: inline;"></a>
+						<a target="_blank" href=""><img title="伐拓" alt="伐拓" src="<{$res}>/images/brandlogo17.jpg"  style="display: inline;"></a>
+						<a target="_blank" href=""><img title="拔佳" alt="拔佳" src="<{$res}>/images/bata.jpg"  style="display: inline;"></a>
+			</ul>
+		</div>
+	</div>
+	<div class="blank40"></div>
+	<!-- 第八行（户外休闲馆） -->
+	<div class="cen">
+		<div class="unit_top" style="border-bottom:3px solid #91764d">
+			<a class="fl leisure_t" href=""></a>
+			<span style="width: 100px;" class="channelmore"><a class="icon6 fr" href=""></a>
+			<a href="" class="fr" target="_blank">户外休闲馆</a></span>
+			<span class="top_classl">
+						<em><a href="" target="_blank">热销户外男鞋</a></em>
+						|
+						<em><a href="" target="_blank">热销户外女鞋</a></em>
+						|
+						<em><a href="" target="_blank">徒步鞋</a></em>
+						|
+						<em><a href="" target="_blank">登山鞋</a></em>
+						|
+						<em><a href="" target="_blank">高帮鞋</a></em>
+						|
+						<em><a href="" target="_blank">低帮鞋</a></em>
+						|
+						<em><a href="" target="_blank">户外男装</a></em>
+						|
+						<em><a href="" target="_blank">户外女装</a></em>
+						
+				&nbsp;&nbsp;&nbsp;
+			</span>
+		</div>
+		<div class="cen adunit">
+				<div class="adinfo3"><a target="_blank" href="">
+				<img title="厚实骆驼 温暖双脚" alt="厚实骆驼 温暖双脚" src="<{$res}>/images/out-1-1219.jpg" style="display: inline;" height="260" width="198"></a></div>
+
+				<div class="adinfo4">
+					<a target="_blank" href="">
+						<img alt="户外三巨头联合上镜" title="户外三巨头联合上镜" src="<{$res}>/images/out-2-1219-1.jpg" style="margin-bottom: 1px; display: inline;" height="129" width="395">
+					</a>
+					<a target="_blank" href=""><img alt="顶级户外 只为专业" title="顶级户外 只为专业" src="<{$res}>/images/out-3-1219.jpg" style="margin-right: 1px; display: inline;" height="129" width="197"></a>
+					<a target="_blank" href=""><img alt="意大利进口品牌" title="意大利进口品牌" src="<{$res}>/images/out-4-1219.jpg"  style="display: inline;float:left" height="129" width="197"></a>
+				</div>
+				<div class="adinfo3">
+					<a target="_blank" href=""><img alt="真实不妥协" title="真实不妥协" src="<{$res}>/images/out-5-1219-1.jpg" style="margin-bottom: 1px; display: inline;" height="129" width="197"></a>
+					<a target="_blank" href=""><img alt="海泰克新款上市" title="海泰克新款上市" src="<{$res}>/images/out-6-1219.jpg" style="display: inline;" height="129" width="197"></a>
+				</div>
+				<div class="adinfo5"><a target="_blank" href=""><img title="极度御寒大衣系列" alt="极度御寒大衣系列" src="<{$res}>/images/out-7-1219-1.jpg" style="display: inline;" height="259" width="197"></a></div>
+
+		</div>
+		<div class="unit_bom clear">
+			<div class="move_left fl">
+				<a href="javascript:;" class="move_l_btn fl" id="leisure-left"></a>
+			</div>
+			<div class="move_mid move_list fl" id="leisure-list">
+				<ul>
+			<li>
+				<span>
+					<a href="" target="_blank">
+						<img style="display: inline;" title="CAMEL/骆驼2011年铜色磨砂牛皮男鞋0572256" alt="CAMEL/骆驼2011年铜色磨砂牛皮男鞋0572256" src="<{$res}>/images/22000221_01_s.jpg" >
+						
+					</a>
+				</span>
+				<span class="move_pt"><a target="_blank" href="">CAMEL/骆驼2011年铜色磨砂牛皮男鞋0572256</a></span>
+				<span class="price"><s>市场价<del>￥988</del></s>&nbsp;&nbsp;<span class="Red">优购价<b>￥298</b></span></span>
+			</li>
+			<li>
+				<span>
+					<a href="" target="_blank">
+						<img style="display: inline;" title="CAMEL/骆驼2011年铜色磨砂牛皮男鞋0572256" alt="CAMEL/骆驼2011年铜色磨砂牛皮男鞋0572256" src="<{$res}>/images/22000221_01_s.jpg" >
+						
+					</a>
+				</span>
+				<span class="move_pt"><a target="_blank" href="">CAMEL/骆驼2011年铜色磨砂牛皮男鞋0572256</a></span>
+				<span class="price"><s>市场价<del>￥988</del></s>&nbsp;&nbsp;<span class="Red">优购价<b>￥298</b></span></span>
+			</li>
+			<li>
+				<span>
+					<a href="" target="_blank">
+						<img style="display: inline;" title="CAMEL/骆驼2011年铜色磨砂牛皮男鞋0572256" alt="CAMEL/骆驼2011年铜色磨砂牛皮男鞋0572256" src="<{$res}>/images/22000221_01_s.jpg" >
+						
+					</a>
+				</span>
+				<span class="move_pt"><a target="_blank" href="">CAMEL/骆驼2011年铜色磨砂牛皮男鞋0572256</a></span>
+				<span class="price"><s>市场价<del>￥988</del></s>&nbsp;&nbsp;<span class="Red">优购价<b>￥298</b></span></span>
+			</li>
+			<li>
+				<span>
+					<a href="" target="_blank">
+						<img style="display: inline;" title="CAMEL/骆驼2011年铜色磨砂牛皮男鞋0572256" alt="CAMEL/骆驼2011年铜色磨砂牛皮男鞋0572256" src="<{$res}>/images/22000221_01_s.jpg" >
+						
+					</a>
+				</span>
+				<span class="move_pt"><a target="_blank" href="">CAMEL/骆驼2011年铜色磨砂牛皮男鞋0572256</a></span>
+				<span class="price"><s>市场价<del>￥988</del></s>&nbsp;&nbsp;<span class="Red">优购价<b>￥298</b></span></span>
+			</li>
+			<li>
+				<span>
+					<a href="" target="_blank">
+						<img style="display: inline;" title="CAMEL/骆驼2011年铜色磨砂牛皮男鞋0572256" alt="CAMEL/骆驼2011年铜色磨砂牛皮男鞋0572256" src="<{$res}>/images/22000221_01_s.jpg" >
+						
+					</a>
+				</span>
+				<span class="move_pt"><a target="_blank" href="">CAMEL/骆驼2011年铜色磨砂牛皮男鞋0572256</a></span>
+				<span class="price"><s>市场价<del>￥988</del></s>&nbsp;&nbsp;<span class="Red">优购价<b>￥298</b></span></span>
+			</li>
+				</ul>
+			</div>
+			<div class="move_right fl">
+				<a href="javascript:;" class="move_r_btn fl" id="leisure-right"></a>
+			</div>
+			<div class="clear"></div>
+			<ul class="move_brand center">	
+						<a target="_blank" href=""><img title="卡特" alt="卡特" src="<{$res}>/images/brandlogo13.jpg"  style="display: inline;"></a>
+						<a target="_blank" href=""><img title="乐斯菲斯" alt="乐斯菲斯" src="<{$res}>/images/thenorthface.jpg"  style="display: inline;"></a>
+						<a target="_blank" href=""><img title="哥伦比亚" alt="哥伦比亚" src="<{$res}>/images/columbia.jpg"  style="display: inline;"></a>
+						<a target="_blank" href=""><img title="迈乐" alt="迈乐" src="<{$res}>/images/brandlogo14.jpg"  style="display: inline;"></a>
+						<a target="_blank" href=""><img title="CAMEL骆驼" alt="CAMEL骆驼" src="<{$res}>/images/camel.jpg"  style="display: inline;"></a>
+						<a target="_blank" href=""><img title="赞贝拉" alt="赞贝拉" src="<{$res}>/images/zanbeila.jpg"  style="display: inline;"></a>
+						<a target="_blank" href=""><img title="康尔健野" alt="康尔健野" src="<{$res}>/images/kingcamp.jpg"  style="display: inline;"></a>
+						<a target="_blank" href=""><img title="萨洛蒙" alt="萨洛蒙" src="<{$res}>/images/salomon.jpg"  style="display: inline;"></a>
+						<a target="_blank" href=""><img title="海泰客" alt="海泰客" src="<{$res}>/images/hitec.jpg" style="display: inline;"></a>
+						<a target="_blank" href=""><img title="卡骆弛" alt="卡骆弛" src="<{$res}>/images/crocs1.jpg" style="display: inline;"></a>
+			</ul>
+		</div>
+	</div>
+	<div class="blank40"></div>
+	<!-- 第九行（童鞋馆） -->
+	<div class="cen">
+		<div class="unit_top" style="border-bottom:3px solid #759228">
+			<a class="fl child_t" href=""></a>
+			<span style="width: 80px;" class="channelmore"><a class="icon5 fr" href=""></a>
+			<a href="" class="fr" target="_blank">童鞋馆</a></span>
+			<span class="top_classl">
+						<em><a href="" target="_blank">2011冬季童鞋</a></em>
+						|
+						<em><a href="" target="_blank">童靴</a></em>
+						|
+						<em><a href="" target="_blank">童装</a></em>
+						|
+						<em><a href="" target="_blank">跑步鞋</a></em>
+						|
+						<em><a href="" target="_blank">学步鞋</a></em>
+						|
+						<em><a href="" target="_blank">棉服/羽绒服</a></em>
+						|
+						<em><a href="" target="_blank">外套/风衣</a></em>
+						
+				&nbsp;&nbsp;&nbsp;
+			</span>
+		</div>
+		<div class="cen adunit">
+				<div class="adinfo3"><a target="_blank" href=""><img title="锁住温暖这个冬天不怕冷" alt="锁住温暖这个冬天不怕冷" src="<{$res}>/images/child1-1219.jpg" style="display: inline;" height="260" width="198"></a></div>
+
+				<div class="adinfo4">
+					<a target="_blank" href=""><img alt="呵护宝贝从脚开始￥229" title="呵护宝贝从脚开始￥229" src="<{$res}>/images/child2--1219.jpg"  style="margin-bottom: 1px; display: inline;" height="129" width="395"></a>
+					<a target="_blank" href=""><img alt="时尚可爱女童靴 ￥159" title="时尚可爱女童靴 ￥159" src="<{$res}>/images/child3-1219-1.jpg" style="margin-right: 1px; display: inline;" height="129" width="197"></a>
+					<a target="_blank" href=""><img alt="甜美可爱连衣裙￥239" title="甜美可爱连衣裙￥239" src="<{$res}>/images/child4-1219-1.jpg"  style="display: inline;float:left" height="129" width="197"></a>
+				</div>
+				<div class="adinfo3">
+					<a target="_blank" href=""><img alt="舒适学步鞋让宝贝爱上走路 ￥199" title="舒适学步鞋让宝贝爱上走路 ￥199" src="<{$res}>/images/child5-1219-1.jpg"  style="margin-bottom: 1px; display: inline;" height="129" width="197"></a>
+					<a target="_blank" href=""><img alt="条纹高领毛衣￥189" title="条纹高领毛衣￥189" src="<{$res}>/images/child6-1219.jpg"  style="display: inline;" height="129" width="197"></a>
+				</div>
+				<div class="adinfo5"><a target="_blank" href="">
+				<img title=" 保暖童靴给宝贝更多关爱￥229" alt=" 保暖童靴给宝贝更多关爱￥229" src="<{$res}>/images/child7-1219.jpg"style="display: inline;" height="259" width="197"></a></div>
+
+		</div>
+		<div class="unit_bom clear">
+			<div class="move_left fl">
+				<a href="javascript:;" class="move_l_btn fl" id="child-left"></a>
+			</div>
+			<div class="move_mid move_list fl" id="child-list">
+				<ul>
+			<li>
+				<span>
+					<a href="" target="_blank">
+						<img style="display: inline;" title="Bata童鞋/babybubbles2011年冬季小童玫红海虎毛保暖童靴100-5141-014" alt="Bata童鞋/babybubbles2011年冬季小童玫红海虎毛保暖童靴100-5141-014" src="<{$res}>/images/13020031_01_s.jpg">
+						
+					</a>
+				</span>
+				<span class="move_pt"><a target="_blank" href="">Bata童鞋/babybubbles2011年冬季小童玫红海虎毛保暖童靴100-5141-014</a></span>
+				<span class="price"><s>市场价<del>￥199</del></s>&nbsp;&nbsp;<span class="Red">优购价<b>￥149</b></span></span>
+			</li>
+			<li>
+				<span>
+					<a href="" target="_blank">
+						<img style="display: inline;" title="Bata童鞋/babybubbles2011年冬季小童玫红海虎毛保暖童靴100-5141-014" alt="Bata童鞋/babybubbles2011年冬季小童玫红海虎毛保暖童靴100-5141-014" src="<{$res}>/images/13020031_01_s.jpg">
+						
+					</a>
+				</span>
+				<span class="move_pt"><a target="_blank" href="">Bata童鞋/babybubbles2011年冬季小童玫红海虎毛保暖童靴100-5141-014</a></span>
+				<span class="price"><s>市场价<del>￥199</del></s>&nbsp;&nbsp;<span class="Red">优购价<b>￥149</b></span></span>
+			</li>
+			<li>
+				<span>
+					<a href="" target="_blank">
+						<img style="display: inline;" title="Bata童鞋/babybubbles2011年冬季小童玫红海虎毛保暖童靴100-5141-014" alt="Bata童鞋/babybubbles2011年冬季小童玫红海虎毛保暖童靴100-5141-014" src="<{$res}>/images/13020031_01_s.jpg">
+						
+					</a>
+				</span>
+				<span class="move_pt"><a target="_blank" href="">Bata童鞋/babybubbles2011年冬季小童玫红海虎毛保暖童靴100-5141-014</a></span>
+				<span class="price"><s>市场价<del>￥199</del></s>&nbsp;&nbsp;<span class="Red">优购价<b>￥149</b></span></span>
+			</li>
+			<li>
+				<span>
+					<a href="" target="_blank">
+						<img style="display: inline;" title="Bata童鞋/babybubbles2011年冬季小童玫红海虎毛保暖童靴100-5141-014" alt="Bata童鞋/babybubbles2011年冬季小童玫红海虎毛保暖童靴100-5141-014" src="<{$res}>/images/13020031_01_s.jpg">
+						
+					</a>
+				</span>
+				<span class="move_pt"><a target="_blank" href="">Bata童鞋/babybubbles2011年冬季小童玫红海虎毛保暖童靴100-5141-014</a></span>
+				<span class="price"><s>市场价<del>￥199</del></s>&nbsp;&nbsp;<span class="Red">优购价<b>￥149</b></span></span>
+			</li>
+			<li>
+				<span>
+					<a href="" target="_blank">
+						<img style="display: inline;" title="Bata童鞋/babybubbles2011年冬季小童玫红海虎毛保暖童靴100-5141-014" alt="Bata童鞋/babybubbles2011年冬季小童玫红海虎毛保暖童靴100-5141-014" src="<{$res}>/images/13020031_01_s.jpg">
+						
+					</a>
+				</span>
+				<span class="move_pt"><a target="_blank" href="">Bata童鞋/babybubbles2011年冬季小童玫红海虎毛保暖童靴100-5141-014</a></span>
+				<span class="price"><s>市场价<del>￥199</del></s>&nbsp;&nbsp;<span class="Red">优购价<b>￥149</b></span></span>
+			</li>
+				</ul>
+			</div>
+			<div class="move_right fl">
+				<a href="javascript:;" class="move_r_btn fl" id="child-right"></a>
+			</div>
+			<div class="clear"></div>
+			<ul class="move_brand center">	
+						<a target="_blank" href=""><img title="迪士尼" alt="迪士尼" src="<{$res}>/images/brandlogo16.jpg" style="display: inline;"></a>
+						<a target="_blank" href=""><img title="米菲" alt="米菲" src="<{$res}>/images/brandlogo15.jpg" style="display: inline;"></a>
+						<a target="_blank" href=""><img title="芭比" alt="芭比" src="<{$res}>/images/brandlogo18.jpg"  style="display: inline;"></a>
+						<a target="_blank" href=""><img title="史努比" alt="史努比" src="<{$res}>/images/brandlogo19.jpg" style="display: inline;"></a>
+						<a target="_blank" href=""><img title="乐一通" alt="乐一通" src="<{$res}>/images/brandlogo22c.jpg" style="display: inline;"></a>
+						<a target="_blank" href=""><img title="猫和老鼠" alt="猫和老鼠" src="<{$res}>/images/brandlogo23c.jpg" style="display: inline;"></a>
+						<a target="_blank" href=""><img title="派克兰帝" alt="派克兰帝" src="<{$res}>/images/paikelandi.jpg"  style="display: inline;"></a>
+						<a target="_blank" href=""><img title="巴比总动员" alt="巴比总动员" src="<{$res}>/images/zongdongyuan.jpg" style="display: inline;"></a>
+						<a target="_blank" href=""><img title="涡牛王子" alt="涡牛王子" src="<{$res}>/images/woniu.jpg" style="display: inline;"></a>
+						<a target="_blank" href=""><img title="阿迪达斯" alt="阿迪达斯" src="<{$res}>/images/brandlogo10.jpg"  style="display: inline;"></a>
+						<a href="">更多品牌&gt;&gt;</a>
+			</ul>
+		</div>
+	</div>
+	<div class="blank40"></div>
+	<!-- 第十行（箱包馆） -->
+	<div class="cen">
+		<div class="unit_top" style="border-bottom:3px solid #8f73a5">
+			<a class="fl bag_t" href=""></a>
+			<span style="width: 80px;" class="channelmore">
+				<a class="icon7 fr" href=""></a>
+				<a href="" class="fr" target="_blank">箱包馆</a>
+			</span>
+			<span class="top_classl">
+						<em><a href="" target="_blank">单肩包</a></em>
+						|
+						<em><a href="" target="_blank">手提包</a></em>
+						|
+						<em><a href="" target="_blank">斜挎包</a></em>
+						|
+						<em><a href="" target="_blank">单肩/斜跨两用包</a></em>
+						|
+						<em><a href="" target="_blank">手提/斜跨两用包</a></em>
+						|
+						<em><a href="" target="_blank">钱包/钥匙包</a></em>
+						
+				&nbsp;&nbsp;&nbsp;
+			</span>
+		</div>
+		<div class="cen adunit2">
+				<span class="adinfo6 fl">
+					<a target="_blank" href=""><img alt="天美意2011Winter最受宠毛绒包" title="天美意2011Winter最受宠毛绒包" src="<{$res}>/images/bag1-1219.jpg" style="display: inline;"></a>
+				</span>
+				<span class="adinfo6 fl">
+					<a target="_blank" href=""><img alt="豹纹女包 尽显奢华￥238" title="豹纹女包 尽显奢华￥238" src="<{$res}>/images/bag2-1219-1.jpg" style="display: inline;"></a>
+				</span>
+				<span class="adinfo6 fl">
+					<a target="_blank" href=""><img alt="百搭鳄纹 两用女包￥399" title="百搭鳄纹 两用女包￥399" src="<{$res}>/images/bag3-1219-1.jpg" style="display: inline;"></a>
+				</span>
+				<span class="adinfo6 fl">
+					<a target="_blank" href=""><img alt="时尚黑白拼接手袋￥168" title="时尚黑白拼接手袋￥168" src="<{$res}>/images/bag4-1219-1.jpg"  style="display: inline;"></a>
+				</span>
+				<span class="adinfo7 fl">
+					<a target="_blank" href=""><img alt="羊纹单肩斜跨女包 ￥258" title="羊纹单肩斜跨女包 ￥258" src="<{$res}>/images/bag5-1219-1.jpg" style="display: inline;"></a>
+				</span>
+		</div>
+		<div class="unit_bom clear">
+			<div class="move_left fl">
+				<a href="javascript:;" class="move_l_btn fl" id="bag-left"></a>
+			</div>
+			<div class="move_mid move_list fl" id="bag-list">
+				<ul>
+					<li>
+						<span>
+							<a href="" target="_blank">
+								<img style="display: inline;" title="TATA/他她2011冬季粉色印LOGO包" alt="TATA/他她2011冬季粉色印LOGO包" src="<{$res}>/images/20000212_01_s.jpg" >
+								
+							</a>
+						</span>
+						<span class="move_pt"><a target="_blank" href="">TATA/他她2011冬季粉色印LOGO包</a></span>
+						<span class="price"><s>市场价<del>￥538</del></s>&nbsp;&nbsp;<span class="Red">优购价<b>￥258</b></span></span>
+					</li>
+					<li>
+						<span>
+							<a href="" target="_blank">
+								<img style="display: inline;" title="TATA/他她2011冬季粉色印LOGO包" alt="TATA/他她2011冬季粉色印LOGO包" src="<{$res}>/images/20000212_01_s.jpg" >
+								
+							</a>
+						</span>
+						<span class="move_pt"><a target="_blank" href="">TATA/他她2011冬季粉色印LOGO包</a></span>
+						<span class="price"><s>市场价<del>￥538</del></s>&nbsp;&nbsp;<span class="Red">优购价<b>￥258</b></span></span>
+					</li>
+					<li>
+						<span>
+							<a href="" target="_blank">
+								<img style="display: inline;" title="TATA/他她2011冬季粉色印LOGO包" alt="TATA/他她2011冬季粉色印LOGO包" src="<{$res}>/images/20000212_01_s.jpg" >
+								
+							</a>
+						</span>
+						<span class="move_pt"><a target="_blank" href="">TATA/他她2011冬季粉色印LOGO包</a></span>
+						<span class="price"><s>市场价<del>￥538</del></s>&nbsp;&nbsp;<span class="Red">优购价<b>￥258</b></span></span>
+					</li>
+					<li>
+						<span>
+							<a href="" target="_blank">
+								<img style="display: inline;" title="TATA/他她2011冬季粉色印LOGO包" alt="TATA/他她2011冬季粉色印LOGO包" src="<{$res}>/images/20000212_01_s.jpg" >
+								
+							</a>
+						</span>
+						<span class="move_pt"><a target="_blank" href="">TATA/他她2011冬季粉色印LOGO包</a></span>
+						<span class="price"><s>市场价<del>￥538</del></s>&nbsp;&nbsp;<span class="Red">优购价<b>￥258</b></span></span>
+					</li>
+					<li>
+						<span>
+							<a href="" target="_blank">
+								<img style="display: inline;" title="TATA/他她2011冬季粉色印LOGO包" alt="TATA/他她2011冬季粉色印LOGO包" src="<{$res}>/images/20000212_01_s.jpg" >
+								
+							</a>
+						</span>
+						<span class="move_pt"><a target="_blank" href="">TATA/他她2011冬季粉色印LOGO包</a></span>
+						<span class="price"><s>市场价<del>￥538</del></s>&nbsp;&nbsp;<span class="Red">优购价<b>￥258</b></span></span>
+					</li>		
+			</ul>
+			</div>
+			<div class="move_right fl">
+				<a href="javascript:;" class="move_r_btn fl" id="bag-right"></a>
+			</div>
+			<div class="clear"></div>
+			<ul class="move_brand center">	
+						<a target="_blank" href=""><img title="百丽" alt="百丽" src="<{$res}>/images/brandlogo1.jpg"  style="display: inline;"></a>
+						<a target="_blank" href=""><img title="他她" alt="他她" src="<{$res}>/images/brandlogo2.jpg" style="display: inline;"></a>
+						<a target="_blank" href=""><img title="天美意" alt="天美意" src="<{$res}>/images/brandlogo3.jpg" style="display: inline;"></a>
+						<a target="_blank" href=""><img title="蔻琪" alt="蔻琪" src="<{$res}>/images/cochco.jpg"style="display: inline;"></a>
+						<a target="_blank" href=""><img title="倾城之恋" alt="倾城之恋" src="<{$res}>/images/brandlogo20.jpg"  style="display: inline;"></a>
+			</ul>
+		</div>
+	</div>
+	<div class="blank40"></div>
+	<!-- 第十二行-->
+	<ul class="cen epclass">
+					<li>
+						<span class="fl tit">
+							<a href="" class="sport_ico"></a>
+							<a href="http://www.yougou.com/channel/c_w7.html" class="sport_col">运动</a>
+						</span>
+						<div class="clear"></div>
+							<div class="tit_link">
+								<a href="" target="_blank">篮球鞋</a>		
+								<a href="" target="_blank">足球鞋</a>	
+								<a href="" target="_blank">卫衣</a>	
+								<a href="" target="_blank">跑步鞋</a>	
+								<a href="" target="_blank">休闲鞋</a>	
+								<a href="" target="_blank">板鞋</a>			
+								<a href="" target="_blank">训练鞋</a>	
+								<a href="" target="_blank">网球鞋</a>		
+								<a href="" target="_blank">棉服</a>			
+								<a href="" target="_blank">羽绒服</a>	
+								<a href="" target="_blank">赛车鞋</a>		
+								<a href="" target="_blank">夹克</a>			
+								<a href="" target="_blank">休闲长裤</a>			
+								<a href="" target="_blank">POLO衫</a>	
+								<a href="" target="_blank">T恤</a>		
+								<a href="" target="_blank">运动长裤</a>		
+							</div>
+					</li>
+					<li>
+						<span class="fl tit"><a href="http://www.yougou.com/search/7p%7E1%7E%7E%7E%7E%7E%7E%7E%7EWOMEN_SHOES%7E" class="women_ico"></a><a href="http://www.yougou.com/search/7p%7E1%7E%7E%7E%7E%7E%7E%7E%7EWOMEN_SHOES%7E" class="women_col">女鞋</a></span>
+						<div class="clear"></div>
+						<div class="tit_link">								<a href="http://www.yougou.com/s/m/search.sc?kword=%25E9%259B%25AA%25E5%259C%25B0%25E9%259D%25B4" target="_blank">雪地靴</a>								<a href="http://www.yougou.com/search/7p%7E1%7E%7EIi%7E%7E%7E%7E%7E6%7EWOMEN_SHOES%7E" target="_blank">超长靴</a>								<a href="http://www.yougou.com/search/7p%7E%7E%7EM0%7E%7E%7E%7E%7E2%7EWOMEN_SHOES%7E" target="_blank">短靴</a>								<a href="http://www.yougou.com/search/7p%7E1%7E%7Elh%7E%7E%7E%7E%7E6%7EWOMEN_SHOES%7E" target="_blank">满帮鞋</a>								<a href="http://www.yougou.com/search/7p%7E1%7E%7EAA%7E%7E%7E%7E%7E6%7EWOMEN_SHOES%7E" target="_blank">浅口鞋</a>								<a href="http://www.yougou.com/search/7p%7E%7E%7EPY%7E%7E%7E%7E%7E2%7EWOMEN_SHOES%7E" target="_blank">中靴</a>								<a href="http://www.yougou.com/search/7p%7E1%7E%7EO2%7E%7E%7E%7E%7E6%7EWOMEN_SHOES%7E" target="_blank">鱼嘴鞋</a>								<a href="http://www.yougou.com/search/7p%7E1%7E%7E%7E%7E%7E%7E%7E%7EWOMEN_SHOES%7E%252525E6%2525259D%252525BE%252525E7%252525B4%252525A7%252525E6%25252589%252525A3" target="_blank">松紧扣</a>								<a href="http://www.yougou.com/search/7p%7E%7E%7EMJ%7E%7E%7E%7E%7E2%7EWOMEN_SHOES%7E" target="_blank">长靴</a>								<a href="http://www.yougou.com/search/7p%7E1%7E%7E%7E%7E%7E%7E%7E%7EWOMEN_SHOES%7E%252525E9%252525AD%25252594%252525E6%2525259C%252525AF%252525E8%252525B4%252525B4" target="_blank">魔术贴</a>								<a href="http://www.yougou.com/s/m/search.sc?kword=%25E5%25A5%25B3%25E7%259A%25AE%25E9%259D%25B4" target="_blank">2011新款女靴</a>								<a href="http://www.yougou.com/search/7p%7E1%7E%7E%7E%7E%7E%7E%7E%7EWOMEN_SHOES%7E%252525E7%25252589%2525259B%252525E7%2525259A%252525AE" target="_blank">牛皮</a>								<a href="http://www.yougou.com/search/7p%7E1%7Emd%7E%7E%7E%7E%7E%7E%7EWOMEN_SHOES%7E" target="_blank">单鞋</a>								<a href="http://www.yougou.com/search/7p%7E1%7E%7E%7E%7E%7E%7E%7E%7EWOMEN_SHOES%7E%252525E7%252525BE%2525258A%252525E7%2525259A%252525AE" target="_blank">羊皮</a>					</div>
+					</li>
+					<li>
+						<span class="fl tit"><a href="http://www.yougou.com/channel/c_Hi.html" class="men_ico"></a><a href="http://www.yougou.com/channel/c_Hi.html" class="men_col">男鞋</a></span>
+						<div class="clear"></div>
+						<div class="tit_link">								<a href="http://www.yougou.com/s/m/search.sc?kword=2011%25E5%2586%25AC%25E5%25AD%25A3%25E7%2594%25B7%25E9%259E%258B" target="_blank">2011冬季男鞋</a>								<a href="http://www.yougou.com/search/Hi%7E1%7E%7Ek7%7E%7E%7E%7E%7E6%7EMEN_SHOES%7E" target="_blank">满帮鞋</a>								<a href="http://www.yougou.com/s/m/search.sc?kword=2011%25E7%25A7%258B%25E5%25AD%25A3%25E7%2594%25B7%25E9%259E%258B" target="_blank">2011秋季男鞋</a>								<a href="http://www.yougou.com/search/Hi%7E1%7E%7E%7E%7E%7E%7E%7E6%7EMEN_SHOES%7E%252525E7%252525B3%252525BB%252525E5%252525B8%252525A6" target="_blank">系带鞋</a>								<a href="http://www.yougou.com/search/Hi%7E1%7E%7E%7E%7E%7E%7Efg06%7E6%7EMEN_SHOES%7E" target="_blank">商务正装鞋</a>								<a href="http://www.yougou.com/search/Hi%7E1%7E%7E%7E%7E%7E%7Efg07%7E6%7EMEN_SHOES%7E" target="_blank">商务休闲鞋</a>								<a href="http://www.yougou.com/search/Hi%7E1%7E%7E%7E%7E%7E%7Efg08%7E6%7EMEN_SHOES%7E" target="_blank">时尚休闲鞋</a>								<a href="http://www.yougou.com/search/Hi%7E1%7E%7E%7E%7E%7E%7E%7E%7EMEN_SHOES%7E%252525E5%252525A5%25252597%252525E8%25252584%2525259A" target="_blank">套脚</a>								<a href="http://www.yougou.com/search/Hi%7E1%7E%7E0C%7E%7E%7E%7E%7E6%7EMEN_SHOES%7E" target="_blank">低靴</a>								<a href="http://www.yougou.com/search/Hi%7E1%7E%7E%7E%7E%7E%7E%7E%7EMEN_SHOES%7E%252525E6%2525259D%252525BE%252525E7%252525B4%252525A7%252525E5%252525B8%252525A6" target="_blank">松紧带</a>								<a href="http://www.yougou.com/search/Hi%7E1%7E%7E%7E%7E%7E%7E%7E%7EMEN_SHOES%7E%252525E7%25252589%2525259B%252525E7%2525259A%252525AE" target="_blank">牛皮</a>					</div>
+					</li>
+					<li>
+						<span class="fl tit"><a href="http://www.yougou.com/channel/c_79.html" class="leisure_ico"></a><a href="http://www.yougou.com/channel/c_79.html" class="leisure_col">户外</a></span>
+						<div class="clear"></div>
+						<div class="tit_link">								<a href="http://www.yougou.com/search/79%7E1%7E%7Eyn%7E%7E%7E%7E%7E6%7EOUTDOOR%7E" target="_blank">户外休闲鞋</a>								<a href="http://www.yougou.com/search/79%7E1%7E%7EHx%7E%7E%7E%7E%7E6%7EOUTDOOR%7E" target="_blank">商务休闲鞋</a>								<a href="http://www.yougou.com/s/m/search.sc?kword=%25E6%2588%25B7%25E5%25A4%2596%25E7%25BE%25BD%25E7%25BB%2592%25E6%259C%258D" target="_blank">户外羽绒服</a>								<a href="http://www.yougou.com/search/79%7E1%7E%7EdP%7E%7E%7E%7E%7E6%7EOUTDOOR%7E" target="_blank">时尚休闲鞋</a>								<a href="http://www.yougou.com/search/79%7E1%7E%7Ei6%7E%7E%7E%7E%7E6%7EOUTDOOR%7E" target="_blank">登山鞋</a>								<a href="http://www.yougou.com/search/79%7E1%7E%7EG4%7E%7E%7E%7E%7E6%7EOUTDOOR%7E" target="_blank">徒步鞋</a>								<a href="http://www.yougou.com/search/79%7E1%7E%7EI9%7E%7E%7E%7E%7E6%7EOUTDOOR%7E" target="_blank">低帮鞋</a>								<a href="http://www.yougou.com/search/79%7E1%7E%7E90%7E%7E%7E%7E%7E6%7EOUTDOOR%7E" target="_blank">高帮鞋</a>								<a href="http://www.yougou.com/search/79%7E1%7E%7E6k%7E%7E%7E%7E%7E6%7EOUTDOOR%7E" target="_blank">越野鞋</a>								<a href="http://www.yougou.com/search/79%7E1%7E%7ELb%7E%7E%7E%7E%7E6%7EOUTDOOR%7E" target="_blank">户外靴</a>								<a href="http://www.yougou.com/search/79%7E1%7E%7EEe%7E%7E%7E%7E%7E6%7EOUTDOOR%7E" target="_blank">休闲靴</a>								<a href="http://www.yougou.com/s/m/search.sc?kword=%25E5%2586%25B2%25E9%2594%258B%25E8%25A1%25A3" target="_blank">冲锋衣</a>								<a href="http://www.yougou.com/search/79%7E1%7E%7E22%7E%7E%7E%7E%7E6%7EOUTDOOR%7E" target="_blank">休闲衣</a>								<a href="http://www.yougou.com/s/m/search.sc?kword=%25E6%258A%2593%25E7%25BB%2592%25E8%25A1%25A3" target="_blank">抓绒衣</a>					</div>
+					</li>
+					<li>
+						<span class="fl tit"><a href="http://www.yougou.com/channel/c_f6.html" class="child_ico"></a><a href="http://www.yougou.com/channel/c_f6.html" class="child_col">童鞋</a></span>
+						<div class="clear"></div>
+						<div class="tit_link">								<a href="http://www.yougou.com/search/f6%7E1%7E%7EKt%7E%7E%7E%7E%7E6%7ECHILDREN_SHOES%7E" target="_blank">跑步鞋</a>								<a href="http://www.yougou.com/search/f6%7E1%7E%7Ebt%7E%7E%7E%7E%7E6%7ECHILDREN_SHOES%7E" target="_blank">夹板鞋</a>								<a href="http://www.yougou.com/search/iO%7E1%7E%7E%7E%7E%7E%7E%7E%7E%7E" target="_blank">童装</a>								<a href="http://www.yougou.com/search/f6%7E1%7E%7E98%7E%7E%7E%7E%7E6%7ECHILDREN_SHOES%7E" target="_blank">学步鞋</a>								<a href="http://www.yougou.com/search/f6%7E1%7E%7EBF%7E%7E%7E%7E%7E6%7ECHILDREN_SHOES%7E" target="_blank">户外鞋</a>								<a href="http://www.yougou.com/search/f6%7E1%7EGl%7E%7E%7E%7E%7E%7E%7ECHILDREN_SHOES%7E" target="_blank">皮鞋</a>								<a href="http://www.yougou.com/search/iO%7E1%7E%7E08%7E%7E%7E%7E%7E6%7E%7E" target="_blank">棉服/羽绒服</a>								<a href="http://www.yougou.com/search/iO%7E1%7E%7Edt%7E%7E%7E%7E%7E6%7E%7E" target="_blank">外套/风衣</a>								<a href="http://www.yougou.com/search/iO%7E1%7E%7E1w%7E%7E%7E%7E%7E6%7E%7E" target="_blank">毛衣/针织衫</a>								<a href="http://www.yougou.com/search/iO%7E1%7E%7EQ4%7E%7E%7E%7E%7E6%7E%7E" target="_blank">裙装</a>								<a href="http://www.yougou.com/search/iO%7E1%7E%7EIN%7E%7E%7E%7E%7E6%7E%7E" target="_blank">卫衣</a>								<a href="http://www.yougou.com/s/m/search.sc?kword=2011%25E5%2586%25AC%25E5%25AD%25A3%25E7%25AB%25A5%25E9%259E%258B" target="_blank">2011冬季童鞋</a>								<a href="http://www.yougou.com/search/iO%7E1%7E%7EFc%7E%7E%7E%7E%7E6%7E%7E" target="_blank">T恤</a>								<a href="http://www.yougou.com/search/f6%7E1%7EhO%7E%7E%7E%7E%7E%7E6%7ECHILDREN_SHOES%7E" target="_blank">童靴</a>					</div>
+					</li>
+					<li style="margin-right:0">
+						<span class="fl tit"><a href="http://www.yougou.com/channel/c_6J.html" class="bag_ico"></a><a href="http://www.yougou.com/channel/c_6J.html" class="bag_col">箱包</a></span>
+						<div class="clear"></div>
+						<div class="tit_link">								<a href="http://www.yougou.com/search/6J%7E1%7E%7Ege%7E%7E%7E%7E%7E6%7ELUGGAGE%7E" target="_blank">单肩包</a>								<a href="http://www.yougou.com/search/6J%7E1%7E%7EWB%7E%7E%7E%7E%7E6%7ELUGGAGE%7E" target="_blank">斜挎包</a>								<a href="http://www.yougou.com/channel/c_6J.html" target="_blank">女包</a>								<a href="http://www.yougou.com/search/6J%7E1%7E%7Elj%7E%7E%7E%7E%7E6%7ELUGGAGE%7E" target="_blank">单肩/斜跨两用包</a>								<a href="http://www.yougou.com/search/6J%7E1%7E%7EhW%7E%7E%7E%7E%7E6%7ELUGGAGE%7E" target="_blank">钱包</a>								<a href="http://www.yougou.com/search/6J%7E1%7E%7Eq7%7E%7E%7E%7E%7E6%7ELUGGAGE%7E" target="_blank">手提/斜跨两用包</a>								<a href="http://www.yougou.com/search/6J%7E1%7E%7E%7E%7E%7Eml01%7E%7E6%7ELUGGAGE%7E" target="_blank">真皮女包</a>								<a href="http://www.yougou.com/search/6J%7E1%7E%7ErJ%7E%7E%7E%7E%7E6%7ELUGGAGE%7E" target="_blank">手提包</a>					</div>
+					</li>
+	</ul>
+	<div class="blank10"></div>
+	<{/nocache}>
+	<{include file="./public/footer.htm"}>

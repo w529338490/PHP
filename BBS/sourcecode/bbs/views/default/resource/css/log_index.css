@@ -1,0 +1,15 @@
+#main{
+	border:1px solid #CDCDCD;	
+	padding-top:5px;
+	margin-bottom:10px;
+}
+.log{
+	width:950px;
+	margin:0 auto;
+	border-bottom:1px dashed #DDE3E7;
+	margin-bottom:10px;
+	padding-bottom:5px;
+}
+.log h1{
+	font-size:16px;
+}

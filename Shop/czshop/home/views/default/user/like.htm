@@ -1,0 +1,26 @@
+<h4 class="titBar">我的收藏夹</h4>  
+       <table class="bdbdash" cellpadding="0" cellspacing="0" width="100%">
+		<tbody>
+		<th>商品名</th>
+		<th>商品图片</th>
+		<th>市场价</th>
+		<th>优购价</th>
+		<th>操作</th>
+		<{section loop=$data name="ls"}>
+		<tr align="center">
+			<td><a href="<{$app}>/product/index/id/<{$data[ls].id}>"><{$data[ls].name}></a></td>	
+			<td><img src="<{$public}>/uploads/mini_<{$data[ls].mpic}>"></td>
+			<td><{$data[ls].price}></td>
+			<td><{$data[ls].price*$data[ls].discount/10}></td>
+			<td>	
+				<a href="<{$url}>/del/id/<{$data[ls].pid}>">删除>></a>
+			</td>
+		</tr>
+	</select>
+	<{sectionelse}>
+		<tr>
+			<td colspan="3" align="center">无数据</td>
+		</tr>
+	<{/section}>
+		</tbody>
+		</table>

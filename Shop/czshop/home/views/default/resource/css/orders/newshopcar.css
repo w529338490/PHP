@@ -1,0 +1,206 @@
+﻿/*
+Title:新购物车样式
+Author:Way
+E-mail:1805759699@qq.com
+*/
+
+/*表格样式*/
+ table tr{ height:30px; font-family:Verdana}
+ table th{ font-weight:normal; background:#F7F7F7; }
+ table a,.ordercolor a{ color:#36C; }
+.bgred{ padding:2px 4px 0 4px; color:#FFFFFE; background:#f67649; }
+.order_top{width:960px; height:97px;}
+.order_top img{margin-top:13px}
+.order_unit{margin-top:8px;position:relative;clear:both;padding:6px 0 0;border-top:1px solid #e6e6e6;z-index:1000;}
+.order_unit h5{z-index:10;font-weight:700;position:absolute;top:-10px;float:left;background-color:#fff;padding:0 10px;color:#000}
+.order_unit h5 img{vertical-align:middle; margin-left:5px}
+.order_unit .showallad{ position:absolute; right:0; top:-10px; padding-right:10px; padding-left:10px; background:#FFF url(/template/common/images/acdot.png) no-repeat 83px -22px; cursor:pointer}
+.order_unit .easy{ background:#FFF url(/template/common/images/acdot.png) no-repeat 59px 7px;}
+.order_plist{width:960px;margin:14px auto 0;}
+.order_plist thead td{color:#999;text-align:center;line-height:24px;}
+.order_plist thead .td_name{width:374px;text-align:left;}
+.td_image{width:108px;}
+.td_status{width:40px;}
+.td_size{width:46px;}
+.td_count{width:110px;}
+.td_shoppprice,.td_ygprice{width:84px;}
+.td_ygprice2{width:94px;}
+.td_operate{width:70px;}
+.order_plist tbody td{text-align:center;padding-bottom:2px}
+.order_plist tbody td img{border:1px solid #e6e6e6;width:60px;height:60px;}
+.product_count{float:left;width:38px; position:relative;font-family:Verdana, Geneva, sans-serif;}
+em,i{font-style: normal; font:400 12px tahoma,"宋体";}
+
+/*address*/
+
+.table_address{width:900px;margin:0 auto}
+.table_address tbody td{height:32px;}
+.table_address tbody td input{ vertical-align:middle}
+.table_address tbody .tdleft{width:120px;text-align:right;padding:0 16px 0 0;color:black;}
+.table_address tbody td i{color:#f00}
+.mltips{margin-left:12px}
+
+.sinput,.minput,.linput{background:#fff ;border:1px solid #999;height:16px;padding:3px 2px;}
+.sinput{width:90px;}
+.minput{width:180px;}
+.linput{width:380px;}
+.dropdown_space{margin-right: 14px;}
+.dropdown_span{width:auto;position:relative; float:left; display:inline; z-index:1000}
+.dropdown_option{background:#FFF ; border-color: #7F9DB9; border-style: solid; border-width: 1px; color: black; cursor: pointer; height: 12px;_height:12px; line-height: 28px; margin: 0; padding:4px 25px 2px 7px; height:20px; text-decoration: none;}
+.focus{outline: 1px solid #B3DBFF;}
+.drop_window{background:#FFFFFF; border:1px solid #CBE3F7; margin:0; padding:7px 0 2px 15px; width: 260px;overflow:hidden;position:relative;zoom:1}
+.drop_window li{float:left;_width:24.9%; white-space:nowrap}
+.drop_window li span{display:block;min-width:55px;height:22px; line-height:22px; padding:0 4px;}
+#province_select,#city_select,#area_select{z-index:999;background:#FFFFFF;position:absolute; left:10px; top:24px; width:260px; height:auto}
+#province_select{left:0}
+
+/*手机验证*/
+.mobile_checkcode,.mobile_checkcode2,.mobile_con{ursor:pointer; border:0}
+.mobile_checkcode{width:102px;height:22px; float:left}
+.mobile_checkcode2{ width:102px;height:22px; background-position:0 -31px}
+.mobile_con{ width:67px; height:22px; background-position:0 -58px}
+.pl12{ padding-left:12px}
+
+.border-btm{ height:9px; width:100%;background:url(/template/common/images/order_addressbg2.gif) repeat-x 0 bottom}
+.warnmsg{ line-height:24px; padding:0 14px}
+.warnmsgbg{background-color:#fffef4; border:1px solid #f3b599; height:23px; overflow:hidden}
+.order_email{position:relative;top:1px}
+.padtop6{padding-top:6px}
+.f_999{color:#999999}
+.f_red{color:#FF0000}
+.f_yellow{color:#f67649}
+
+#reciever_list,#pay_type,#outstock_notify,.user_delivery,.unitlist{width: 960px;margin: 0 auto;padding: 8px 0 6px}
+#pay_type,#outstock_notify,.user_delivery{width: 960px;}
+#outstock_notify p{line-height: 24px;}
+.unitlist p{width: 860px;margin: 0 auto;}
+.unitlist p input{vertical-align: middle;}
+.unitlist p.order_confirm{height: 35px;line-height: 35px;}
+#reciever_list p span, #pay_type p span, .user_delivery p span,.unitlist p span{float: left;overflow: hidden;line-height: 24px}
+.r_user_name{position: relative;width: 115px;_padding-top: 3px;}
+.r_user_address{width: 400px;}
+.r_user_postcode{width: 100px;}
+.r_user_phone{width: 180px;}
+.r_user_change{width: 30px;}
+.r_user_name input, .userpay_name input{vertical-align: middle;margin-right: 10px}
+
+#pay_type p,.user_delivery p,.unitlist p{line-height:30px;height:30px;overflow:hidden}
+.userpay_name label{line-height:25px}
+.userpay_name{margin:0 28px 0 0;color:#666;line-height:40px;position:relative;}
+.r_user_name label,.userpay_name label{padding-left:30px}
+.userpay_name label input{position:absolute; left:0; top:3px}
+.r_user_name label input{position:absolute; left:0; top:1px}
+.userpay_info{color:#999;_line-height:24px;}
+.userpay_info label{margin-right:20px;}
+.userpay_info em{color:#008cd6;}
+.userpay_info label i{color:#ff3333;}
+.user_delivery{width:960px; margin:0 auto; padding:8px 0 6px}
+
+
+#submit_order{padding:33px 0 58px 0;text-align:center;}
+.order_confirm{width:860px;margin:0 auto;line-height:35px;height:35px;}
+.order_confirm i{line-height:35px;height:35px}
+.iGray{color:#aaa;}
+
+
+.order_submit{ cursor:pointer; border:none; width:173px; height:38px; background-position:-3px -37px;}
+.cancel_coupon{ cursor:pointer; border:none;  width:71px; height:22px; background-position:-87px -5px}
+.use_coupon{ cursor:pointer; border:none; width:78px; height:22px; background-position:-3px -5px}
+.fb400{ font-weight:400; color:#999999}
+.or_money{color:#f67649; font-weight:bold; padding-right:18px}
+.address_info{ width:900px; border-top:1px solid #f3b599; margin:0 auto; margin-left:50px;  background:#fffef4} /*修改*/
+.wrongmsg{margin-left:12px;display:inline;color:#f67649;padding:5px 80px 7px 25px;background-position:-244px -30px;}
+.wrongmsg2{margin-left:0px;display:block;color:#f67649;padding:10px 20px;background-position:-244px -21px;}
+.rightmsg{display:inline; padding:5px 80px 7px 25px;margin-left:12px;background-position:-244px 0px}
+.rightmsg2{display:block;margin-left:0px;padding:10px 10px;background-position:-244px 0px}
+
+
+/*弹出层css*/
+.popup_c{ width:648px}
+.popup_c p{ padding:5px 10px}
+.userlogin_pop{ width:530px; padding:15px 15px 0 15px;}
+.userlogin_con{ width:530px; margin:0 auto}
+.userlogin_top{ width:530px; height:27px;background:url(/template/common/images/login_topbg.png) repeat-x 0 bottom}
+.userlogin_top ul{ padding-left:20px}
+.userlogin_top li,#pop_reg,#pop_login,.pop_paylogin{background:url(/template/common/images/login_pop.png) no-repeat}
+.userlogin_top li{ cursor:pointer; width:85px;height:27px; overflow:hidden; margin-right:10px; text-align:center;line-height:29px;float:left;background-position:-1px -29px}
+.userlogin_top li.curr{ background-position:-98px -29px}
+.pop_table{ width:530px}
+.pop_table tr td{ height:38px; line-height:20px}
+.pop_input{ width:166px; height:20px; line-height:20px; border:1px solid #999999}
+.pop_ltd{ width:102px; text-align:right}
+#pop_reg{ width:86px; height:26px; cursor:pointer; border:none}
+#pop_login{ width:86px; height:26px; cursor:pointer; border:none; background-position:-98px 0}
+.pop_paylogin{ width:108px; height:23px; display:block;background-position:-193px 0}
+.pop_tabc{ float:left; color:#000000}
+
+.remove_product,.add_product,.remove_product_hover,.add_product_hover,.remove_product_no,.add_product_no{width: 16px;height: 16px;float: left;display:inline;margin-left: 15px;cursor: pointer;}
+.add_product{margin:0;background-position: -218px -30px;}
+.remove_product{background-position: -188px -30px;}
+.remove_product_hover{background-position: -188px -58px;}
+.add_product_hover{margin:0;background-position: -218px -58px;}
+.remove_product_no{background-position: -188px -3px;}
+.add_product_no{margin: 0;background-position: -218px -3px;}
+
+
+.r_user_name input,.userpay_name input{star:expression(this.onFocus=this.blur())}
+input:focus { outline:0; }
+.update_ads{ width:86px; height:24px; background-position:-4px -83px; border:none; cursor:pointer}
+#other_address_select .address_info,#noaddress .address_info{ /*background:none; height:200px*/}
+.num_warntips{ position:absolute; top:-56px; display:none; color:#535353; left:-94px; width:157px; height:51px; overflow:hidden; line-height:18px; background:url(/template/common/images/product_num_tips.gif) no-repeat}
+.num_warntips p{ padding:5px; text-align:left}
+.activity_title{ width:41px; margin:0 auto; position:absolute; top:17px; left:20px; height:18px;line-height:21px;*line-height:23px; background:url(/template/common/images/activity_bg.gif) no-repeat; color:#FFF}
+
+/*支付页面*/
+.pbg1,.pbg2,.npay_msg,.coutincebuy,.confirm_paybtn{background:url(/template/common/images/pay_bg.gif) no-repeat}
+.npay_top{width:960px; height:94px; overflow:hidden}
+.npay_top span{ line-height:100px; padding-right:50px}
+.pbg1{ background-position:297px 35px;}
+.pbg2{ background-position:297px -45px;}
+.npay_top img{margin-top:13px}
+.npay_con{ height:275px; padding-left:168px; line-height:22px}
+.npay_con p .p20{ padding-left:20px}
+.npay_con p input{vertical-align:middle}
+.npay_con .pl{ padding-left:32px}
+.npay_msg{ width:32px; height:28px; display:inline-block; background-position:-121px -196px}
+.coutincebuy{ width:109px;height:30px; border:none; cursor:pointer; background-position:0 -196px}
+.pay_div{ width:876px; margin:0 auto; height:auto}
+.pay_div h5{ padding-left:5px; padding-right:5px; position:absolute; top:-10px; left:20px; background:#FFFFFF}
+.pay_div h6,.pay_select{ padding-left:23px; clear:both}
+.pay_select li input,.pay_select li img{vertical-align:middle; margin-right:2px}
+.pay_select li {float:left}
+.liwidth li{ width:175px}
+.liwidth2 li{ width:175px; height:41px}
+.tunline{ text-decoration:underline}
+.confirm_pay{padding:22px 0 24px 68px}
+.confirm_paybtn{ width:211px; height:37px; overflow:hidden; background-position:0 -155px; border:none; cursor:pointer; display:inline-block}
+.pay_dot{ height:7px; clear:both;padding-top:10px; background:url(/template/common/images/pay_dot.gif) repeat-x 0 10px; width:826px; margin-left:25px}
+.order_sub{margin-top:8px;clear:both;padding:6px 0 0;border:none;border-bottom:1px solid #e6e6e6;z-index:0}
+
+/*使用优惠券*/
+.order_confirm2{width:860px;margin:0 auto; line-height:25px;height:35px;z-index:1001}
+.order_confirm2 dd{ float:left; padding-left:10px}
+.coupon_list{  width:512px; color:#333; border:1px solid #cbe3f7; background:#FFF; z-index:1001}
+.verdana{font-family:Verdana}
+.coupon_list table tr td{ text-align:center; vertical-align:middle; font-family:Arial, Helvetica, sans-serif; line-height:100%}
+.coupon_list dd{ padding-left:0; text-align:center}
+.coupon_list dl{ height:33px; float:left; line-height:33px}
+.coupon_btn{ width:16px; height:13px;  position:absolute; right:8px; top:7px;  cursor:pointer}
+.couponlist_close{ position:absolute; display:block; width:14px; height:14px; cursor:pointer; top:10px; right:10px;}
+
+.nocoupon{width:502px;float:left;padding-top:15px; padding-bottom:15px; text-align:center;color:#AAAAAA;}
+
+
+.postareat,.nopostareat{ width:142px; height:24px; border:1px solid #dddddd; line-height:22px; color:#FFF; font-weight:bold}
+.postareat ul{margin:1px;background:#009944; padding-left:3px}
+.nopostareat ul{ margin:1px;background:#ff0000;padding-left:3px}
+.postarealist{border:1px solid #dddddd; width:560px; line-height:24px}
+.postarealist ul{ padding-left:5px; padding-right:5px; color:#000000}
+.pareal{ padding-left:77px; clear:both}
+
+.yzbtn{ margin-left:10px;width:67px; height:22px; border:none; cursor:pointer;background-position:-94px -84px}
+.mobileyz{ height:24px; line-height:24px; background:#f1aa46; padding:0 10px; color:#FFF; width:360px}
+.mobileyzarea{ margin-left:79px; padding-top:5px; padding-bottom:5px;background:#fffef4; border:1px solid #f3b599; width:840px; margin-bottom:15px; overflow:hidden}
+.mobileyzarea .minfo{ padding:7px 5px 8px 10px}
+.yzdjs{ width:132px; height:22px; line-height:23px;background-position:-162px -84px; *margin-top:3px}
+.mobileyztips{ padding-left:10px}

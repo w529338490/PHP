@@ -1,0 +1,49 @@
+<{nocache}>
+<html>
+	<head>
+		<link rel="stylesheet" href="<{$res}>/css/orders.css" type="text/css"/>
+		<script type="text/javascript" src="<{$public}>/js/jquery-1.4.4.min.js"></script>
+		<script src="<{$res}>/js/order.js"></script>	
+	</head>
+	<body>
+		<div class="container">
+			<div class="title">
+				<p>订单管理 >> 修改订单</p> 
+			</div>
+			<div class="main">
+				<form action="<{$url}>/uporders" method="post">
+					<table width="500" border="0" align="center">
+						<tr class="cont">
+							<td>收货人：</td><td><input class="fos" type="text" name="linkman" value="<{$userinfo.linkman}>"></td>
+						</tr>
+						<tr class="cont">
+							<td>地址：</td><td><input class="fos" type="text" name="oaddress" value="<{$userinfo.oaddress}>"></td>
+						</tr>
+
+						<tr class="cont">
+							<td>邮编：</td><td><input class="fos" type="text" name="code" value="<{$userinfo.code}>"></td>
+						</tr>
+
+						<tr class="cont">
+							<td>联系电话：</td><td><input class="fos" type="text" name="telephone" value="<{$userinfo.telephone}>"></td>
+						</tr>
+
+						<input type="hidden" name="id" value="<{$userinfo.id}>">
+
+						<tr class="cont">
+							<td>&nbsp;</td>
+							<td>
+								<input class="button" type="submit" name="sub" value="修改" />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<input class="button" type="reset" name="reset" value="重置" />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<a href="<{$url}>/mod/id/<{$userinfo.id}>">返回</a>
+							</td>							
+						</tr>
+					</table>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>
+<{/nocache}>

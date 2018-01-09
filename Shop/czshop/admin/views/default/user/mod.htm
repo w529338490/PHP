@@ -1,0 +1,42 @@
+<html>
+	<head>
+	<link rel="stylesheet" type="text/css" href="<{$res}>/css/form.css"/>
+	</head>
+	<title>
+	</title>
+	<body style="background:#D9FBFF;">
+		<table id="mytable" cellspacing="0" align="center" >	
+		<form  method="post" action="<{$url}>/update">
+		<input type="hidden" name="id" value="<{$data.id}>">
+		<tr align="center" class="specalt">
+			<td class="alt">用 户 名 ：</td>
+			<td class="alt"> <{$data.username}></td>
+		</tr>
+		<tr align="center" class="specalt">
+			<td class="alt">用户积分 ：</td>
+			<td class="alt"> <{$data.upoint}></td>
+		</tr>
+		<tr align="center" class="specalt">
+			<td class="alt">设置权限 ：</td>
+			<td class="alt">
+				<{if $allow_1 eq 1 || $allow_4 eq 1}>				
+							<input id="q1" <{if $data.allow_1 eq 0}>checked<{/if}> type="checkbox" name="allow_1" value=0">禁用用户
+				<{/if}>
+				<{if $allow_1 eq 1 && $allow_2 eq 1 || $allow_4 eq 1}>							
+							<input id="q2" <{if $data.allow_2 eq 1}>checked<{/if}> type="checkbox" name="allow_2" value="1"> 订单管理
+				<{/if}>
+				<{if $allow_1 eq 1 && $allow_3 eq 1 || $allow_4 eq 1}>			
+							<input id="q3" <{if $data.allow_3 eq 1}>checked<{/if}> type="checkbox" name="allow_3" value="1">录入数据
+				<{/if}>
+			</td>	
+		<tr class="specalt">
+			<td colspan="2" align="right">
+			<input class="button" type="submit" value="确认修改">
+			<input class="button" type="reset" value="重置">
+			<button onclick="<{$url}>/index" name="返回" value="返回">返回>></button>
+			</td>
+		</tr>
+	</form>
+	</table>
+	</body>
+</html>

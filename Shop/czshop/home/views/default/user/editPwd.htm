@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<script type="text/javascript" src="<{$public}>/js/jquery-1.4.4.min.js"></script>
+		<script type="text/javascript" src="<{$public}>/js/ajax3.0.js"></script>
+		<script type="text/javascript">
+		function checkPass(name){
+			if(name.match(/^[0-9A-Za-z]{6,20}$/)/*&&<{$smarty.session.password}>==$("#password").attr("value")*/){
+				$("#pwd1").html("<img src='<{$res}>/images/pic21.gif'/>");
+			}else{
+				$("#pwd1").html("原密码输入错误").css("color","red");
+			}
+		}
+		function checkPwd(name){
+			if(name!=$("#password").attr("value")){
+			if(name.match(/^[0-9A-Za-z]{6,20}$/)){
+				$("#pwd2").html("<img src='<{$res}>/images/pic21.gif'/>");
+			}else{
+				$("#pwd2").html("密码格式错误").css("color","red");
+			}}else{
+				$("#pwd2").html("密码无改变").css("color","red");
+			}
+		}
+		function checkRePwd(name){
+			if(name.match(/^[0-9A-Za-z]{6,20}$/)&& name===$("#userpwd").attr("value")){
+				$("#pwd3").html("<img src='<{$res}>/images/pic21.gif'/>");
+			}else{
+				$("#pwd3").html("两次密码输入不一致，请重新输入").css("color","red");
+			}
+		}
+		function tic(id){
+			if(id==1){$("#pwd1").html("请输入原密码").css("color","grey");
+			}
+			if(id==2){$("#pwd2").html("密码可使用字母+数字的6-20个字符").css("color","grey");}
+			if(id==3){$("#pwd3").html("请确认密码").css("color","grey");}
+		}
+		</script>
+	</head>
+	<body>
+		<form action="<{$url}>/editPwd" method="post">
+			请输入原密码：<input id="password" type="password" name="pwd" onfocus="tic(1)" onblur="checkPass(this.value)"/><span id="pwd1"></span></p>
+			请输入新密码：<input id="userpwd" type="password" name="userpwd" onfocus="tic(2)" onblur="checkPwd(this.value)"/><span id="pwd2"></span></p>
+			请确认新密码：<input id="repwd" type="password" name="repwd" onfocus="tic(3)" onblur="checkRePwd(this.value)"/><span id="pwd3"></span></p>
+
+			<input type="submit" value="确认" name=""/>
+			<input type="reset" value="重置" name=""/><span id="pwd4"></span>
+		</form>
+	</body>
+</html>

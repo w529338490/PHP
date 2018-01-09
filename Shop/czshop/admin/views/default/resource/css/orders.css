@@ -1,0 +1,59 @@
+body,ul,ol,li,p,h1,h2,h3,h4,h5,h6,form,fieldset,table,td,img,div{margin:0;padding:0;border:0;}
+ul,ol{list-style-type:none;}
+select,input,img,select{vertical-align:middle;}
+div.main{
+	margin-left:25px;
+	margin-top:15px;
+}
+div.order{
+	margin-top:15px;
+}
+table tr td{
+	line-height:30px;
+	border-bottom:1px solid  #b5cfd9;
+}
+table tr.tit td{
+	font-weight:bold;
+	color:#5d5d5d;
+	font-size:15px;
+}
+table tr.cont a{
+	color:#0099cc;
+}
+table tr.cont a:hover{
+	color:#FF0000;
+}
+table tr td.sel{
+	cursor:pointer;
+}
+input.resel{
+	border:0px;
+}
+input.ser{
+	border:0px;
+}
+div.uinfo{
+	width:210px;
+	height:220px;
+	background:#66d9ff;
+	position:absolute;
+	left:10px;
+	top:center;	
+	display:none;
+	border:1px solid #0078f0;
+}
+div.uinfo img{
+	float:right;
+	margin-top:-18px;
+	cursor:pointer;
+}
+div.uinfo ul{
+	width:180px;
+	height:200px;
+	margin-top:10px;
+	margin-left:10px;
+}
+div.uinfo ul li{
+	padding:15px;
+}
+

@@ -1,0 +1,18 @@
+<h4 class="titBar">修改个人密码</h4>   
+<form action="<{$url}>/editPwd" method="post">   
+       <table class="bdbdash" cellpadding="0" cellspacing="0" width="100%">
+		<tbody>
+			<tr><td align="right">请输入原密码：</td>
+			<td><input id="password" type="password" name="pwd" onfocus="tic(1)" onblur="checkPass(this.value)"/></td></tr>
+			<tr><td colspan="2" align="center"><span id="pwd1"></span></td></tr>
+			<tr><td align="right">请输入新密码：</td><td><input id="userpwd" type="password" name="userpwd" onfocus="tic(2)" onblur="checkPwd(this.value)"/></td></tr>
+			<tr><td colspan="2" align="center"><span id="pwd2"></span></tr>
+			<tr><td align="right">请确认新密码：</td><td><input id="repwd" type="password" name="repwd" onfocus="tic(3)" onblur="checkRePwd(this.value)"/></td></tr>
+			<tr><td colspan="2" align="center"><span id="pwd3"></span></td></tr>
+
+			<tr><td align="right"><input type="submit" value="确认" name=""/>&nbsp;</td>
+			<td align="left">&nbsp;<input type="reset" value="重置" name=""/></td></tr>	
+		</tbody>
+		</table>
+	</form>	
+	

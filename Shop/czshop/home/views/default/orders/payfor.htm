@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- 引入公共样式 -->
+<link href="<{$res}>/css/orders/base.css" type="text/css" rel="stylesheet">
+<link href="<{$res}>/css/orders/ucenter.css" type="text/css" rel="stylesheet">
+<link href="<{$res}>/css/orders/newshopcars.css" type="text/css" rel="stylesheet">
+<!-- 引入公共脚本 -->
+<script type="text/javascript" src="<{$res}>/js/orders/jquery-1.js"></script>
+<title>订单支付 - 优购网上鞋城 - 买好鞋，上优购</title>
+</head>
+
+<body>
+
+<!-- head start-->
+<div class="w960 npay_top pbg2">
+<a href="<{$app}>/index" target="_blank"><img src="<{$res}>/images/new_logo.gif" alt="优购网上鞋城"></a>
+</div>
+<!-- head end-->
+
+<!-- main -->
+<div class="w960">
+<div class="w958 grayborder">
+<div class="npay_con f_999" style="padding-left:38px; height:auto">
+<p class="blank10" style="height:32px"></p>
+<p><span class="npay_msg"></span><span class="Size14 fb" style="color:#4d4d4d;">您的订单已成功提交，请点击左下方“确认购买，去付款”按钮进行支付。</span></p>
+<p class="blank10" style="height:12px"></p>
+<{nocache}>	
+<p class="pl">订单号：<b class="Size16 f_yellow"><{$smarty.get.oid}></b><span class="p20">需支付金额：</span><b class="Size16 f_yellow"><{$smarty.get.total}>元
+</b><span class="p20">支付方式：</span>在线支付</p>
+<p class="blank10" style="height:12px"></p>
+<p class="pl">如您未及时付款，再次支付时可能出现<font class="f_yellow">商品缺货</font>的情况，因此优购建议您<font class="f_yellow">下单后及时付款</font>（24小时内未支付的订单将自动取消）</p>
+</div>
+
+<p class="blank10" style="height:30px"></p>
+
+<form autocomplete="off">
+<div class="pay_div grayborder relative" style="height:280px">
+<h5 class="Size14" style="color:#4d4d4d;">请选择以下支付方式进行支付</h5>
+<p class="blank10" style="height:20px"></p>
+
+<h6>支付平台</h6>
+<ul class="pay_select liwidth">
+<li><span><input name="webbankpay" id="pay1" value="1" type="radio"></span><img src="<{$res}>/images/payico-2.gif" title="支付宝" alt="支付宝" onclick="selectPayOrder('../pay/alipay/sendAlipayOrder.sc','1001','','','pay1')"></li>
+</ul>
+
+<p class="pay_dot"></p>
+
+<p class="blank10" style="height:15px"></p>
+<center><a href="<{$app}>/alipay/alipayto/id/<{$smarty.get.oid}>"><img src="<{$res}>/images/order.jpg"></a></center>
+</div>
+
+<p class="confirm_pay">
+<span class="fr f_999 tright" style="padding-right:40px; line-height:22px">如果您在支付过程遇到任何支付问题，请拨打客服热线：<font class="f_yellow">400-6262-036</font>（免长途费）<br>
+完成支付后，您可以：去首页<a href="http://www.yougou.com/" target="_blank" class="Blue tunline">继续购物</a></span>
+<span><input class="confirm_paybtn" value=" " title="确认购买，去付款" onclick="sendPayOrder()" type="button"></span></p>
+</form>
+</div>
+</div>
+<!-- main -->
+<{/nocache}>	
+<!-- foot -->
+<div class="w960">
+<div class="footer Gray" style="margin-top:18px;height:40px">
+    <p class="tright">Copyright ? 2011 Yougou Technology Co., Ltd. <a href="http://www.miibeian.gov.cn/" target="_blank">粤ICP备09070608号-2</a> 增值电信业务经营许可证：<a href="http://www.miibeian.gov.cn/" target="_blank" style="padding-left: 0pt;">粤 B2-20090203</a></p>
+</div>
+<!-- foot -->
+
+</div>
+</body></html>

@@ -1,0 +1,59 @@
+<{nocache}>
+<html>
+	<body>
+		<table id='lform' style='text-align:center;width:80%;'>
+			<tr align='center' id='search'>
+				<th colspan='3'>商品名：<input type='text' name='name1' size='9'></th>
+				<th colspan='2'>单价：<input type='text' name='price1' size='10' ></th>
+				<th colspan='2'>折扣：<input type='text' name='discount1' size='9'></th>
+				<th colspan='1'><input type='button' onclick='search()' value='搜索'></th>
+			</tr>
+			<tr>
+				<th>&nbsp;</th>
+				<th onclick = "search('name',this)">商品名</th>
+				<th onclick = "search('mpic',this)">商品图</th>
+				<th onclick = "search('ptime',this)">添加时间</th>
+				<th onclick = "search('price',this)">单价</th>
+				<th onclick = "search('sum',this)">数量</th>
+				<th onclick = "search('discount',this)">折扣</th>
+				<th>操作</th>
+			</tr>
+			<{section loop=$data name='goods'}>
+			<tr align='center'>
+				<td class="alt"><input type='checkbox' name='id[]' value='<{$data[goods].id}>'></td>
+				<td class="alt" width='100px' onmouseover='showwin(this)'><{$data[goods].name}></td>
+				<td class="alt"><img src='<{$public}>/uploads/mini_<{$data[goods].mpic}>' width='60' height='60'></td>
+				<td class="alt"><{$data[goods].ptime|date_format:"%Y-%m-%d"}></td>
+				<td class="alt"><span><{$data[goods].price}></span>元</td>
+				<{if $data[goods].sum <= 30}>
+					<td style="color:red"><{$data[goods].sum}>个</td>
+				<{else}>
+					<td class="alt"><{$data[goods].sum}>个</td>
+				<{/if}>
+				<td class="alt"><{$data[goods].discount}>折</td>
+				<td class="alt">
+					<button onclick='sell(this,1)'>上架</button>
+					<button onclick='mod(this)'>修改</button>
+				</td>
+			</tr>
+			<{sectionelse}>
+				<tr>
+					<td colspan="8" align="center">本类没有商品</td>
+				</tr>
+			<{/section}>
+			<tr>
+				<td colspan='4' align='left'>
+					<button onclick='inall(this)'>全选</button>
+					<button onclick='innot()'>反选</button>
+					<button onclick="return confirm('你确定要删除吗?')?delall():''">删除</button>
+					<button onclick='sellall()'>上架</button>
+					<input type='text' name='disc' size='2'><button onclick='disc(this)'>打折</button>
+				</td>
+				<td colspan="4" align="right"><{$fpage}></td>
+			</tr>
+
+</table>
+							
+	</body>
+</html>
+<{/nocache}>

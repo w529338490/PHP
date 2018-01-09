@@ -1,0 +1,41 @@
+<{nocache}>
+<html>
+	<head>
+		<link rel="stylesheet" href="<{$res}>/css/orders.css" type="text/css"/>
+		<script type="text/javascript" src="<{$public}>/js/jquery-1.4.4.min.js"></script>
+		<script src="<{$res}>/js/order.js"></script>	
+	</head>
+	<body>
+			<div class="container">
+			<div class="title">
+				<p>订单管理 >> 修改订单</p> 
+			</div>
+			
+			<div class="main">
+				<form action="<{$url}>/updategoods" method="post">
+				<table width="100%" border="0">
+					<tr class="tit">
+						<td>商品名称</td><td>商品描述</td><td>价格</td><td>数量</td><td>小计</td><td>操作</td>		
+					</tr>
+						<{section loop=$goods name="ls"}>
+							<tr>
+								<td><{$goods[ls].pname}></td>
+								<td><{$goods[ls].psize}></td>
+								<td><{$goods[ls].pprice}></td>
+								<td><{$goods[ls].num}></td>
+								<td><{$goods[ls].num*$goods[ls].pprice}></td>
+								<td>
+									<a href="<{$url}>/showgoods/id/<{$goods[ls].id}>/oid/<{$data.id}>xj/<{$goods[ls].num*$goods[ls].pprice}>">查看</a>
+									<a href="<{$url}>/goodsdel/id/<{$goods[ls].id}>/xj/<{$goods[ls].num*$goods[ls].pprice}>/oid/<{$data.id}>" onclick="return confirm('您确定要删除此订单中的商品：<{$goods[ls].pname}>吗？')">[删除]</a>
+								</td>
+							<tr>
+						<{/section}>
+					<tr class="cont"><td colspan="4" align="right">总计：</td><td>￥<{$data.total}>元</td>
+					<td><input class="button" type="submit" name="sub" value="返回" /></td></tr>
+				</table>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>
+<{/nocache}>

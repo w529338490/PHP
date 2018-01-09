@@ -1,0 +1,18 @@
+
+#prosize li {
+    color: #676566;
+    cursor: pointer;
+    float: left;
+    font-size: 12px;
+    height: 32px;
+    line-height: 32px;
+    margin: 5px;
+    text-align: center;
+    width: 32px;
+}
+.sizebg {
+    background: url("../../images/sprit_bg.gif") no-repeat scroll -2px -2px transparent;
+}
+.sesizebg {
+    background: url("../../images/sprit_bg.gif") no-repeat scroll -2px -37px transparent;
+}

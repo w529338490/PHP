@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<{include file="./public/header.htm"}>
+	<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>优购网-时尚鞋类网购首选-买好鞋,上优购!</title>
+		<meta name="Description" content="优购">
+		<meta name="Keywords" content="优购">
+		<link href="<{$res}>/css/list/base-2.css" type="text/css" rel="stylesheet">
+		<link href="<{$res}>/css/list/mold-2.css" type="text/css" rel="stylesheet">
+		<link href="<{$res}>/css/list/eaglepage.css" type="text/css" rel="stylesheet">
+		<script src='<{$public}>/js/ajax3.0.js'></script>
+		<script src='<{$public}>/js/jquery-1.4.4.min.js'></script>
+		<script type="text/javascript" charset="UTF-8">
+			function op(a){
+				$(".proSieve_sp").slideToggle(1000);
+				if($(a).html()=="收起筛选器 ↑"){
+					$(a).html("展开筛选器 ↓");
+				}else{
+					$(a).html("收起筛选器 ↑");
+				}
+			}
+			
+		</script>
+	</head>
+		
+	<body>
+		<div class="blank8"></div>
+		<div class="blank8"></div>
+		<div class="cen newListy">
+			<div class="cen" id="lazyLoadImgDiv">
+				<div class="proSieve scen grayborder selfApat">
+					<h4 class="titBar">
+						<span class="fl">您目前的选择:</span>
+						<span class="fl" id="searchResult">
+							<!--筛选条件显示 start -->
+							<{nocache}>
+								<{$show}>
+							<{/nocache}>
+							<!--筛选条件显示 end -->
+						</span>
+						<a class="resetTj fr" href="<{$url}>/index/pid/<{$guan}>">重置筛选条件</a>
+					</h4>
+					<div class="proSieve_sp">
+							<div class="pS-hook fl Sl-brand">
+								<h2><label class="fl ">款式</label></h2>
+								<ul>
+									<{nocache}>
+									<{section loop=$style name='st'}>
+										<li>
+											<a href="<{$url}>/index/<{$str}>/styleid/<{$style[st].id}>/sname/<{$style[st].sname}>"><{$style[st].sname}></a>
+										</li>
+									<{/section}>
+									<{/nocache}>
+								</ul>
+							</div>
+							<div class="pS-hook fl Sl-hook">
+								<h2><label class="fl ">品牌</label></h2>
+								<ul>
+									<{nocache}>
+									<{section loop=$cat name='pp'}>
+										<li>
+										<a href="<{$url}>/index/<{$str}>/typeid/<{$cat[pp].id}>/tname/<{$cat[pp].tname}>"><{$cat[pp].tname}></a>
+										</li>
+									<{/section}>
+									<{/nocache}>	
+								</ul>
+							</div>
+							<div class="pS-hook fl pS-code Sl-code">
+								<h2><label class="fl">尺码</label></h2>
+								<{nocache}>
+								<p>
+										<a class="Sh-code" href="<{$url}>/index/<{$str}>/size/34">34</a>
+										<a class="Sh-code" href="<{$url}>/index/<{$str}>/size/35">35</a>
+										<a class="Sh-code" href="<{$url}>/index/<{$str}>/size/36">36</a>
+										<a class="Sh-code" href="<{$url}>/index/<{$str}>/size/37">37</a>
+										<a class="Sh-code" href="<{$url}>/index/<{$str}>/size/38">38</a>
+										<a class="Sh-code" href="<{$url}>/index/<{$str}>/size/39">39</a>
+										<a class="Sh-code" href="<{$url}>/index/<{$str}>/size/40">40</a>
+										<a class="Sh-code" href="<{$url}>/index/<{$str}>/size/41">41</a>
+										<a class="Sh-code" href="<{$url}>/index/<{$str}>/size/42">42</a>
+										<a class="Sh-code" href="<{$url}>/index/<{$str}>/size/43">43</a>
+										<a class="Sh-code" href="<{$url}>/index/<{$str}>/size/44">44</a>
+										<a class="Sh-code" href="<{$url}>/index/<{$str}>/size/45">45</a>
+										<a class="Sh-code" href="<{$url}>/index/<{$str}>/size/46">46</a>
+								</p>
+								<{/nocache}>
+							</div>
+							<div class="pS-hook fl Sl-price">
+								<h2><label class="fl ">价格</label></h2>
+								<{nocache}>
+								<ul>
+										<li>
+											<a href="<{$url}>/index/<{$str}>/price/1/pname/200以下">200以下</a>
+										</li>
+										<li>
+											<a href="<{$url}>/index/<{$str}>/price/2/pname/200-299">200-299</a>
+										</li>
+										<li>
+											<a href="<{$url}>/index/<{$str}>/price/3/pname/300-499">300-499</a>
+										</li>
+										<li>
+											<a href="<{$url}>/index/<{$str}>/price/4/pname/500-599">500-599</a>
+										</li>
+										<li>
+											<a href="<{$url}>/index/<{$str}>/price/5/pname/600-699">600-699</a>
+										</li>
+										<li>
+											<a href="<{$url}>/index/<{$str}>/price/6/pname/700以上">700以上</a>
+										</li>
+								</ul>
+								<{/nocache}>
+							</div>
+							<div class="pS-hook fl pS-color Sl-hook" id="pS-color">
+								<h2><label class="fl">颜色</label></h2>
+								<p>
+								<{nocache}>
+								<{section loop=$color name='c'}>
+								<a href="<{$url}>/index/<{$str}>/cid/<{$color[c].id}>/cname/<{$color[c].cname}>">
+									<span style='height:15px;width:15px;background-color:#<{$color[c].cvalue}>'title="<{$color[c].cname}>">&nbsp;&nbsp;</span>
+								</a>
+								<{/section}>
+								<{/nocache}>
+								</p>
+							</div>
+					</div>
+				</div>
+				<div class="closeSearch">
+					<a href='javascript:void(0)' onclick='op(this)' class="open">收起筛选器 ↑</a>
+				</div>
+				<div class="blank8"></div>
+			<{nocache}>
+				<div class="proBarx proBar" style='text-align:right'>
+						<{$fpage}>
+				</div>
+				<ul class="proList" id="proList">
+					<{section loop=$data name='goods'}>
+							<li>
+								<span class="relative">
+									<a target="_blank" href="<{$app}>/product/index/id/<{$data[goods].id}>">
+										<img width='160' height='160' alt="<{$data[goods].name}>" src="<{$public}>/uploads/_<{$data[goods].mpic}>" >
+										
+									</a>
+								</span>
+								<span class="nptt">
+									<a target="_blank"  href="id/<{$data[goods].id}>" title="<{$data[goods].name}>">
+										<{$data[goods].name}>
+									</a>
+								</span>
+								<span class="price_sc">市场价：<s>￥<{$data[goods].price}></s></span>
+								<span class="price_hd gray">优购价：
+									<b>￥<{$data[goods].price*$data[goods].discount/10}></b>(<{$data[goods].discount}>折)
+								</span>
+							</li>
+					<{/section}>
+				</ul>
+				<!-- 分页开始 start-->
+				<div class="paginator" id="paginator" style='text-align:center'>
+					<{$fpage}>					
+				</div>
+				<!-- 分页结束-->
+			</div>
+		</div>
+		<div class="blank8"></div>
+		<{/nocache}>
+<{include file="./public/footer.htm"}>	
+	</body>
+</html>

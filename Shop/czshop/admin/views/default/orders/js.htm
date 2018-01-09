@@ -1,0 +1,15 @@
+<{nocache}>
+<table>
+<tr>
+						<th>商品名称</th><th>数量</th><th>价格</th><th colspan="2">商品描述</th>	
+					</tr>
+					<{section loop=$ode name="ls"}>
+						<tr>	
+								<td><{$ode[ls].pname}></td>
+								<td><{$ode[ls].num}></td>
+								<td><{$ode[ls].pprice}></td>
+								<td colspan="2">颜色<{$ode[ls].cid}>尺码<{$ode[ls].psize}></td>
+						</tr>	
+					<{/section}>
+</table>
+<{/nocache}>

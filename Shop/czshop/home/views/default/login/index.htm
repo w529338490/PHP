@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml"><head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>优购网_用户登录</title>
+	<meta name="description" content="优购网">
+	<meta name="keywords" content="优购网">
+	<link rel="stylesheet" href="<{$res}>/css/login/base.css" type="text/css">
+	<link rel="stylesheet" href="<{$res}>/css/login/validator.css" type="text/css">
+	<link rel="stylesheet" href="<{$res}>/css/login/zc.css" type="text/css">
+	<script type="text/javascript" src="<{$public}>/js/jquery-1.4.4.min.js"></script>
+	<script type="text/javascript" src="<{$public}>/js/ajax3.0.js"></script>
+	<script type="text/javascript">
+	function checkUser(name){
+			if(name.match(/\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/)){
+				Ajax().get("<{$url}>/unique/username/"+name,function(data){
+					if(data==0){
+						$("#reg_email_msg_tip").html("");
+						 $("#reg_email_tip").html("<img src='<{$res}>/images/pic21.gif'/>");
+					
+					   }else{
+		
+						$("#reg_email_msg_tip").html("Email地址已存在!").css("color","red");
+					   }
+				})
+			}else{
+				$("#reg_email_msg_tip").html("Email地址格式错误，格式如:yougou@163.com").css("color","red");
+			}
+	}
+	
+		function checkPwd(name){
+			if(name.match(/^[0-9A-Za-z]{6,20}$/)){
+				$("#reg_password1_tip").html("<img src='<{$res}>/images/pic21.gif'/>");
+				$("#reg_password1_msg_tip").html(" ");
+			}else{
+				$("#reg_password1_msg_tip").html("密码的长度应在6-20位之间").css("color","red");
+			}
+		}
+		function checkRePwd(name){
+			if(name.match(/^[0-9A-Za-z]{6,20}$/)&& name===$("#userpwd").attr("value")){
+				$("#reg_password2_tip").html("<img src='<{$res}>/images/pic21.gif'/>");
+				$("#reg_password2_msg_tip").html(" ");
+			}else{
+				$("#reg_password2_msg_tip").html("两次密码输入不一致，请重新输入").css("color","red");
+			}
+		}
+		function tic(id){
+			if(id==1){$("#reg_email_msg_tip").html("请输入常用Email地址，将用来找回密码，接收订单通知").css("color","grey");
+			}
+			if(id==2){$("#reg_password1_msg_tip").html("密码可使用字母+数字长度为6-20个字符").css("color","grey");}
+			if(id==3){$("#reg_password2_msg_tip").html("请确认密码").css("color","grey");}
+		}
+		function checkCode(val){
+				Ajax().get("<{$url}>/vcode/code/"+val, function(data){
+					if(data==5){
+						$("#code1_msg_tip").html("验证码正确").css("color","green");
+					}
+					if(data==6){
+						$("#code1_msg_tip").html("验证码错误，请重新输入").css("color","red");
+				   }
+				});
+		}
+		function doinsert(){
+			Ajax().post("<{$url}>/insert",{username:$("#username").attr("value"),password:$("#userpwd").attr("value"),password1:$("#repwd").attr("value"),code:$("#vdcode").attr("value")},function(data){
+					if(data==6){
+						 $("#tijiao").html("注册成功请登录 >>>").css("color","grey");
+						$("#login_email").attr("value",$("#username").attr("value"));
+						$("#login_email").attr("value",$("#username").attr("value"));
+					   }
+					 if(data==5){
+						$("#tijiao").html("注册失败").css("color","red");		
+					   }
+				});			
+		}
+	</script>
+	</head>
+	<body>
+	<!-- reghead start-->
+	<div class="w960 relative">
+	<div class="nreg_head">
+	<div class="fl nreg_logo"><a href="<{$app}>/index"><img src="<{$res}>/images/new_logo.gif" alt="优购网上鞋城" title="优购网上鞋城"></a></div>
+	<div class="fr nreg_reback"><a href="<{$app}>/index" class="Blue">返回首页</a></div>
+	</div>
+	</div>
+	<!-- reghead end-->
+	<div class="w960">
+	<div class="nreg_box grayborder">
+
+	<!-- regstart -->
+	<div class="fl nreg_left">
+	<form name="form2" action="<{$url}>/" method="post" onsubmit="return validate('click')">
+	<input id="redirectURL_2" name="redirectURL" value="" type="hidden">
+	<div class="fl nreg_form">
+	<div class="nreg_form_title"></div>
+
+	<div class="nreg_item">
+	<div class="nreg_th"><label for="email">Email：</label></div>
+	<div class="nreg_td"><input name="username" id="username" class="nreg_input" type="text" onfocus="tic(1)" onblur="checkUser(this.value)"/><div class="nregtips" id="reg_email_tip"></div></div>
+	<p class="Gray nreg_tips" id="reg_email_msg_tip">&nbsp;</p>
+	</div>
+
+	<div class="nreg_item">
+	<div class="nreg_th"><label for="reg_password1">设置密码：</label></div>
+	<div class="nreg_td"><input id="userpwd" name="userpwd" class="nreg_input" type="password" onfocus="tic(2)" onblur="checkPwd(this.value)"><div class="nregtips" id="reg_password1_tip"></div></div>
+	<p class="Gray nreg_tips" id="reg_password1_msg_tip"><font class="Yellow">&nbsp;</font></p>
+	</div>
+
+	<div class="nreg_item">
+	<div class="nreg_th"><label for="password2">确认密码：</label></div>
+	<div class="nreg_td"><input id="repwd" class="nreg_input" name="repwd" type="password" onfocus="tic(3)" onblur="checkRePwd(this.value)"><div class="nregtips" id="reg_password2_tip"></div></div>
+	<p class="Gray nreg_tips" id="reg_password2_msg_tip">&nbsp;</p>
+	</div>
+
+	<div class="nreg_item">
+	<div class="nreg_th"><label for="vcode">验证码：</label></div>
+	<div class="nreg_td"><input name="code" type="text" onblur="checkCode(this.value)" onkeyup="if (this.value != this.value.toUpperCase()) this.value=this.value.toUpperCase();" id="vdcode" size="6" class="nvcode_input" /><span><img src="<{$url}>/code" alt="看不清楚，换一张" style="cursor: pointer;position:relative;top:-3px;" onclick="this.src='<{$url}>/code/'+Math.random()" /></span><span class="Gray">单击图片更换验证码</span></div>
+	<p class="Gray nreg_tips" id="code1_msg_tip"></p>
+	</div>
+	<p class="blank20"></p>
+	<div class="nreg_item">
+	<div class="nreg_th">&nbsp;</div>
+	<div class="nreg_td tleft"><span id="tijiao"></span></div>
+	</div>
+	<p class="nreg_p clear"><input style="display: inline;" value=" " class="nreg_btn" type="button" onclick="doinsert()"></p>
+	</div>
+	</form>
+	</div>
+	<!-- regend -->
+
+	<!-- loginstart -->
+	<div class="fr nreg_rig">
+	<div class="fl nlogin"><p class="nlogin_title"></p>
+
+	<form action="<{$url}>/dologin" method="post">
+	<input id="redirectURL_1" name="redirectURL" value="" type="hidden">
+	<div class="nlogin_item">
+	<div class="fl nlogin_th f_black"><label for="username">账 号：</label></div>
+	<div class="fl nlogin_td relative"><input name="username" id="login_email" class="nlogin_input" style="color: rgb(170, 170, 170);" type="text"><div class="nlogintips" id="login_email_tip"></div></div>
+	<div class="fl nlogin_tips"><span id="login_email_msg_tip"><font class="Gray">请输入注册邮箱/用户名</font></span></div>
+	</div>
+
+
+
+	<div class="nlogin_item">
+	<div class="fl nlogin_th f_black"><label for="username">密 码：</label></div>
+	<div class="fl nlogin_td relative"><input name="password" value="" id="login_password" maxlength="20" class="nlogin_input" type="password"><div class="nlogintips" id="login_password_tip"></div></div>
+	<div class="fl nlogin_tips"><span id="login_password_msg_tip"><font class="Gray">请输入注册密码</font></span></div>
+	</div>
+	<div class="nlogin_item">
+	<div class="nlogin_p clear"><input style="display: inline;" name="login" value=" " class="nlogin_btn" type="submit">&nbsp;&nbsp;</div>
+	</div>
+	</form>
+	</div>
+	<!-- otherlogin -->
+
+	</div>
+	<!-- loginend -->
+
+	</div>
+
+	</div>
+
+	<div class="blank20"></div>
+
+	<!--footer start-->
+	<div class="footer Gray">
+		<p class="tright">Copyright © 2011 Yougou Technology Co., Ltd. <a href="http://www.miibeian.gov.cn/" target="_blank">粤ICP备09070608号-2</a> 增值电信业务经营许可证：<a href="http://www.miibeian.gov.cn/" target="_blank">粤 B2-20090203</a></p>
+	</div>
+	<!--footer end-->
+	<!-- ClickTale Bottom part -->
+	<div id="ClickTaleDiv" style="display: none;"></div>
+	</body></html>

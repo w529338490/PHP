@@ -1,0 +1,63 @@
+#preview{ float:none; margin:20px auto; text-align:center; width:500px;}
+.jqzoom{ width:480px; height:480px; position:relative;}
+.list-h li{ float:left;}
+#spec-n5{width:500px; height:83px; padding-left:5px; padding-top:6px; overflow:hidden; position:relative}
+#spec-left,#spec-right{  width:10px; height:45px; float:left; cursor:pointer; margin-top:10px;}
+#spec-left{padding-top:10px; margin-right:9px}
+#spec-right{padding-top:10px; margin-left:5px}
+
+#spec-list{ position:relative;float:left;text-align:center;width:442px;border:0px solid #000;height:83px;padding-top:5px;overflow:hidden;}
+#spec-list ul li{ float:left; display:inline; width:75px; text-align:left; padding-top:5px}
+#spec-list ul li img{ padding:2px; border:1px solid #ddd; width:60px; height:60px;}
+#spec-list ul li .select{ background:url(../images/iconbg.gif) no-repeat -2px -1000px;border:1px solid #D80C18; }
+.jqzoom{position:relative;padding:0;}
+.jqzoom img{ border:1px solid #eaeaea}
+.seebigimg{width:800px;height:800px;}
+.jqZoomPup{z-index:10;visibility:hidden;position:absolute;top:0px;left:0px;width:50px;height:50px; overflow:hidden;border:1px solid #eaeaea;background:#999 50% top no-repeat;opacity:0.2;-moz-opacity:0.2;-khtml-opacity:0.2;filter:alpha(Opacity=20);cursor:crosshair}
+.zoomdiv{
+z-index:100;position:absolute;
+ margin-left:500px;
+ margin-top:-480px;
+ zoom:1;
+background:url(../images/loading.gif) #fff no-repeat center center;
+border:1px solid #000000;display:none;text-align:center;overflow: hidden;}
+.ZoomLoading {
+	width:482px;
+	height:482px;
+	position:absolute;
+	background:url(../images/reload.gif) no-repeat;
+	top:0;
+	left:0px;
+	display:none;
+	text-align:center;
+	z-index:1000;
+
+}
+.ZoomLoading .tips{
+    margin:auto;
+	margin-top:200px;
+	width:100px;
+	height:80px;
+	overflow:hidden;
+    border:1px solid #dedede;
+    background:#fff url(../images/sloading.gif) no-repeat 40px 40px;
+	text-align:center;
+	opacity:0.7;
+	-moz-opacity:0.7;
+	-khtml-opacity:0.7;
+	filter:alpha(Opacity=70);
+}
+.ZoomLoading .tips p{ padding-top:10px}
+.seemorepic{
+	width:101px;
+	height:19px;
+	position:absolute;
+	background:#fff;
+	right:0;
+	bottom:0;
+	_right:2px;
+	_bottom:5px;
+	z-index:1001;
+	zoom:1
+}
+.ZoomLoading img{ vertical-align:middle; margin-top:250px}

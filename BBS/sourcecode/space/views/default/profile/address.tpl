@@ -1,0 +1,1 @@
+<{nocache}>	<{html_options options=$city}><{/nocache}>

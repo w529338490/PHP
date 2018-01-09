@@ -1,0 +1,64 @@
+/*注册 start */
+	#main #reg_title{
+		margin-top:10px;
+		background: none repeat scroll 0 0 #F2F2F2;
+		border: 1px solid #CDCDCD;
+		border-bottom: 1px solid #C2D5E3;
+		height: 31px;
+		line-height: 31px;
+		white-space: nowrap;
+		padding:0px 10px;
+	}
+	#main #reg_title > b{
+		float:left;
+	}
+	#main #reg_title > span{
+		
+		float:right;
+	}
+	#main #reg_title a,#main #reg_form a{
+		color:#336699;
+	}
+	#main #reg_form{
+		border: 1px solid #CDCDCD;
+		border-top:none;
+		padding:40px 100px;
+		white-space: nowrap;	
+		margin-bottom:10px;
+	}
+	#main #reg_form table tr{
+		line-height:25px;
+	}
+	#main #reg_form table th,#main #reg_form table td{
+		border-bottom: 1px dotted #CDCDCD;
+		padding:10px 0px;
+	}
+	#main #reg_form table th{
+		width:150px;
+		padding-right:15px;
+		text-align:right;
+		font-weight:100;
+	}
+	#main #reg_form table th b{
+		color:red;
+	}
+	#main #reg_form table input{
+		width:220px;
+		padding:4px 0px;
+		margin-right:10px;
+	}
+	#main #reg_form table select{
+		padding:4px;
+		margin-right:10px;
+	}
+	#main #reg_form table #reg_btn{
+		width:100px;
+		padding:5px 10px;
+	}
+	#main #reg_form table img{
+		cursor:pointer;
+	}
+/*注册 end */
+	.ok{
+		background:url("../images/check_right.gif") no-repeat;
+	}

@@ -1,0 +1,31 @@
+.sub_board_box{
+	border:1px solid #ccc;
+	margin-bottom:10px;
+}
+.sub_board_box h1{
+    background: url("../images/titlebg.png") repeat-x scroll 0 0 #E5EDF2;
+    border-color: #C2D5E3;
+    border-width: 1px 0;
+	
+    border-bottom: 1px solid #C2D5E3;
+    border-top: 1px solid #FFFFFF;
+    height: 31px;
+    line-height: 31px;
+    overflow: hidden;
+    padding: 0 10px;
+    white-space: nowrap;	
+	font-size:14px;
+}
+.sub_board_box table tr td{
+	padding:10px 0px;
+	border-bottom:1px dashed #ccc;
+}
+.sub_board_box table h3{
+	color:#336699;
+}
+.sub_board_box table h3 small{
+	color:#F26C4F;
+}
+.sub_board_box .sub_info{
+	padding:10px;
+}

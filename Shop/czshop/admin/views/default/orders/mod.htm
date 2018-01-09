@@ -1,0 +1,101 @@
+<html>
+<{nocache}>
+	<head>
+	<link rel="stylesheet" href="<{$res}>/css/orders.css" type="text/css"/>
+	<script type="text/javascript" src="<{$public}>/js/jquery-1.4.4.min.js"></script>
+	<script src="<{$res}>/js/order.js"></script>	
+		<script type="text/javascript">
+		$('#user').click(function(){
+			$('.uinfo').show();
+		});
+		$('img').click(function(){
+			$('.uinfo').hide();
+		});
+		</script>
+	</head>
+	<body>
+		<div class="container">
+		<div class=title>
+			<div>优购后台管理-订单信息</div>
+			<div style="float:right"><a href="<{$url}>/index/ostate=<{$ord.ostate}>">返回订单列表</a></div>
+		</div>
+		<div class="main">
+				<div class="uinfo">
+					<center><h4>购货人信息</h4></center><img src="<{$res}>/images/close.gif" width=15 height=15 title="关闭">
+					<ul>
+						<li><span>用户名:</span><{$data.username}></li>
+						<li><span>积分:</span><{$data.upoint}></li>
+						<li><span>禁言状态:</span><{if $data.ustate eq 0}>正常<{elseif $data.ustate eq 1}>已冻结<{/if}></li>
+					</ul>	
+				</div>
+							
+				<table width="100%" border="0" style="text-align:center" align="center">
+					<tr bgcolor="#DEEFFA"><td colspan="6"><font color="#362cfa" style="font-size:16px;"><strong>基本信息</strong></font></td></tr>
+					
+					<tr>
+						<td>订单号:</td><td><{$ord.id}></td>
+						<td>订单状态:</td>
+						<td colspan="3">
+							<{if $ord.ostate eq 0}>
+								待付款
+							<{elseif $ord.ostate eq 1}>
+								待发货
+							<{elseif $ord.ostate eq 2}>
+								已完成
+							<{elseif $ord.ostate eq 3}>
+								已取消
+							<{/if}>
+						</td>
+					</tr>
+					<tr class="cont">
+						<td>购货人:<a href="#" id="user">[显示购货人信息]</a></td>
+						<td><{$data.username}></td>
+						<td>下单时间:</td>
+						<td colspan="3"><{$ord.rtime|date_format:"%Y-%m-%d %H:%M:%S"}></td>
+					</tr>	
+					<tr class="cont" bgcolor="#DEEFFA">
+						<td colspan="6">
+							<font color="#362cfa" style="font-size:16px;">
+								<strong>收货人信息</strong>
+							</font>
+							&nbsp;&nbsp;
+							<{if $ord.ostate<2 }>
+							<a href="<{$url}>/ordermod/id/<{$ord.id}>">[编辑]</a>
+							<{/if}>
+						</td>
+					</tr>
+					<tr>
+						<td>收货人:</td><td><{$ord.linkman}></td><td>地址:</td><td colspan="3"><{$ord.oaddress}></td>		
+					</tr>
+					<tr>
+						<td>邮编:</td><td><{$ord.code}></td><td>联系电话:</td><td><{$ord.telephone}></td>
+					</tr>
+					<tr class="cont" bgcolor="#DEEFFA">
+						<td colspan="6">
+							<font color="#362cfa" style="font-size:16px;">
+								<strong>商品信息</strong></font>
+								&nbsp;&nbsp;&nbsp;&nbsp;	
+								<{if $ord.ostate<2 }>
+								<a href="<{$url}>/odetail/id/<{$ord.id}>">[编辑]</a>
+								<{/if}>
+						</td>
+					</tr>
+					<tr>
+						<th>商品名称</th><th>数量</th><th>价格</th><th colspan="2">商品描述</th>	
+					</tr>
+					<{section loop=$ode name="ls"}>
+						<tr>	
+								<td><{$ode[ls].pname}></td>
+								<td><{$ode[ls].num}></td>
+								<td><{$ode[ls].pprice}></td>
+								<td colspan="2">颜色<{$ode[ls].cname}>尺码<{$ode[ls].psize}></td>
+						</tr>	
+					<{/section}>
+					<tr><td colspan="5" align="right" style="padding-right:50px;">总计：￥<{$ord.total}>元</td></tr>
+				</table>
+			</div>
+		</div>
+
+	</body>
+	<{/nocache}>
+</html>

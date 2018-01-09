@@ -1,0 +1,23 @@
+<{nocache}>
+<html>
+	<head>
+	<link rel="stylesheet" type="text/css" href="<{$res}>/css/form.css"/>
+	</head>
+	<body style="background:#D9FBFF;">
+	<center>
+		<table id="lform" cellspacing="0" width="700px">
+		<form  method="post" action="<{$url}>/update">
+		<input type="hidden" name="id" value="<{$post.id}>">
+		<tr class="specalt"><th>品牌ID</th><td class="alt"><{$ts}></td></tr>
+		<tr class="specalt"><th>款式ID</th><td class="alt"><{$ss}></td></tr>
+		<tr class="specalt"><th>公告内容</th><td class="alt"><textarea name="ncont" cols="50" rows="5" value="text"><{$post.ncont}></textarea><br/></td></tr>
+		<tr align="center"class="specalt"><td colspan="2" class="alt"><input type="submit" class="button" value="修改">&nbsp;&nbsp;
+				<input type="reset" class="button" value="重 置">&nbsp;&nbsp;
+				<input type="button" onclick="if(confirm('确定要删除吗?')) window.location='<{$url}>/del/id/<{$post.id}>'" class="button" value="删 除>>">&nbsp;&nbsp;
+				<button onclick="window.location='<{$url}>/index'" name="返回" value="返回">返 回>></button></td>
+        </tr></form>
+		</table>
+	</center>
+	</body>
+</html>
+<{/nocache}>

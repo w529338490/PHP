@@ -1,0 +1,21 @@
+<{nocache}>
+<html>
+	<head>
+	<link rel="stylesheet" type="text/css" href="<{$res}>/css/form.css"/>
+		
+	</head>
+	<body style="background:#D9FBFF;" >
+		<center>
+		<table id="lform" cellspacing="0" width="700px">
+		<form  method="post" action="<{$url}>/insert">
+		<tr class="specalt"><th>品牌</th><td class="alt"><{$ts}></td></tr>
+		<tr class="specalt"><th>款式</th><td class="alt"><{$ss}></td></tr>
+		<tr class="specalt"><th>公告内容</th><td class="alt"><textarea name="ncont" cols="50" rows="5" value="text"></textarea><br/><{$ck}></td></tr>
+		<tr class="specalt" align="center"><td colspan="2"><input type="submit" class="button" value="添 加">&nbsp;&nbsp;
+				<input type="reset" class="button" value="重 置"></td>
+        </tr></form>
+		</table>
+		</center>
+	</body>
+</html>
+<{/nocache}>

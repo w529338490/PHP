@@ -1,0 +1,56 @@
+#main{
+	margin-bottom:10px;
+}
+#user_list{
+	border:1px solid #EEF2F4;
+	overflow:hidden;
+	padding:2px 0px 2px 1px;
+}
+#user_list ul.user_ul{
+	list-style:none;
+	margin:0 auto;
+}
+#user_list ul.user_ul > li{
+	width:223px;
+	border:1px solid #F3F3F3;
+	background:#F9F9F9;
+	float:left;
+	padding:5px;
+	margin:2px 2px 10px 2px;
+}
+#user_list ul.user_ul > li img{
+	background: none repeat scroll 0 0 #FFFFFF;
+	border-color: #F2F2F2 #CDCDCD #CDCDCD #F2F2F2;
+	border-style: solid;
+	border-width: 1px;
+	height: 48px;
+	padding: 2px;
+	width: 48px;		
+	float:left;
+	margin-right:10px;
+}
+#user_list ul.user_ul > li .search_user_name{
+	font-weight:700;
+}
+#user_list ul.user_ul > li .search_ope{
+	background: url("../images/arrwd.gif") no-repeat scroll 100% 50% transparent;
+	cursor: pointer;
+	padding-bottom:2px;
+	padding-right: 16px;
+	white-space: nowrap;	
+}
+ul.ope_box{
+	display:none;
+	position:absolute;
+	list-style:none;
+	background:white;
+	border:1px solid #ccc;
+	margin-left:63px;
+}
+ul.ope_box li{
+	margin:5px;
+	line-height:20px;
+}
+ul.ope_box li a:hover{
+	background:#EEF4F6;
+}

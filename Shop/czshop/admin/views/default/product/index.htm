@@ -1,0 +1,586 @@
+<!DOCTYPE html PUBLIC
+          "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<{nocache}>
+<html xmlns="http://www.w3.org/1999/xhtml">   
+<link href="<{$res}>/css/form.css" mce_href="<{$res}>/css/form.css" rel="stylesheet" type="text/css" />
+	<head>
+		<style>
+			*{padding:0px;margin:0px;}
+			ul,li{list-style:none;}
+			body{
+				text-align:center;
+				margin-left:auto;
+				margin-right:auto;
+				background-color:#D9FBFF;
+			}
+			table{
+				text-align:center;
+				margin-left:auto;
+				margin-right:auto;
+				padding-top:10px;
+			}
+			#img{
+				z-index:5;
+				display:none;
+				height:100px;
+				width:921px;
+				position:absolute;
+				left:120px;
+			}
+			#trans {
+				position:absolute;
+				top:-10px;
+				z-index:3;
+				display:none;
+				background:#000;
+				-moz-opacity:0.2;
+				opacity:0.2;
+				filter:alpha(opacity=20);
+			}
+			#updatepd{
+				position:absolute;
+				left:450px;
+				z-index:3;
+				width:400px;
+				padding:10px 0px;
+				background-color:white;
+				border:1px solid black;
+				display:none;
+					
+			}
+			#upd{
+				position:absolute;
+				left:450px;
+				top:150px;
+				z-index:3;
+				width:300px;
+				background-color:white;
+				display:none;
+				margin:0px;
+				padding:10px;
+				border:1px solid black;
+			}
+			.cancel{
+				position:absolute;
+				left:304px;
+				top:0px;
+				width:15px;
+			}
+			.cancel img{
+				width:15px;
+				height:15px;
+				border-bottom:1px solid black;
+				border-left:1px solid black;
+			}
+			.preview{ /* 该对象用户在IE下显示预览图片 */
+				width:150px;
+				height:100px;
+				margin:0px;
+				padding:0px;
+				margin-left:3px;
+   			 	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);     
+			}
+			#mis{
+				width:200px;
+				border:1px solid black;
+				border-top:0px solid black;
+				position:absolute;
+				left:450px;
+				display:none;
+				height:120px;
+				text-align:center;
+				background-color:#fff;
+				z-index:6;
+				font-weight:bold;
+				text-align:center;
+			}
+			#mis div{
+				position:relative;
+				top:30px;
+				width:200px;
+				height:30px;
+				line-height:30px;
+			}
+		</style>
+		<script src='<{$public}>/js/ajax3.0.js'></script>
+		<script src='<{$public}>/js/jquery-1.4.4.min.js'></script>
+		<script>
+			//显示/关闭透明界面
+			$(function(){
+				$("#trans").css("width",window.screen.availWidth);
+				$("#trans").css("height",window.screen.availHeight);
+				$("#upd .cancel").click(function(){
+					$("#img").hide(300);
+					$("#img").find('img').hide(300);
+					$("#upd").hide(300,function(){
+						$('#trans').hide();
+					});
+				})
+			})
+			//分页显示类别
+			var cache=new Array();	
+			function setPage(url){
+				nurl = url;
+				//if(typeof(cache[url])=="undefined") {
+					Ajax().get(url, function(data){
+						if(data){
+							$('#content').html(data);
+							//cache[url]=str;
+						}else{
+							esystem("导入数据失败",0);
+						}
+					})
+				//}else{
+				//	obj.innerHTML=cache[url];
+				//}
+			}
+			setPage("<{$url}>/slist/page/1/sell/0");
+			//报错系统
+			function esystem(einfo,tof){
+				if(tof==0)
+					$("#mis div").html(einfo).css("color","red");
+				else	$("#mis div").html(einfo).css("color","green");
+				$("#mis").css("top",document.body.scrollTop);
+				$("#mis").stop(true,true).slideDown(500);
+				setTimeout(function(){$("#mis").stop(true,true).slideUp(500)},3000);	
+			}
+			//上传文件报错
+			function uperror(err){
+				esystem(err,0);
+			}	
+			//显示/隐藏修改界面
+			function mod(a){
+				$('#trans').show();
+				$('#upd').show(300);
+				$("#upd input[name='name']").attr("value",$(a).parents('td').prevAll('td').eq(5).html());
+				$("#upd input[name='price']").attr("value",$(a).parents('td').prevAll('td').eq(2).find('span').html());
+				modid = $(a).parent('td').prevAll('td').eq(6).find("input[type='checkbox']").attr('value');
+				Ajax('json').get("<{$url}>/mod/id/"+modid,function(data){
+					//alert(data);
+					for(var i=0;i<data[0].intro.length;i++){
+						getvalue[i] =  data[0].intro[i];
+					}
+					$("select[name='styleid'] option[value='"+data[0].styleid+"']").attr('selected',true); 
+					ssf($("select[name='styleid'] option[value='"+data[0].styleid+"']"));
+					$("select[name='typeid'] option[value='"+data[0].typeid+"']").attr('selected',true);
+					$('#img img').each(function(){
+						$(this).attr('src','');
+					})
+					$('#img').show(300);
+					for(var j=0;j<data.length;j++){
+						var q = j+1;
+						//alert(data[j].picname);
+						$("#p"+q).find('img').show();
+						$("#p"+q).find('img').attr('src','<{$public}>/uploads/'+data[j].picname);
+					}
+				})		
+			}
+			//执行更新操作
+			function update(upimg){
+				var intro = new Array();
+				var name = $("#upd input[name='name']").attr("value");
+				var price = $("#upd input[name='price']").attr("value");
+				var typeid = $("select[name='typeid'] option:selected").attr('value');
+				var styleid = $("select[name='styleid'] option:selected").attr('value');
+				var k=0;
+				var img = eval(upimg);
+				$("input[name='intro']").each(function(){
+					intro[k] = $(this).prev('span').html()+$(this).attr('value'); 
+					k++;
+				})
+				if(upimg){
+					var productfield = {name:name,id:modid,price:price,intro:intro,typeid:typeid,styleid:styleid,mpic:img[0],picname:img};	
+				}else{
+					var productfield = {name:name,id:modid,price:price,intro:intro,typeid:typeid,styleid:styleid};	
+				}
+				Ajax('html').post("<{$url}>/update",productfield,
+				function(data){
+					if(data){
+						//alert(data);
+						esystem("修改成功",1);
+						setPage(nurl);
+						$("input[type='file']").each(function(){
+							$(this).attr('value','');
+						})
+					}else esystem("修改失败",0);
+				});
+				
+			}
+			// 执行单条删除操作
+			function del(b){
+				delid = $(b).parent('td').prevAll('td').eq(4).find("input[type='checkbox']").attr('value');
+				Ajax('html',false).get("<{$url}>/del/id/"+delid,function(data){
+					if(data) esystem("删除成功",1);
+					else esystem("删除失败",0);
+				})
+				setPage(nurl);
+			}
+			//执行多条删除操作
+			function delall(){
+				var delids = new Array();
+				for(var i=0;i<$("#lform :checked").length;i++){
+					delids[i] = $("#lform :checked").eq(i).attr("value");
+				}
+				Ajax('html').get("<{$url}>/del/id/"+delids,function(data){
+					if(data){
+						//alert(data);
+						esystem("删除成功",1);
+						setTimeout(function(){setPage(nurl)},300);
+					}else{
+						esystem("删除失败",0);
+					}
+				});
+				
+				
+			}
+			//全选按钮
+			function inall(ina){
+				if($(ina).html()=="全选"){
+					$("#content input[type='checkbox']").attr("checked",true);
+					$(ina).html("全否");
+				}else{
+					$("#content input[type='checkbox']").attr("checked",false);
+					$(ina).html("全选");
+				}
+
+			}
+			//反选按钮
+			function innot(){
+				$("#content input:checkbox").each(function(){
+					if($(this).attr("checked"))
+						$(this).attr("checked",false);
+					else $(this).attr("checked",true);
+				})
+				
+			}
+			//图片预览，兼容FF和IE
+			function showimg(obj,img){  
+				if(!obj.value.match( /.jpg|.gif|.png|.bmp/i) ){     
+					esystem("图片格式无效",0);    
+       				 	return false;     
+				}
+			       	$('#img').show();
+				$('#'+img).show();
+					
+				if(obj){  
+					
+					//objPreviewFake = obj.parentNode.firstChild;
+					objPreviewFake = document.getElementById(img);
+					//ie  
+					if (objPreviewFake.filters){
+					   	
+						obj.select(); 	
+						//srcimg = document.selection.createRange().text;
+						srcimg = $(obj).attr('value');
+						objPreviewFake.filters.item(
+						'DXImageTransform.Microsoft.AlphaImageLoader').src=srcimg;
+						$('#'+img).find('img').hide();
+						return true;	
+                			}  
+                			//firefox  
+                			else if(window.navigator.userAgent.indexOf("Firefox")>=1){ 
+						if(obj.files){ 
+							var objurl = window.URL.createObjectURL(obj.files[0]);
+							$('#'+img).find('img').show();
+							$('#'+img).find('img').attr("src",objurl);
+							return true;  
+						}   
+                			}  
+					return false;
+           			 }  
+			 }
+			//添加图片
+			 im=0;
+			 function aimg(a){
+				$(a).parents('li').nextAll('li').eq(im).show();
+				$(a).parents('li').nextAll('li').eq(im).find("input[type='file']").attr('name','tpic[]');
+				im++;
+				if(im>=8) im=0;
+			}
+			//删除图片
+			function dimg(a,b){
+				$(a).parent('li').hide();
+				$(a).prev("input[type='file']").attr('name','');
+				//$('#'+b).hide();
+			}
+			//style_selectform
+			getvalue=new Array("","","","","","","","","","","","","","","","","","","","","","","","","","","");
+			function ssf(a){
+				var sid = $(a).attr("value");
+				if(sid!=0){
+					$('#pd').parent('tr').show();
+				}else{
+					$('#pd').parent('tr').hide();
+					return;
+				}
+				var str = "";
+				Ajax('json').get("<{$url}>/find/id/"+sid,function(data){
+					for(var i=0;i<data.length;i++){
+						str += "<li style='margin-top:2px;'><span>"+data[i]+"：</span>";
+						str += "<input type='text' class='psd' name='intro' size='8' value='"+getvalue[i]+"'></li>";
+					}
+					$('#pd').html(str);
+				})	
+			}
+			//单件商品上架
+			function sell(a,b){
+				var sellid = $(a).parent('td').prevAll('td').eq(6).find("input[type='checkbox']").attr('value');
+				Ajax().post("<{$url}>/changestate",{id:sellid,pstate:b},function(data){
+					if(data){
+						setPage(nurl);	
+					}else{
+						esystem("上架失败",0);	
+					}
+				})
+			}
+			//多件商品上架
+			function sellall(){
+				var ids = new Array();
+				for(var i=0;i<$("input[type='checkbox']:checked").length;i++){
+					ids[i] = $("input[type='checkbox']:checked").eq(i).attr('value');
+						
+				}
+				Ajax().post("<{$url}>/sellall",{id:ids,pstate:1},function(data){
+					if(data){
+						//alert(data);
+						setPage(nurl);	
+					}else{
+						esystem("上架失败",0);	
+					}
+				})
+				
+			}
+			//打折
+			function disc(a){
+				var disids = new Array();
+				for(var i=0;i<$("#lform :checked").length;i++){
+					disids[i]= $("#lform :checked").eq(i).attr("value");
+				}
+				var discount = $(a).prev('input').attr('value');
+				Ajax().post('<{$url}>/disc',{discount:discount,id:disids},function(data){
+					if(data){
+						$(a).prev('input').attr('value','');
+						esystem("打折成功",1);
+						setPage(nurl);
+					}else{
+						esystem("打折失败",0);
+					}
+				})
+			}
+			//增加详情
+			function addnode(a){
+				var str = "<tr class='add_node' align='center'>";
+				str += "<td><{$cs}><input type='button' onclick='delnode(this)' value='取消'></td>";
+				str += "<td><input type='text' name='size' size='5'></td>";
+				str += "<td><input type='text' name='number' size='5'></td>";
+				str += "</tr>";
+				$(a).parents('table').append(str);
+			}
+			//去除详情
+			function delnode(a){
+				$(a).parents('tr').remove();
+			}
+			//显示详情界面
+			tofup=1;
+			function showwin(a){
+				$(a).mousemove(function(e){ //获取鼠标坐标，兼容IE和FF
+					var x = e.pageX;
+					var y = e.pageY;
+					$("#updatepd").css('top',y-10);
+					$("#updatepd").css('left',x-10);
+				})
+				var pdmodid = $(a).prev('td').find('input').attr('value');
+				if(pdmodid) pdmod(pdmodid);
+				setTimeout(function(){
+					$("#updatepd").css('display','block');
+					$("#updatepd").hover(function(){
+						$("#updatepd").css('display','block');
+					},function(){
+						$("#updatepd").css('display','none');
+					})
+					$("select[name='colorid']").mouseover(function(){
+						$("#updatepd").css('display','block');
+					})	
+				},10);
+				
+			}
+			//详情修改界面
+				function pdmod(a){
+				Ajax('json').post("<{$url}>/pdmod",{id:a},function(data){
+					$(".add_node").remove();
+					for(var i=0;i<data.length;i++){
+						if(i==0){
+							$("#p_size input[name='size']").attr('value',data[0].size);
+							$("#p_num input[name='number']").attr('value',data[0].number);
+						}else if(data.length>$("select[name='colorid']").length){
+							var str = "<tr align='center' class='add_node'>";
+							str += "<td><{$cs}><input type='button' onclick='delnode(this)' value='取消'></td>";
+							str += "<td><input type='text' name='size' value='"+data[i].size+"' size='5'></td>";
+							str += "<td><input type='text' name='number' value='"+data[i].number+"' size='5'></td>";
+							str += "</tr>";
+							$("#updatepd").find('table').append(str);
+						}else{
+							$(".add_node").remove();
+						}
+						$("select[name='colorid'] option[value='"+data[i].cid+"']").eq(i).attr('selected',true);
+						updatepdId = a; 
+					}
+				})
+			}
+			//搜索&排序
+			sign='';
+			function search(a,b){
+				var where='';
+				var name = $("#search input[name='name1']").attr('value');
+				var price = $("#search input[name='price1']").attr('value');
+				var discount = $("#search input[name='discount1']").attr('value');
+
+				if(name) where += "/name/"+name;
+				if(price) where += "/price/"+price;
+				if(discount) where += "/discount/"+discount;
+				if(a){
+					$('#lform th').css('color','black');
+					$(b).css('color','red');
+					where +="/order/"+a;
+					if(sign != a) {
+						sign = a;
+						where += "/desc/desc";
+					}else{
+						sign = '';
+						where += "/desc/asc";
+					} 
+					
+				}
+				setPage("<{$url}>/slist/page/1/sell/0"+where);
+			}
+			//执行详情修改
+			function updatepd(){
+				var cid = new Array();
+				var size = new Array();
+				var num = new Array();
+				for(var i=0;i<$("select[name='colorid'] option:selected").length;i++){
+					cid[i] = $("select[name='colorid'] option:selected").eq(i).attr('value');
+					size[i] = $("input[name='size']").eq(i).attr('value');
+					num[i] = $("input[name='number']").eq(i).attr('value');
+					//alert(cid[i]+':'+size[i]+':'+num[i])
+					if(!cid[i] || !size[i] || !num[i]){
+						esystem("不能为空",0);
+						return;
+					}
+				}
+
+				Ajax().post("<{$url}>/updatepd",{pid:updatepdId,cid:cid,number:num,size:size},function(data){
+					if(data){ 
+						esystem("修改成功",1);
+						setPage(nurl);
+					}
+					else esystem("修改失败",0);
+				})
+			}
+		</script>
+	</head>
+	<body>
+		<center>
+			<div id='trans'></div>
+			<div id='mis'><div></div></div>
+			<div id='img'>
+				<div class='preview' id='p1' style='float:left'>
+					<img width='150' height='100'>
+				</div>
+				<div class='preview' id='p2' style='float:left'>
+					<img width='150' height='100'>
+				</div>
+							
+				<div class='preview' id='p3' style='float:left'>
+					<img width='150' height='100'>
+				</div>
+							
+				<div class='preview' id='p4' style='float:left'>
+					<img width='150' height='100'>
+				</div>
+				<div class='preview' id='p5' style='float:left'>
+					<img width='150' height='100'>
+				</div>
+				<div class='preview' id='p6' style='float:left'>
+					<img width='150' height='100'>
+				</div>
+			</div>
+			<h2 id='tit'>管理商品</h2>	
+			<div id='content'></div>
+		</center>
+		<div id='upd'>
+			<div class='cancel'><img src='<{$res}>/images/ffds.gif'></div>
+				<table>
+					<h3 align='center'>修改商品</h3>
+					<form action="<{$url}>/ajud" method="post" target='img' enctype="multipart/form-data">
+						<tr align='center'><td onmouseover='getx(this)'>商品名称：</td><td><input type="text" name="name" ></td><tr>
+						<tr align='center'><td>类别：</td><td><{$ts}></td></tr>
+						<tr align='center'><td>款式：</td><td><{$ss}></td><tr>
+						<tr align='center'><td>单价：</td><td><input type="text" name="price" ></td><tr>
+						<tr align='center' style='display:none;'>
+							<td>商品详情：</td>
+							<td id='pd' align='right' style='padding-right:10px;'></td>
+						<tr>
+
+						<tr>
+							<td>商品图片：</td>
+							<td >
+								<li>
+									<input onchange="showimg(this,'p1')" type="file" name="tpic[]" size='5'>
+									<input type='button' onclick='aimg(this)' value='增加'>
+								</li>
+								<li style='display:none'>
+								
+									<input onchange="showimg(this,'p2')" type="file" name="" size='5'>
+									<input type='button' value='取消' onclick="dimg(this,'p2')">
+								</li>
+								<li style='display:none'>
+								
+									<input onchange="showimg(this,'p3')" type="file" name="" size='5'>
+									<input type='button' value='取消' onclick="dimg(this,'p3')">
+								</li>
+								<li style='display:none'>
+									
+									<input onchange="showimg(this,'p4')" type="file" name="" size='5'>
+									<input type='button' value='取消' onclick="dimg(this,'p4')">
+								</li>
+								<li style='display:none'>
+								
+									<input onchange="showimg(this,'p5')" type="file" name="" size='5'>
+									<input type='button' value='取消' onclick="dimg(this,'p5')">
+								</li>
+								<li style='display:none'>
+								
+									<input onchange="showimg(this,'p6')" type="file" name="" size='5'>
+									<input type='button' value='取消' onclick="dimg(this,'p6')">
+								</li>
+							</td>
+						</tr>
+						<tr>
+							<td>
+															
+							</td>
+						</tr>
+						<tr align='center'><td colspan='2'><input type="submit"  value="修改"></td></tr>
+					</form>
+				</table>
+				<iframe name='img' width='0' height='0' style='display:none'></iframe>
+			</div>
+			<div id='updatepd'>
+				<table>
+					<tr>
+						<th>颜色</th><th>尺码</th><th>数量</th>
+					</tr>
+					<tr>
+						<td><{$cs}><input type='button' onclick='addnode(this)' value='增加'></td>	
+						<td id='p_size'><input type="text" name="size" size='5'></td>
+						<td id='p_num'><input type="text" name="number" size='5'></td>
+					</tr>
+				</table>
+				<tr align='center'><td colspan='2'><input type="button" onclick='updatepd()' value="提交"></td><tr>
+			</div>
+	</body>
+
+</html>
+<{/nocache}>

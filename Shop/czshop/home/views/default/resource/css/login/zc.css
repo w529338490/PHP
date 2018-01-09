@@ -1,0 +1,84 @@
+.nreg_head{ height:92px}
+.nreg_logo{ padding-top:15px; width:310px}
+.nreg_reback{ padding-right:20px; line-height:92px}
+.nreg_box{ width:958px; height:451px}
+
+.nreg_left {
+    height: 451px;
+    width: 571px;
+}
+
+.nreg_rig {
+    height: 451px;
+    overflow: hidden;
+    width: 377px;
+}
+
+.nreg_form {
+    padding-left: 90px;
+}
+
+.nreg_form_title,.nreg_btn,.nlogin_title,.nlogin_btn,.nrighttips,.nerrortips,.login2_btn,.login3_btn,.login4_btn,.login5_btn{background:url(../../images/nregsprite.png) no-repeat}
+.nreg_form_title{ height:93px; width:480px; background-position:-3px 24px}
+.nreg_item{ width:480px}
+.nreg_item p{ height:26px; padding-left:72px}
+.nreg_th{ width:72px;float:left; line-height:26px; font-size:14px; color:#000}
+
+.nreg_input,.nvcode_input,.nlogin_input,.nvcode_input2{height:24px;font:14px Verdana,Arial;line-height:180%}
+.nreg_input{ border:1px solid #b5b5b5; width:250px}
+.nvcode_input{border:1px solid #b5b5b5; width:52px}
+.nreg_td{ width:408px; float:left; line-height:26px; position:relative}
+.nreg_td img,.nlogin_td img{ vertical-align:middle!important; *vertical-align:; cursor:pointer}
+.nreg_td span{ margin-left:15px}
+.nreg_p{ padding-left:72px; padding-top:20px}
+.nreg_btn{width:112px; height:33px; border:none; cursor:pointer;background-position:-5px -173px; display:none}
+.nreg_tips{ line-height:25px; clear:both}
+.noscriptbar,.nocookiebar{ width:948px;border:#fadc80 2px solid; margin:5px auto;line-height:120%;background:#fff9e3; position:relative; clear:both;padding:6px}
+.nocookiebar{display:none}
+.noscriptbar img,.nocookiebar img{ position:absolute; top:6px}
+
+.nlogin{ width:284px; overflow:hidden; margin-top:29px; padding-bottom:20px; border:1px solid #ebebeb; background:#fffef3} /*改*/
+
+
+.nlogin_title{ height:64px; background-position:12px -73px}
+
+.nlogin_item {
+    width: 305px;
+}
+
+.nlogin_th{ width:72px; text-align:right; font-size:14px; line-height:26px}
+.nlogin_th label{ padding-right:1px}
+
+.nlogin_td {
+    line-height: 24px;
+    width: 223px;
+}
+
+.nlogin_input {
+    border: 1px solid #F3B69A;
+    height: 24px;
+    width: 180px;}
+
+.nvcode_input2{ width:52px; height:24px; border:1px solid #f3b69a}
+.nlogin_tips{width:262px;height:26px; line-height:26px}
+.nlogin_tips span{ padding-left:72px}
+.nlogin_p{ padding-left:72px; padding-top:15px}
+.nlogin_btn{ width:95px; height:33px; border:none; cursor:pointer; background-position:-5px -235px;display:none}
+.nregtips{ width:26px; height:26px; position:absolute; top:0; right:118px; }
+.nlogintips{ width:26px; height:26px; position:absolute; top:0; right:8px; }
+.nrighttips{width:26px; height:26px;background-position:-199px -177px}
+.nerrortips{width:26px; height:26px;background-position:-199px -240px}
+.captips{z-index:20; line-height:18PX; top:28px; *top:30px;border:#b49366 1px solid;position:absolute;background:#fdf6aa; display:none;height:18px; overflow:hidden; padding:1px;left:0px}
+
+.login2 {
+    border: 1px solid #EBEBEB;
+    margin-top: 8px;
+    padding-bottom: 19px;
+    width: 285px;
+}
+
+.login2 p{padding-left:8px}
+.login2_btn,.login3_btn,.login4_btn,.login5_btn{ width:99px; height:23px; background-position:-5px -275px; cursor:pointer; border:none}/*改*/
+.login3_btn{ background-position:-111px -275px}
+.login4_btn{ background-position:-5px -300px}/*改*/
+.login5_btn{ background-position:-111px -301px}/*改*/

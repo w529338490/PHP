@@ -1,0 +1,261 @@
+<!DOCTYPE html PUBLIC
+          "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">   
+<link href="<{$res}>/css/form.css" mce_href="<{$res}>/css/form.css" rel="stylesheet" type="text/css" />
+	<head>
+		<style>
+			*{padding:0px;margin:0px;}
+			body{background-color:#D9FBFF;}
+			ul,li{list-style:none}
+			#trans {
+				position:absolute;
+				top:-10px;z-index:2;
+				display:none;
+				background:#000;
+				-moz-opacity:0.2;
+				opacity:0.2;
+				filter:alpha(opacity=20);
+			}
+			#add{
+				position:absolute;
+				left:450px;
+				top:150px;
+				z-index:3;
+				width:300px;
+				display:none;
+				background-color:white;
+				border:1px solid black;	
+			}
+			#upd{
+				position:absolute;
+				left:450px;
+				top:150px;
+				z-index:3;
+				width:300px;
+				display:none;
+				background-color:white;
+				margin:0px;
+				padding:0px;
+				border:1px solid black;
+			}
+			.cancel{
+				position:relative;
+				left:141px;
+				width:15px;
+			}
+			.cancel img{
+				width:15px;
+				height:15px;
+				border-bottom:1px solid black;
+				border-left:1px solid black;
+			}
+			#mis{
+				width:200px;
+				border:1px solid black;
+				border-top:0px solid black;
+				position:absolute;
+				left:450px;
+				display:none;
+				height:120px;
+				text-align:center;
+				background-color:#fff;
+				z-index:4;
+				font-weight:bold;
+				text-align:center;
+			}
+			#mis div{
+				position:relative;
+				top:30px;
+				width:200px;
+				height:30px;
+				line-height:30px;
+			}
+		</style>
+		<script src='<{$public}>/js/ajax3.0.js'></script>
+		<script src='<{$public}>/js/jquery-1.4.4.min.js'></script>
+		<script>
+			//隐藏/显示添加界面
+			$(function(){
+				$("#trans").css("width",window.screen.availWidth);
+				$("#trans").css("height",window.screen.availHeight);
+				$(".add").click(function(){
+					$('#trans').show();
+					$("#add").show(300);
+					
+				})
+				$("#add .cancel").click(function(){
+					$("#add").hide(300,function(){
+						$('#trans').hide();
+					});
+				})
+				$("#upd .cancel").click(function(){
+					$("#upd").hide(300,function(){
+						$('#trans').hide();
+					});
+				})
+			})
+			//分页显示款式
+			var cache=new Array();	
+			function setPage(url){
+				nurl = url;
+				//if(typeof(cache[url])=="undefined") {
+					Ajax().get(url, function(data){
+						if(data){
+							$('#content').html(data);
+							//cache[url]=str;
+						}else{
+							esystem("导入数据失败",0);
+						}
+					})
+				//}else{
+				//	obj.innerHTML=cache[url];
+				//}
+			}
+			setPage("<{$url}>/slist/page/1");
+			//执行添加操作
+			function insert(){
+				var name = $("#add input[name='cname']").attr('value');
+				var cv = $("#add input[name='cvalue']").attr('value');
+				if(!name){
+					esystem("颜色名称不能为空",0);
+					return;
+				}
+				Ajax("html",false).post("<{$url}>/insert",{cname:name,cvalue:cv},function(data){
+					if(data){
+						esystem("添加成功",1);
+					}else {
+						esystem("添加失败",0);
+					}
+				});
+				setPage(nurl);
+			}
+			//报错系统
+			function esystem(einfo,tof){
+				if(tof==0)
+					$("#mis div").html(einfo).css("color","red");
+				else	$("#mis div").html(einfo).css("color","green");
+				$("#mis").css("top",document.body.scrollTop);
+				$("#mis").stop(true,true).slideDown(500);
+				setTimeout(function(){$("#mis").stop(true,true).slideUp(500)},3000);	
+			}
+			//显示/隐藏修改界面
+			function mod(a){
+				$('#trans').show();
+				$('#upd').show(300);
+				modid = $(a).parent('td').prevAll('td').eq(2).find("input[type='checkbox']").attr('value');
+				var cv=$(a).parents('td').prevAll('td').eq(0).html();
+				$("#upd input[name='cvalue']").attr("value",cv);
+				$("#upd input[name='cname']").attr("value",$(a).parents('td').prevAll('td').eq(1).html());			
+			}
+			//执行更新操作
+			function update(){
+				var name = $("#upd input[name='cname']").attr('value');
+				var cv = $("#upd input[name='cvalue']").attr('value');
+				if(!name){
+					esystem("款式名不能为空",0);
+					return;
+				}
+				Ajax('html',false).post("<{$url}>/update",{cname:name,cvalue:cv,id:modid},function(data){
+					if(data){
+						esystem("修改成功",1);
+					}else esystem("修改失败",0);
+				});
+				setPage(nurl);
+			}
+			// 执行单条删除操作
+			function del(b){
+				var delid = $(b).parent('td').prevAll('td').eq(2).find("input[type='checkbox']").attr('value');
+				Ajax('html',false).get("<{$url}>/del/id/"+delid,function(data){
+					if(data) esystem("删除成功",1);
+					else esystem("删除失败",0);
+				})
+				setPage(nurl);
+			}
+			//执行多条删除操作
+			function delall(){
+				for(var i=0;i<$("#content :checked").length;i++){
+					delids = $("#content :checked").eq(i).attr("value");
+					Ajax('html').get("<{$url}>/del/id/"+delids);
+				}
+				setTimeout(function(){setPage(nurl)},200);
+			}
+			//全选按钮
+			function inall(ina){
+				if($(ina).html()=="全选"){
+					$("#content input[type='checkbox']").attr("checked",true);
+					$(ina).html("全否");
+				}else{
+					$("#content input[type='checkbox']").attr("checked",false);
+					$(ina).html("全选");
+				}
+
+			}
+			//反选按钮
+			function innot(){
+				$("#content input:checkbox").each(function(){
+					if($(this).attr("checked"))
+						$(this).attr("checked",false);
+					else $(this).attr("checked",true);
+				})
+				
+			}
+		</script>
+	</head>
+	<body>
+		<center>
+			<div id='trans'></div>
+			<div id='mis'><div></div></div>
+			<h2>颜色管理</h2>	
+			<button class='add'>添加</button>
+			<div id='content'></div>
+			<div id='tp' style='margin-top:30px;'></div>
+	
+			<div id='add'>
+				<div class='cancel'><img src='<{$res}>/images/ffds.gif'></div>
+				<table style='margin:20px; 0px'>
+					<h3>添加颜色</h3>
+						<tr align='center'>
+							<td>颜色名称：</td>
+							<td><input type="text" name="cname" ></td>
+						</tr>
+						<tr align='center'>
+							<td>颜色值：</td>
+							<td class='asd'>
+								<{$color}>
+							</td>
+						<tr>
+						<tr align='center'>
+							<td colspan='2'>
+								<input type="button" onclick='insert()' value="添加">
+							</td>
+						</tr>
+				</table>
+			</div>
+
+			<div id='upd'>
+				<div class='cancel'><img src='<{$res}>/images/ffds.gif'></div>
+				<table style='margin:20px; 0px;'>
+					<h3>修改颜色</h3>
+						<tr></tr>
+						<td>颜色名称：</td>
+							<td><input type="text" name="cname" ></td>
+						</tr>
+						<tr align='center'>
+							<td>颜色值：</td>
+							<td>
+								<input class='color' style='width:48px;height:16px;overfrom:hidden' name='cvalue' />	
+							</td>
+						<tr>
+						<tr align='center'>
+							<td colspan='2'>
+								<input type="button" onclick='update()' value="修改">
+							</td>
+						</tr>
+				</table>	
+			</div>
+		
+		</center>
+	</body>
+
+</html>

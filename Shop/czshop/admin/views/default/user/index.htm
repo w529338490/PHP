@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml"><head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<head>
+			<title></title>
+			
+			<link rel="stylesheet" type="text/css" href="<{$res}>/css/form.css"/>
+			<script type="text/javascript" src="<{$public}>/js/jquery-1.4.4.min.js"></script>
+			<Script type="text/javascript">
+			$(function(){
+				var c;
+				$("tr").hover(
+					function(){
+						c=$(this).css("background-color");//在改颜色之前获取源颜色值
+						$(this).css("background-color","yellow");//改变颜色
+					},function(){
+						$(this).css("background-color",c);//改回颜色
+					});
+			});
+			  //全选按钮
+			function inall(ina){
+				if($(ina).html()=="全选"){
+					$("#mytable input[type='checkbox']").attr("checked",true);
+					$(ina).html("全否");
+				}else{
+					$("#mytable input[type='checkbox']").attr("checked",false);
+					$(ina).html("全选");
+				}
+
+			}
+			//反选按钮
+			function innot(){
+				$("#mytable input:checkbox").each(function(){
+					if($(this).attr("checked"))
+						$(this).attr("checked",false);
+					else $(this).attr("checked",true);
+				})				
+			}
+			function change(){
+				$("#form1").attr("action","<{$url}>/grop2");
+			
+			}
+			</script>
+			<style type="text/css">
+				a:link{text-decoration:none;color:#000000;font-size:14px;}
+				a:hover{color:#ff9900;text-decoration:underline;}
+				a:active{color:#ff0000;}
+				a:visited{color:#000ff;text-decoration:none;}	
+				
+			</style>	
+	</head>	
+<body style="background:#D9FBFF;">
+	用户列表(<{$mess}>)
+	<div style="float:right;">
+		<div style="float:right;"><img onclick="search()" src="<{$res}>/images/icon_search.gif"/></div>
+		<div style="float:right;">输入需要查找的用户名：<input type="text" size="10" id="sea" name="username" value="<{$search}>"></div>
+	
+	</div>
+		
+		<hr>
+	<script>
+		function search(){
+			var sval = document.getElementById("sea").value;
+				window.location="<{$url}>/index/search/"+sval;
+		}
+	</script>
+	<center>
+	<table id="lform" cellspacing="0" width="700px">
+	<tr class="specalt"><th>批量选择</th> <th>用户名称</th>  <th>用户积分</th> <th>用户权限</th></tr>
+	<tr align="center" class="specalt">
+		<td class="alt"><img src="<{$res}>/images/user-info.gif" alt="超级管理"></td>
+		<td class="alt">admin</td>
+		<td class="alt">999999999</td>
+		<td class="alt">超级管理</td>
+	</tr>
+	<form id="form1" action="<{$url}>/grop1" method="post">
+	<{section loop=$data name="ls"}>
+		<tr align="center" class="specalt">
+			<td class="alt"><input type="checkbox" name="id[]" value="<{$data[ls].id}>"/></td>
+			<td class="alt" style="<{if $data[ls].allow_1 eq 0}>text-decoration:line-through;<{/if}>"><{$data[ls].username}></td>	
+			<td class="alt"><{$data[ls].upoint}></td>
+			<td class="alt">
+			<{if $allow_4 eq 1}>	
+				<a href="<{$url}>/mod/id/<{$data[ls].id}>">权限>></a>&nbsp;&nbsp;
+				
+				<a href="<{$url}>/del/id/<{$data[ls].id}>">删除>></a>
+			<{else if}>
+				<{if $data[ls].allow_3 eq 1 || $data[ls].allow_2 eq 1 }>
+				<img src="<{$res}>/images/Profile.png" alt="管理">				
+				<{else if}>
+				<a href="<{$url}>/mod/id/<{$data[ls].id}>"> 权限>></a>
+				<{/if}>
+			<{/if}>
+			</td>
+		</tr>
+	</select>
+	<{sectionelse}>
+		<tr class="specalt">
+			<td  class="alt" colspan="3" align="center">无数据</td>
+		</tr>
+	<{/section}>
+		<tr class="specalt"><td align="center"><span onclick='inall(this)'>全选</span>/
+					<span onclick='innot()'>反选</span></td>
+					<td></td>
+					<td></td>
+			<td align="center"> &nbsp;
+					<input id="button1" type="submit" value="禁用" name="jinyong"/>
+					<input id="button1" type="submit" value="启用" name="jinyong" onclick="change()"/></td>
+		</tr></form>
+</table>
+</center><hr>
+<center><{$fpage}></center>
+</body>
+</html>

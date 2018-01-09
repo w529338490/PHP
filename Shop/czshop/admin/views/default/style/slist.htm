@@ -1,0 +1,41 @@
+<{nocache}>
+<html>
+	<body>
+		<table id='lform' style='text-align:center;width:60%'>
+			<tr>
+				<th colspan='6' align='right'>
+					<button onclick='inall(this)'>全选</button>
+					<button onclick='innot()'>反选</button>
+					<button onclick='delall()'>删除</button>
+				</th>
+			</tr>
+			<tr>
+				<th>&nbsp;</th>
+				<th>名称</th>
+				<th>详情</th>
+				<th>操作</th>
+			</tr>
+			<{section loop=$data name="ls"}>
+				<tr>
+					<td class="alt"><input type="checkbox" name="id[]" value="<{$data[ls].id}>"></td>
+					<td class="alt"><{$data[ls].sname}></td>
+					<td class="alt"><{$data[ls].sdetail}></td>
+					<td class="alt">
+						<button onclick='mod(this)'>修改</button>
+						<button onclick="return confirm('你确定要删除<{$data[ls].sname}>吗?');del(this)">删除</button>
+					</td>
+				</tr>
+			<{sectionelse}>
+				<tr>
+					<td colspan="6" align="center">没有任何款式</td>
+				</tr>
+			<{/section}>
+			<tr>
+				<td colspan="6" align="right"><{$fpage}></td>
+			</tr>
+
+</table>
+							
+	</body>
+</html>
+<{/nocache}>

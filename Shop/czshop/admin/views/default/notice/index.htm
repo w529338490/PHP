@@ -1,0 +1,39 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="<{$res}>/css/form.css"/>
+		<script src='<{$public}>/js/jquery-1.4.4.min.js'></script>
+	</head>
+	<body style="background:#D9FBFF;">
+	<center>
+		<table id="lform" cellspacing="0" width="700px">
+			<tr align="center" class="specalt">
+				<th colspan="4">公告列表</th>
+			</tr>
+			<tr class="specalt" align="center">
+				<th>品 牌 ID</th>
+				<th>款 式 ID</th>
+				<th>内    容</th>
+				<th>操    作</th>
+			</tr>
+		    <form  method="post" action="<{$url}>/update" >
+			<{ section name=doc loop=$notices }>	
+			<tr align="center" class="specalt">
+				<td class="alt"><{ $notices[doc].tid }></td>		
+				<td class="alt"><{ $notices[doc].sid }></td>
+				<td class="alt"><{ $notices[doc].ncont }></td>
+			<td class="alt">	
+					<a href="<{$url}>/mod/id/<{ $notices[doc].id }>">修改>></a>&nbsp;&nbsp;&nbsp;
+					<a onclick="return confirm('确定要删除公告吗？')" href="<{$url}>/del/id/<{ $notices[doc].id }>">删除>></a>
+				</td>
+			</tr>
+
+				<{ sectionelse }>
+			<tr align="center" class="specalt">
+				<td  colspan="4" class="alt">暂无公告!</td>
+			</tr>
+				<{ /section }>
+			</form>
+		</table>
+	</center>
+	</body>
+</html>

@@ -1,0 +1,23 @@
+.paginator {
+    clear: both;
+    display: block;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+.page{text-align:center; height:30px;float:right;}
+.page a,.page span{ float:left; width:22px; height:20px; margin-left:3px; border:1px solid #ddd; overflow:hidden; }
+.page .thispage{ border:1px solid #f67649; color:#f67649; }
+.pageJump{padding:0 10px 0 10px; display:inline; }
+.pageJump span{ float:left; padding-top:2px; }
+.page span.pageJump{border:none; width:auto;}
+.pageJump .txt{width:30px; margin:0 5px;border: 1px solid #DDDDDD; height:15px; line-height:15px;}
+.prev,.prev1,.next,.next1,.submit-page{ background:url(../../images/btnbg.png) no-repeat; }
+.prev,.prev1,.next,.next1{ float:left; width:22px; height:20px; margin-left:5px; border:1px solid #ddd; overflow:hidden; }
+.page a.prev{background-position:-296px -20px; line-height:20px; padding-left:10px; width:52px; cursor:pointer;margin-right:2px;}
+.prev1{background-position:-296px 0;cursor: not-allowed;}
+.next{ width:52px; line-height:20px; padding-left:10px; background-position:-344px 0; }
+.next1{background-position:-386px -20px;cursor: not-allowed;  }
+.page .next{ width:52px; margin-left:5px; text-align:left; }
+.combtn{ font-size:14px; font-weight:bold; }
+.page a.submit-page{ border:none; width:auto; width:48px; color:#fff; background-position:-940px 0;height:22px; line-height:22px; text-align:center; display:inline-block; }
+.pageJump{ float:right; margin:0 10px; display:inline; }

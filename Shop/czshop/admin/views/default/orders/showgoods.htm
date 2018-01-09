@@ -1,0 +1,49 @@
+<{nocache}>
+<html>
+	<head>
+		<link rel="stylesheet" href="<{$res}>/css/orders.css" type="text/css"/>
+		<script type="text/javascript" src="<{$public}>/js/jquery-1.4.4.min.js"></script>
+		<script src="<{$res}>/js/order.js"></script>	
+	</head>
+	<body>
+		<div class="container">
+			<div class="title">
+				<p>订单管理 >> 修改订单</p> 
+			</div>
+			<div class="main">
+				<form action="<{$url}>/upgoods" method="post">
+					<table width="600" border="0" align="center">
+						<tr class="cont">
+							<td>商品名</td><td><input class="fos" type="text" name="pname" value="<{$data.pname}>"></td>
+						</tr>
+						<tr class="cont">
+							<td>尺码</td><td><input class="fos" type="text" name="psize" value="<{$data.psize}>"></td>
+						</tr>
+
+						<tr class="cont">
+							<td>单价</td><td><input class="fos" type="text" name="pprice" value="<{$data.pprice}>"></td>
+						</tr>
+
+						<tr class="cont">
+							<td>数量</td><td><input class="fos" type="text" name="num" value="<{$data.num}>"></td>
+						</tr>
+						<input type="hidden" name="xj" value="<{$data.pprice*$data.num}>">
+						<input type="hidden" name="id" value="<{$data.id}>">
+						<input type="hidden" name="oid" value="<{$data.oid}>">	
+						<tr class="cont">
+							<td>&nbsp;</td>
+							<td>
+								<input class="button" type="submit" name="sub" value="修改" />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<input class="button" type="reset" name="reset" value="重置" />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<a href="<{$url}>/odetail/id/<{$data.oid}>">返回</a>
+							</td>							
+						</tr>
+					</table>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>
+<{/nocache}>	

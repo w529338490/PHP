@@ -1,0 +1,1 @@
+//参数一:字符串   参数二:编码,如'utf8';function getlength(str, encode){	var encodelen = 3;	if(encode && encode.substr(0, 2).toLowerCase() === 'gb')	encodelen = 2;	var bytelen = 0;	var chars = str.split('');	for(i = 0; i<chars.length; i++)	{	var urichar = encodeURI(chars[i]);	bytelen += urichar.length == 1 ? 1 : urichar.length / 9 * encodelen;	}	return bytelen;}

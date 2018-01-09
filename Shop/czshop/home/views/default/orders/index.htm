@@ -1,0 +1,422 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>订单提交中心_优购网上鞋城</title>
+	<link href="<{$res}>/css/orders/base.css" type="text/css" rel="stylesheet">
+	<link href="<{$res}>/css/orders/newshopcar.css" type="text/css" rel="stylesheet">
+	<link href="<{$res}>/css/orders/validator.css" type="text/css" rel="stylesheet">
+	<link rel="stylesheet" href="<{$res}>/css/orders/skin.css" type="text/css">
+	<script type="text/javascript" src="<{$res}>/js/orders/jquery-1.js"></script>
+	<script type="text/javascript" src="<{$res}>/js/orders/jquery_002.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="<{$res}>/js/orders/Area_mini2.js"></script>
+	<script type="text/javascript" src="<{$res}>/js/orders/jquery.js"></script>
+	<script type="text/javascript" src="<{$res}>/js/orders/artDialog.js"></script>
+	<script type="text/javascript" src="<{$res}>/js/orders/base.js"></script>
+	<script type="text/javascript" src="<{$public}>/js/ajax3.0.js"></script>
+<script>
+var addressMap = new YouGou.Util.Map();
+</script>	<script type="text/javascript">
+		var basePath = "";
+	</script>
+	<script type="text/javascript" src="<{$res}>/js/orders/shoppingcart.js"></script>
+	<style>
+		.clearfix:after {content: ".";display: block;height: 0px;clear: both; visibility: hidden;}
+		.sort_select{border:1px solid #ddd; width:100%;color:#6b5a8e;clear:both;}
+		.sort_select span{float:left;display:inline;line-height:28px;padding-left:10px;}
+		.sort_select{border:#e4e4e4 solid 1px;}
+		.sort_select p{display:block;height:30px; line-height:30px; padding-left:20px; background:#F7F7F7;border-bottom:#e4e4e4 solid 1px;}
+		.sort_select ul li{float:left;margin-right:50px;height:20px; line-height:20px;padding:10px 20px;display:block;}
+		.sort_select ul li span{margin:0 5px;}
+		.sort_select ul li  img{margin-left:30px;}
+		.sort_select ul {clear:both;}
+	</style>
+<script src="<{$res}>/js/orders/mv.js" async="" type="text/javascript"></script>
+<{nocache}>	
+<!--  计算出订单总和  -->
+<script type="text/javascript">
+		function tongji(){
+						var total = 0;
+						for(i=0;i<$(".shopping_cart0").length;i++){
+									total+=parseInt($(".shopping_cart0").eq(i).children(".xiaoji").html());
+							}	
+						$("#sum").children(".zj").html("总计:"+total);
+						$("#fb400").html(total);
+						$("#yingfu").html(total);
+						$("#pay").attr('value',total);
+		}
+</script>
+</head>
+<body onload="tongji()">
+
+	<!-- head start-->
+	<div class="w960 relative order_top">
+		<a href="" target="_blank"><img src="<{$res}>/images/new_logo.gif" alt="优购网上鞋城"></a>
+	</div>
+	<!-- head end-->
+
+	<form action="<{$url}>/addorder" method="post" name="orderForm" id="orderForm">
+		<input id="orderNum" value="0" type="hidden">
+		<input id="limitOrderNum" value="10" type="hidden">
+		<div class="w960">
+				<!-- 购物车列表块 -->
+				<div class="w960 order_unit" id="shoppingCartContainer">
+
+<script>
+var isNewFastActiveFlag = false;
+</script>
+<h5>您选购的商品</h5>
+<p class="blank5"></p>
+<table class="order_plist">
+	<thead>
+		<tr>
+			<td class="td_image">商品图片</td>
+			<td class="td_name" style="text-align: left;">商品名称</td>
+			<td class="td_size">尺码</td><td class="td_count">数量</td>
+			<td class="td_shoppprice">市场价</td>
+			<td class="td_ygprice">优购价</td>
+			<td class="td_ygprice">小计</td>
+			<td class="td_operate">操作</td>
+		</tr>
+	</thead>
+	<tbody>
+	<input id="productRecordNum" value="1" type="hidden">
+	<{section loop=$data name="ls"}>
+		<tr class="shopping_cart0">
+			<td class="tright">
+				<a href="<{$app}>/product/id/<{$data[ls].id}>" target="_blank">
+					<img  src="<{$public}>/uploads/<{$data[ls].mpic}>" alt="产品图" height="60px" width="60px">	
+					<input type="hidden" name="pid[]" value="<{$data[ls].id}>">
+					<input type="hidden" name="cid[]" value="<{$data[ls].cid}>">
+					<input type="hidden" name="psize[]" value="<{$data[ls].size}>">
+					<input type="hidden" name="name[]" value="<{$data[ls].name}>">
+					<input type="hidden" name="price[]" value="<{$data[ls].price*$data[ls].discount/10}>">
+					
+				</a>
+			</td>
+			<td style="text-align: left;">
+				<a href="<{$app}>/goods/id/<{$data[ls].id}>" target="_blank">
+					<{$data[ls].pinpai}>  <{$data[ls].name}>(<{$data[ls].cname}>)
+				</a>
+			</td>
+			<td class="Black">
+					<{$data[ls].size}>
+			</td>
+			<td class="Black">
+				<input class="num" type="text" name="num[]" size="1" value=<{$data[ls].num}>>件	
+				<!-- 改变商品数量改变值-->
+				<script type="text/javascript">
+					$(".num").blur(function(){
+						if($(this).attr('value')>=1)
+						{
+						 if($(this).attr('value')> <{$data[ls].max}>){
+								$(this).attr('value',<{$data[ls].max}>);
+								
+								alert('很抱歉!库存不足!');
+								}
+						}
+						else{
+							$(this).attr('value',1);
+							alert('商品数量不正确');
+							}
+							var count=$(this).attr('value')*parseInt($(this).parent().nextAll(".relative").html());
+							$(this).parent().nextAll(".xiaoji").html(count);
+							tongji();
+					})
+				</script>	
+			</td>
+			<td class="Black"><del><{$data[ls].price}></del></td>
+			<td class="relative">
+				<{$data[ls].price*$data[ls].discount/10}>元
+				
+			</td>
+			<td class="xiaoji" class="Black"><{$data[ls].num*$data[ls].price*$data[ls].discount/10}></td>
+			<td><a href="<{$url}>/del/id/<{$data[ls].id}>" ">删除</a></td>
+		</tr>
+		<{/section}>
+		<input id="pay" type="hidden" name="pay" value="0">
+		<tr id="sum">  <td class="zj" colspan="8" style="text-align:right">总计 ：</td></tr>
+	</tbody>
+</table>
+<p class="tright"><a href="http://www.yougou.com/" title="继续购物" target="_blank" class="Blue" style="padding-right: 25px; text-decoration: underline;">继续购物&gt;&gt;</a></p>
+<script>
+	$(".num_warntips").fadeIn("fast").delay(2000).fadeOut("slow");
+
+	// 数量加效果
+	$(".add_product").hover(function(){
+		$(this).attr("class",'add_product_hover');
+	},function(){
+		$(this).attr("class",'add_product');
+	});
+
+	// 数量减效果
+	$(".remove_product").hover(function(){
+		$(this).attr("class",'remove_product_hover');
+	},function(){
+		$(this).attr("class",'remove_product');
+	});
+</script>
+				</div>
+
+				<div class="blank20"></div>
+
+				<!-- 收货人信息 start -->
+<div class="w960 order_unit">
+  <input name="receivingProvince" id="receivingProvince" value="" type="hidden">
+  <input name="receivingProvinceName" id="receivingProvinceName" value="" type="hidden">
+  <input name="receivingCity" id="receivingCity" value="" type="hidden">
+  <input name="receivingCityName" id="receivingCityName" value="" type="hidden">
+  <input name="receivingDistrict" id="receivingDistrict" value="" type="hidden">
+  <input name="receivingDistrictName" id="receivingDistrictName" value="" type="hidden">
+  <input name="addressState" id="addressState" value="" type="hidden">
+  <input name="addressId" id="addressId" value="" type="hidden">
+  <script>window.top.isNewFastActive = false;</script>
+  <h5>收货人信息</h5>
+  <p class="blank15"></p>
+  <div style="display:none">
+		<div id="address_radio_p"><div class="mobileyzarea" id="mobileyzarea"><p style="padding-top:5px"><span>为了更好的为您服务，请验证手机号码，每个手机号码只验证一次。</span><span id="mobileac_tips" class="pl12 fl none"><font class="f_red">这个号码已经参加过活动</font></span><span class="fl" style="padding-left:12px"><input class="mobile_checkcode" title="获取手机验证码" type="button"></span><span id="mobiletips" style="padding-left:12px">验证码已发送到你手机&nbsp;&nbsp;<input class="sinput Gray" value="请输入验证码" id="yzcode2" type="text"></span><span style="padding-left:2px"><input value=" " class="yzbtn" type="button"></span></p>
+		<div class="tright" style="padding-right:10px" id="checkmobile"><!--<span class="f_red">验证码有误，请核实或重新获取</span>--><span class="rightmsg Green">验证成功</span></div>
+       </div></div>
+  </div>
+        <script>window.top.isLogin = true;</script>
+<div id="noaddress">
+  <div class="address_info_x" style="height:auto" id="address_info">
+    <p class="tright"></p>
+    <table class="table_address fl">
+       <tbody>
+           
+           <tr>
+               <td class="tdleft">收货人手机<i>*</i></td>
+               <td>
+                 <span class="fl">
+                   <input id="receivingMobilePhone" name="receivingMobilePhone" onkeyup="$('#phoneCodeOrder_tips').hide();$('#phoneCodeOrderTxt').hide();$('#checkSmsCodeOrderBtn').hide();$('#codeCheckOrderResult_tips').hide();" class="minput" type="text">
+                 </span>
+                 <span id="updatePhoneOrder_tips" class="pl12 fl none">
+                   <font class="f_red">您的手机号码已经变更，请重新获取验证码</font>
+                 </span>
+                 <span id="receivingMobilePhone_tips" class="mltips fl"></span>
+                 
+               </td>
+           </tr>
+           
+           <tr>
+               <td class="tdleft">收货人姓名<i>*</i></td>
+               <td>
+                   <input maxlength="16" id="receivingName" name="receivingName" class="minput" type="text"><span id="receivingName_tips" class="mltips"></span>
+               </td>
+           </tr>
+           <tr>
+               <td class="tdleft">收货人地址<i>*</i></td>
+               <td>
+            <div class="dropdown_span">
+              <div class="fl" id="province_select" style="display:none">
+                <ul class="fl drop_window"><li><span><a href="javascript:void(0)" rel="root-6">北京</a></span></li><li><span><a href="javascript:void(0)" rel="root-17">上海</a></span></li><li><span><a href="javascript:void(0)" rel="root-11">天津</a></span></li><li><span><a href="javascript:void(0)" rel="root-15">重庆</a></span></li><li><span><a href="javascript:void(0)" rel="root-18">河北省</a></span></li><li><span><a href="javascript:void(0)" rel="root-24">山西省</a></span></li><li><span><a href="javascript:void(0)" rel="root-32">河南省</a></span></li><li><span><a href="javascript:void(0)" rel="root-29">辽宁省</a></span></li><li><span><a href="javascript:void(0)" rel="root-9">吉林省</a></span></li><li><span><a href="javascript:void(0)" rel="root-16">黑龙江省</a></span></li><li><span><a href="javascript:void(0)" rel="root-25">内蒙古</a></span></li><li><span><a href="javascript:void(0)" rel="root-22">江苏省</a></span></li><li><span><a href="javascript:void(0)" rel="root-30">山东省</a></span></li><li><span><a href="javascript:void(0)" rel="root-28">安徽省</a></span></li><li><span><a href="javascript:void(0)" rel="root-26">浙江省</a></span></li><li><span><a href="javascript:void(0)" rel="root-14">福建省</a></span></li><li><span><a href="javascript:void(0)" rel="root-36">湖北省</a></span></li><li><span><a href="javascript:void(0)" rel="root-8">湖南省</a></span></li><li><span><a href="javascript:void(0)" rel="root-20">广东省</a></span></li><li><span><a href="javascript:void(0)" rel="root-34">广西省</a></span></li><li><span><a href="javascript:void(0)" rel="root-21">江西省</a></span></li><li><span><a href="javascript:void(0)" rel="root-39">四川省</a></span></li><li><span><a href="javascript:void(0)" rel="root-37">海南省</a></span></li><li><span><a href="javascript:void(0)" rel="root-38">贵州省</a></span></li><li><span><a href="javascript:void(0)" rel="root-10">云南</a></span></li><li><span><a href="javascript:void(0)" rel="root-27">西藏</a></span></li><li><span><a href="javascript:void(0)" rel="root-19">陕西省</a></span></li><li><span><a href="javascript:void(0)" rel="root-23">甘肃省</a></span></li><li><span><a href="javascript:void(0)" rel="root-33">青海</a></span></li><li><span><a href="javascript:void(0)" rel="root-31">宁夏</a></span></li><li><span><a href="javascript:void(0)" rel="root-35">新疆</a></span></li></ul>
+              </div>
+              <a id="province_link" class="dropdown_option dropdown_space focus" style="color: black;">请选择省</a>
+            </div>
+            <div class="dropdown_span">
+              <div class="fl" id="city_select" style="display:none">
+                <ul class="fl drop_window"></ul>
+              </div>
+              <a id="city_link" class="dropdown_option dropdown_space focus" style="color: gray; margin-left: 10px;">请选择城市</a>
+            </div>
+            <div class="dropdown_span">
+              <div id="area_select" class="fl" style="display:none">
+                <ul class="fl drop_window"></ul>
+              </div>
+              <a id="area_link" class="dropdown_option focus" style="color: gray; margin-left: 10px;">请选择县区</a>
+            </div>
+            <span id="receivingDistrict_tips" class="mltips"></span>
+
+              <div style="display:inline; padding-left:20px; line-height:25px"><font class="Black"> 邮政编码：</font>
+                <input id="receivingZipCode" name="receivingZipCode" class="sinput" style="width: 50px;" maxlength="6" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" type="text">
+              <span class="Gray" id="postdiv2">（有助于快速确定送货地址）</span>
+              <span style="display: none;" class="Gray" id="postdiv">&nbsp;&nbsp;该地区邮编为：<font class="f_red" id="thispostcode"></font>&nbsp;&nbsp;<a href="javascript:void(0)" id="usethiscode" class="Blue" style="text-decoration: underline;">使用此邮编</a></span>
+              <span id="receivingZipCode_tips" class="mltips"></span>
+            </div>
+             </td>
+         </tr>
+         <tr>
+             <td class="tdleft"></td>
+           <td>
+             <span id="province_i"></span>
+             <span id="city_i"></span>
+             <span id="area_i"></span>
+             <input id="receivingAddress" name="receivingAddress" maxlength="60" class="linput" style="width: 250px;" type="text">
+             <span id="receivingAddress_tips" class="mltips"><font class="f_red">&nbsp;&nbsp;（请填写详细地址，确保准确送达）</font></span>
+           </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
+
+				<!-- 配送方式 -->
+				<div class="w960 order_unit" style="position:relative;z-index:1;display:none;">
+				<h5>配送方式</h5>
+				<p class="blank15"></p>
+				<div class="unitlist">
+					 <div style="float:left; width:960px; overflow:hidden" id="delivery_div">
+				     	<p><span class="userpay_name"><label for="deliveryWay_1"><input name="deliveryWay" id="deliveryWay_1" value="1" checked="checked" type="radio">普通快递</label></span><span class="userpay_name" style="width:100px">0元<font class="f_yellow">(免运费)</font></span><span class="userpay_info" style="width:460px"><label>（支持货到付款）</label></span><br class="clear"></p>
+				        <p class="none"><span class="userpay_name"><label for="deliveryWay_3"><input name="deliveryWay" id="deliveryWay_3" value="3" type="radio">EMS专递&nbsp;</label></span><span class="userpay_name" style="width:100px">0元<font class="f_yellow">(免运费)</font></span><span class="userpay_info" style="width:460px"><label>（由EMS快递负责配送，暂时不支持货到付款）</label></span></p>
+				     	<p><span class="userpay_name"><label for="deliveryWay_2"><input name="deliveryWay" id="deliveryWay_2" value="2" type="radio">顺丰专递</label></span><span class="userpay_name" style="width:100px">12元(加急费)</span><span class="userpay_info" style="width:460px"><label>（由顺丰快递负责配送，暂时不支持货到付款）</label><a class="Blue" href="http://www.sf-express.com/" target="_blank">查询顺丰配送区域</a></span></p>
+				        <p><span class="userpay_name"></span><span class="userpay_info"><font class="f_yellow">提醒：</font>如果您所填写的收货地址超出顺丰配送范围，客服人员将在24小时内与您联系并协商修改为其他快递配送。</span></p>
+				        <p class="none"><span id="deliveryWay_tips"></span></p>
+					</div>
+				</div>
+				</div>
+				<!-- 配送方式 end-->
+				<p class="blank15"></p>
+
+				<!-- 支付方式 start -->
+				<div class="w960 order_unit" id="pay_div" style="position:relative;z-index:1">
+					<h5>支付方式</h5>
+					<p class="blank15"></p>
+				    <div id="pay_type" class="unitlist">
+				    	<p>
+							<span class="userpay_name">
+								<label for="payment_1">在线支付<input id="payment_1" name="payment" value="ONLINE_PAYMENT" type="radio"></label>
+							</span>
+						    <span class="userpay_info"><span style="color:red;">在线支付享98折优惠</span>（支持支付宝、财付通、快钱、手机支付及各大银行网银支付）</span>
+					    </p>
+				    	<p id="payment_2_p">
+			            	<span class="userpay_name">
+			            		<label for="payment_2">
+			            			<input id="payment_2" name="payment" value="CASH_ON_DELIVERY" type="radio">货到付款
+			            		</label>
+			            	</span>
+			            	<span class="userpay_info" id="notServiceAreaDesc"><span style="color:red;"></span>（现金支付，暂不支持刷卡。请当面验货，满意后再付款。如收货时遇到问题，请致电：<font class="f_yellow">400-6963-666</font>）</span>
+			            </p>
+			            <p>
+			            	<span class="userpay_name"></span>
+			            	<span class="userpay_info">
+			            		<font class="f_yellow">提醒：</font>请确认您填写的收货地址在货到付款配送区域内，以便商品顺利送达。
+			            	</span>
+			            </p>
+			            <p class="none"><span id="payment_tips"></span></p>
+				    </div>
+				    <div class="pareal none">
+           				<div class="fl postareat"><ul>可以货到付款的区域</ul></div>
+           				<div class="fl postarealist"><ul id="butTheServiceAreaInfo"></ul></div>
+       				</div>
+   					<p class="blank4" style="height:5px"></p>
+   					<div class="pareal none">
+   						<div class="fl nopostareat"><ul>不可以货到付款的区域</ul></div>
+   						<div class="fl postarealist"><ul id="notServiceAreaInfo"></ul>
+   					</div>
+				    <div id="cansend"></div>
+				    </div>
+				</div>
+				<!-- 支付方式 end -->
+
+				<p class="blank15"></p>
+				<!-- 送货时间start -->
+				<div class="w960 order_unit">
+					<h5>送货时间</h5>
+					<p class="blank15"></p>
+			 		<div class="unitlist">
+						<p>
+							<span class="userpay_name" style="margin-right:5px;">
+								<label for="RadioGroup2_0">
+									<input id="RadioGroup2_0" name="deliveryDate" value="WORKDAY_DELIVERY" type="radio">只工作日送货
+								</label>
+							</span>
+							<span class="userpay_info" style="width:460px">
+								<label>（双休日、假日不用送，适合于办公室/写字楼/商用地址）</label>
+							</span>
+							<br class="clear">
+						</p>
+			    		<p>
+			    			<span class="userpay_name" style="margin-right:5px;">
+			    				<label for="RadioGroup2_1">
+			    					<input id="RadioGroup2_1" name="deliveryDate" value="ALL_CAN_DELIVER" type="radio">工作日、双休日与假日均可送货
+			    				</label>
+			    			</span>
+			    			<span class="userpay_info" style="width:460px"><label></label></span>
+			    			<br class="clear">
+			    		</p>
+			    		<p>
+			    			<span class="userpay_name" style="margin-right:5px;">
+			    				<label for="RadioGroup2_2">
+			    					<input id="RadioGroup2_2" name="deliveryDate" value="HOLIDAY_DELIVERY" type="radio">只双休日、假日送货
+			    				</label>
+			    			</span>
+			    			<span class="userpay_info" style="width:460px">
+			    				<label>（工作日不用送，适合于家庭地址）</label>
+			    			</span>
+			    			<br class="clear">
+			    		</p>
+			    		<p class="none"><span id="deliveryDate_tips"></span></p>
+						<p>
+							<span class="userpay_name"></span>
+							<span class="userpay_info"><font class="f_yellow">提醒：</font>此信息将打印在快递面单上，作为快递公司送货的参考依据，个别地区配送可能会有所延误，请谅解！</span>
+						</p>
+			            <p class="none">
+			            	<span class="userpay_name"></span>
+			            	<span class="userpay_info">需要附加说明，请点击 <a href="javascript:;" id="order_remark_s" class="Blue">订单备注</a></span>
+			            </p>
+			            <p style="display:none" id="order_remark_s2">
+			            	<span class="userpay_name"></span>
+			            	<span class="userpay_name" style="margin-right:10px">订单附言：<input class="linput" name="orderNoteInfo" id="orderNoteInfo" maxlength="200" style="color: gray;" type="text"><a href="javascript:void(0);" id="cancelusertalk" class="Blue">取消</a></span>
+			            	<span id="orderNoteInfo_tips" class="userpay_info">（配送相关特殊说明，配送公司会尽量协调。）</span>
+			            </p>
+			        </div>
+				</div>
+				<!-- 送货时间 end -->
+				<p class="blank15"></p>
+
+				<!-- 订单结算块 -->
+				<div class="w960 order_unit" id="orderSettlementContainer">
+<h5>请确认提交订单</h5>
+<div id="userOrderInfoMessage" class="unitlist" style="padding:14px 0 0 0">
+	<script>
+		//页面刷新后，将可用优惠券置空
+		myCouponList=null;
+
+		
+
+		// 鼠标移上行高亮效果
+		$("#coupon_list_table tr").live('mouseover',function(){
+			$(this).addClass("f_yellow cursor");
+			$(this).find('input').attr("checked",true);
+		}).live('mouseout',function(){
+			$(this).removeClass("f_yellow cursor");
+			$(this).find('input').attr("checked",false);
+		});
+	</script>
+
+	<p id="order_money" class="order_confirm Black" style="position:relative;height:auto;">
+		商品总金额：<i  id="fb400" class="or_money">489元</i>
+		运费：<i class="or_money">0元<font >（免运费）</font>
+		</i>
+	</p>
+	<p id="order_paymoney" class="order_confirm f_black" style="position:relative;">
+		应支付金额：<i id="yingfu" style="font-weight:bolder;font-size:30px;font-color:#F67649"></i>
+	</p>
+</div>
+<{/nocache}>	
+				</div>
+
+				<div class="clear"></div>
+				<div class="order_sub">
+					<div id="submit_order" >
+			        	<input  id="submit" value=" " class="order_submit" title="提交订单" type="submit" style="background:url(<{$res}>/images/order.jpg)">
+					</div>
+				</div>
+
+			<div id="help_order_pop" style="display:none"></div>
+			<div id="help_pay_pop" style="display:none"></div>
+			<div id="help_coupon_pop" style="display:none"></div>
+
+			<!-- footer start -->
+			<div class="footer Gray" style="margin-top:18px;height:40px">
+			    <p class="tright">Copyright © 2011 Yougou Technology Co., Ltd. <a href="http://www.miibeian.gov.cn/" target="_blank">粤ICP备09070608号-2</a> 增值电信业务经营许可证：<a href="http://www.miibeian.gov.cn/" target="_blank">粤 B2-20090203</a></p>
+			</div>
+			<!-- footer end -->
+		</div>
+	</form>
+	<script type="text/javascript" src="<{$res}>/js/orders/couponEffectRangeShow.js" charset="UTF-8"></script>
+	<script type="text/javascript">initOrder();</script>
+<script type="text/javascript" src="<{$res}>/js/orders/newcom.js"></script>
+
+</body></html>
